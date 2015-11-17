@@ -5,3 +5,5 @@ C:\Users\Didya_it_lunch\Desktop\Scheduling-Jh\Scheduling-Jh\obj\x86\Debug\Schedu
 C:\Users\Didya_it_lunch\Desktop\Scheduling-Jh\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.csproj.GenerateResource.Cache
 C:\Users\Didya_it_lunch\Desktop\Scheduling-Jh\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.exe
 C:\Users\Didya_it_lunch\Desktop\Scheduling-Jh\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.pdb
+C:\Users\Didya_it_lunch\Desktop\Scheduling-Jh\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.exe
+C:\Users\Didya_it_lunch\Desktop\Scheduling-Jh\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.pdb
