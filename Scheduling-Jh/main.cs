@@ -11,6 +11,7 @@ namespace Scheduling_Jh
 {
     public partial class main : Form
     {
+        private box chlid;
         public main()
         {
             InitializeComponent();
@@ -39,6 +40,40 @@ namespace Scheduling_Jh
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            chlid= new box();
+            this.Hide();
+            chlid.Show();
+
+            MessageBox.Show("하이하이");
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Close();
         }
     }
 }
