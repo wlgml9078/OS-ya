@@ -7,11 +7,20 @@ namespace Scheduling_Jh
 {
     class Scheduler
     {
-        private List<Process> inputData;
+        public int currentTime;
+        public List<Process> inputData;
         private List<Stamp> timestamp;
-        public Scheduler() { 
-
+        public Scheduler(List<Process> list){
+            currentTime = 0;
+            inputData = new List<Process>();
+            inputData = list;
         }
-
+        public void addStamp(Stamp stamp) {
+            timestamp.Add(stamp);
+        }
+        public List<Stamp> getTimestamp() {
+            return timestamp;
+        }
     }
+
 }

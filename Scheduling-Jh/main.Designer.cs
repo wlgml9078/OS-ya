@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.ProcessList = new System.Windows.Forms.Label();
+            this.processList = new System.Windows.Forms.ListBox();
+            this.titlebar = new System.Windows.Forms.Label();
             this.processName = new System.Windows.Forms.TextBox();
             this.arrivalTime = new System.Windows.Forms.TextBox();
             this.burstTime = new System.Windows.Forms.TextBox();
             this.timeSlice = new System.Windows.Forms.TextBox();
             this.priority = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.addProcess = new System.Windows.Forms.Button();
             this.processNameText = new System.Windows.Forms.Label();
             this.arrivalTimeText = new System.Windows.Forms.Label();
             this.burstTimeText = new System.Windows.Forms.Label();
@@ -52,11 +52,11 @@
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.processListText = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
-            this.processInfo = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.processInfo = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -76,27 +76,28 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // listBox1
+            // processList
             // 
-            this.listBox1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 18;
-            this.listBox1.Location = new System.Drawing.Point(12, 92);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(341, 400);
-            this.listBox1.TabIndex = 1;
+            this.processList.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.processList.FormattingEnabled = true;
+            this.processList.ItemHeight = 18;
+            this.processList.Location = new System.Drawing.Point(12, 92);
+            this.processList.Name = "processList";
+            this.processList.Size = new System.Drawing.Size(341, 400);
+            this.processList.TabIndex = 1;
+            this.processList.SelectedIndexChanged += new System.EventHandler(this.processList_SelectedIndexChanged);
             // 
-            // ProcessList
+            // titlebar
             // 
-            this.ProcessList.AutoSize = true;
-            this.ProcessList.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.ProcessList.ForeColor = System.Drawing.Color.White;
-            this.ProcessList.Location = new System.Drawing.Point(13, 16);
-            this.ProcessList.Name = "ProcessList";
-            this.ProcessList.Size = new System.Drawing.Size(135, 24);
-            this.ProcessList.TabIndex = 2;
-            this.ProcessList.Text = "스케줄러 프로그램";
-            this.ProcessList.Click += new System.EventHandler(this.label1_Click);
+            this.titlebar.AutoSize = true;
+            this.titlebar.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.titlebar.ForeColor = System.Drawing.Color.White;
+            this.titlebar.Location = new System.Drawing.Point(13, 16);
+            this.titlebar.Name = "titlebar";
+            this.titlebar.Size = new System.Drawing.Size(135, 24);
+            this.titlebar.TabIndex = 2;
+            this.titlebar.Text = "스케줄러 프로그램";
+            this.titlebar.Click += new System.EventHandler(this.label1_Click);
             // 
             // processName
             // 
@@ -144,15 +145,16 @@
             this.priority.TabIndex = 7;
             this.priority.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.priority_KeyPress);
             // 
-            // button2
+            // addProcess
             // 
-            this.button2.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button2.Location = new System.Drawing.Point(375, 378);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(106, 32);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "프로세스 추가";
-            this.button2.UseVisualStyleBackColor = true;
+            this.addProcess.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.addProcess.Location = new System.Drawing.Point(375, 378);
+            this.addProcess.Name = "addProcess";
+            this.addProcess.Size = new System.Drawing.Size(106, 32);
+            this.addProcess.TabIndex = 8;
+            this.addProcess.Text = "프로세스 추가";
+            this.addProcess.UseVisualStyleBackColor = true;
+            this.addProcess.Click += new System.EventHandler(this.button2_Click);
             // 
             // processNameText
             // 
@@ -298,23 +300,23 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
-            this.panel1.Controls.Add(this.ProcessList);
+            this.panel1.Controls.Add(this.titlebar);
             this.panel1.Location = new System.Drawing.Point(-1, -1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(667, 56);
             this.panel1.TabIndex = 23;
             // 
-            // label1
+            // processListText
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(12, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 21);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "프로세스 목록";
+            this.processListText.AutoSize = true;
+            this.processListText.BackColor = System.Drawing.Color.Transparent;
+            this.processListText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.processListText.ForeColor = System.Drawing.Color.Black;
+            this.processListText.Location = new System.Drawing.Point(12, 58);
+            this.processListText.Name = "processListText";
+            this.processListText.Size = new System.Drawing.Size(92, 21);
+            this.processListText.TabIndex = 3;
+            this.processListText.Text = "프로세스 목록";
             // 
             // notifyIcon1
             // 
@@ -332,16 +334,6 @@
             this.panel2.Size = new System.Drawing.Size(133, 334);
             this.panel2.TabIndex = 24;
             // 
-            // processInfo
-            // 
-            this.processInfo.AutoSize = true;
-            this.processInfo.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.processInfo.Location = new System.Drawing.Point(372, 81);
-            this.processInfo.Name = "processInfo";
-            this.processInfo.Size = new System.Drawing.Size(92, 21);
-            this.processInfo.TabIndex = 25;
-            this.processInfo.Text = "프로세스 정보";
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
@@ -351,6 +343,16 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(133, 334);
             this.panel3.TabIndex = 25;
+            // 
+            // processInfo
+            // 
+            this.processInfo.AutoSize = true;
+            this.processInfo.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.processInfo.Location = new System.Drawing.Point(372, 81);
+            this.processInfo.Name = "processInfo";
+            this.processInfo.Size = new System.Drawing.Size(92, 21);
+            this.processInfo.TabIndex = 25;
+            this.processInfo.Text = "프로세스 정보";
             // 
             // panel4
             // 
@@ -371,7 +373,7 @@
             this.ClientSize = new System.Drawing.Size(663, 507);
             this.Controls.Add(this.scheduleText);
             this.Controls.Add(this.processInfo);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.processListText);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.radioButton7);
             this.Controls.Add(this.radioButton4);
@@ -385,13 +387,13 @@
             this.Controls.Add(this.burstTimeText);
             this.Controls.Add(this.arrivalTimeText);
             this.Controls.Add(this.processNameText);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.addProcess);
             this.Controls.Add(this.priority);
             this.Controls.Add(this.timeSlice);
             this.Controls.Add(this.burstTime);
             this.Controls.Add(this.arrivalTime);
             this.Controls.Add(this.processName);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.processList);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel4);
@@ -409,14 +411,14 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label ProcessList;
+        private System.Windows.Forms.ListBox processList;
+        private System.Windows.Forms.Label titlebar;
         private System.Windows.Forms.TextBox processName;
         private System.Windows.Forms.TextBox arrivalTime;
         private System.Windows.Forms.TextBox burstTime;
         private System.Windows.Forms.TextBox timeSlice;
         private System.Windows.Forms.TextBox priority;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button addProcess;
         private System.Windows.Forms.Label processNameText;
         private System.Windows.Forms.Label arrivalTimeText;
         private System.Windows.Forms.Label burstTimeText;
@@ -431,7 +433,7 @@
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.RadioButton radioButton7;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label processListText;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label processInfo;

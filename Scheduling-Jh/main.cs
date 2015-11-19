@@ -18,27 +18,24 @@ namespace Scheduling_Jh
         {
             InitializeComponent();
             chlid = new box();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             RadioButton[] radios = new RadioButton[7];
-            for (int i = 0; i < 7; i++)
-            {
-                
-            }
+            
 
         }
 
         private void btn1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("즐","안녕안녕");
+         
         }
 
         private void btn1_KeyDown(object sender, KeyEventArgs e)
         {
-            MessageBox.Show("바이바이");
+         
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -56,8 +53,7 @@ namespace Scheduling_Jh
             
             this.Hide();
             chlid.Show();
-
-            MessageBox.Show("하이하이");
+                        
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -124,6 +120,16 @@ namespace Scheduling_Jh
             {
                 e.Handled = true;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            processList.
+        }
+
+        private void processList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
