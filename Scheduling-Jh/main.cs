@@ -26,14 +26,19 @@ namespace Scheduling_Jh
             RadioButton[] radios = new RadioButton[7];
             for (int i = 0; i < 7; i++)
             {
-                radios[i] = radioButton+i;
+                
             }
 
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void btn1_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("즐","안녕안녕");
+        }
 
+        private void btn1_KeyDown(object sender, KeyEventArgs e)
+        {
+            MessageBox.Show("바이바이");
         }
 
         private void label1_Click(object sender, EventArgs e)

@@ -8,7 +8,7 @@ namespace Scheduling_Jh
     class Scheduler
     {
         private List<Process> inputData;
-        private List
+        private List<Stamp> timestamp;
         public Scheduler() { 
 
         }
