@@ -69,7 +69,6 @@ namespace Scheduling_Jh
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            
             this.Hide();
             chlid.Show();
             int target=0;
@@ -82,7 +81,7 @@ namespace Scheduling_Jh
             switch (target)
             {
                 case 0:
-                    new FCFS(getData());
+                    FCFS fcfs=new FCFS(getData());
                     break;
                 case 5:
                     if(timeSlice.Text==""){
@@ -91,7 +90,9 @@ namespace Scheduling_Jh
                     else{
                         int quant;
                         Int32.TryParse(timeSlice.Text,out quant);
-                        new RR(getData(), quant);
+                        RR rr=new RR(getData(), quant);
+                        rr.rr_alg();
+                        
                     }
                     
                     break;
@@ -193,19 +194,25 @@ namespace Scheduling_Jh
             else
                 name = processName.Text;
             Int32.TryParse(arrivalTime.Text,out temp1);
+            Console.Write(temp1);
             Int32.TryParse(burstTime.Text,out temp2);
+            Console.WriteLine(temp2);
             if (flag){
                 newProcess = new Process(name, temp1,temp2);
+                processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), 0 + "");
             }
             else
             {
                 Int32.TryParse(priority.Text, out temp3);
-                newProcess = new Process(name, temp1, temp3);
+                newProcess = new Process(name, temp1, temp2,temp3);
+                processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), priority.Text);
+                
             }
             processListval.Add(newProcess);
             for(int i=0;i<processListval.Count;i++){
                 Console.WriteLine(processListval[i].getName()+"");
             }
+            
 
         }
         private void button2_Click(object sender, EventArgs e)

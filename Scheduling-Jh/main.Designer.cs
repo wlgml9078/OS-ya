@@ -392,7 +392,7 @@
             this.processArrivedTime,
             this.processBurstTime,
             this.processPriority});
-            this.processList.Location = new System.Drawing.Point(16, 92);
+            this.processList.Location = new System.Drawing.Point(17, 92);
             this.processList.Name = "processList";
             this.processList.RowHeadersWidth = 20;
             this.processList.RowTemplate.Height = 20;
