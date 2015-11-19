@@ -23,22 +23,21 @@ namespace Scheduling_Jh
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             RadioButton[] radios = new RadioButton[7];
-            for (int i = 0; i < 7; i++)
-            {
-                
-            }
+            timeSlice.Hide();
+            timeSliceText.Hide();
 
         }
 
         private void btn1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("즐","안녕안녕");
+         
         }
 
         private void btn1_KeyDown(object sender, KeyEventArgs e)
         {
-            MessageBox.Show("바이바이");
+         
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -56,8 +55,7 @@ namespace Scheduling_Jh
             
             this.Hide();
             chlid.Show();
-
-            MessageBox.Show("하이하이");
+                        
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
@@ -123,6 +121,35 @@ namespace Scheduling_Jh
             if (!(Char.IsDigit(e.KeyChar)) && e.KeyChar != 8 && e.KeyChar != 45 && e.KeyChar != 46) //8:백스페이스,45:마이너스,46:소수점
             {
                 e.Handled = true;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void processList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!radioButton4.Checked)
+            {
+                timeSlice.Hide();
+                timeSliceText.Hide();
+            }
+            else
+            {
+                timeSlice.Show();
+                timeSliceText.Show();
             }
         }
     }
