@@ -21,14 +21,9 @@ namespace Scheduling_Jh
 
         }
 
-        private void btn1_Click(object sender, EventArgs e)
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("즐","안녕안녕");
-        }
 
-        private void btn1_KeyDown(object sender, KeyEventArgs e)
-        {
-            MessageBox.Show("바이바이");
         }
     }
 }
