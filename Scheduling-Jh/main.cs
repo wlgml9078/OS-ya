@@ -85,6 +85,15 @@ namespace Scheduling_Jh
                     new FCFS(getData());
                     break;
                 case 5:
+                    if(timeSlice.Text==""){
+                        timeSliceText.ForeColor=Color.Red;
+                    }
+                    else{
+                        int quant;
+                        Int32.TryParse(timeSlice.Text,out quant);
+                        new RR(getData(), quant);
+                    }
+                    
                     break;
             }
         }
