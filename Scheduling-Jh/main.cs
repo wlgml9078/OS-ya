@@ -305,5 +305,10 @@ namespace Scheduling_Jh
         {
             is_down = false;
         }
+
+        private void processList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -53,4 +53,9 @@ namespace Scheduling_Jh
             return AWT;
         }
     }
+
+    public void showData()
+    {
+        console.
+    }
 }

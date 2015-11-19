@@ -67,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RR.cs" />
     <Compile Include="Scheduler.cs" />
+    <Compile Include="SRT.cs" />
     <Compile Include="Stamp.cs" />
     <EmbeddedResource Include="box.resx">
       <DependentUpon>box.cs</DependentUpon>
