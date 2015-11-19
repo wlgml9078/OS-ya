@@ -15,5 +15,12 @@ namespace Scheduling_Jh
         {
             InitializeComponent();
         }
+        public void getInfo(){
+
+        }
+        private void box_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

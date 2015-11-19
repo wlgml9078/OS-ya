@@ -15,3 +15,4 @@ C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh
 C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling_Jh.main.resources
 C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling_Jh.Properties.Resources.resources
 C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.csproj.GenerateResource.Cache
+C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling_Jh.box.resources

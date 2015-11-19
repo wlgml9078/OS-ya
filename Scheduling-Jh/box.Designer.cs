@@ -28,9 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // box
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "box";
             this.Text = "box";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.box_FormClosing);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

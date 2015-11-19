@@ -28,21 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.ProcessList = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.processName = new System.Windows.Forms.TextBox();
+            this.arrivalTime = new System.Windows.Forms.TextBox();
+            this.burstTime = new System.Windows.Forms.TextBox();
+            this.timeSlice = new System.Windows.Forms.TextBox();
+            this.priority = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.processName = new System.Windows.Forms.Label();
-            this.InputTime = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.processNameText = new System.Windows.Forms.Label();
+            this.arrivalTimeText = new System.Windows.Forms.Label();
+            this.burstTimeText = new System.Windows.Forms.Label();
+            this.timeSliceText = new System.Windows.Forms.Label();
+            this.priorityText = new System.Windows.Forms.Label();
+            this.scheduleText = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -50,17 +51,24 @@
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.button1.FlatAppearance.BorderSize = 0;
             this.button1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(518, 409);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 32);
             this.button1.TabIndex = 0;
             this.button1.Text = "스케줄링 시작";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // listBox1
@@ -68,62 +76,68 @@
             this.listBox1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 18;
-            this.listBox1.Location = new System.Drawing.Point(12, 67);
+            this.listBox1.Location = new System.Drawing.Point(12, 103);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(340, 382);
+            this.listBox1.Size = new System.Drawing.Size(341, 328);
             this.listBox1.TabIndex = 1;
             // 
             // ProcessList
             // 
             this.ProcessList.AutoSize = true;
-            this.ProcessList.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.ProcessList.Location = new System.Drawing.Point(10, 27);
+            this.ProcessList.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.ProcessList.ForeColor = System.Drawing.Color.White;
+            this.ProcessList.Location = new System.Drawing.Point(13, 10);
             this.ProcessList.Name = "ProcessList";
-            this.ProcessList.Size = new System.Drawing.Size(78, 18);
+            this.ProcessList.Size = new System.Drawing.Size(135, 24);
             this.ProcessList.TabIndex = 2;
-            this.ProcessList.Text = "프로세스 목록";
+            this.ProcessList.Text = "스케줄러 프로그램";
             this.ProcessList.Click += new System.EventHandler(this.label1_Click);
             // 
-            // textBox1
+            // processName
             // 
-            this.textBox1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox1.Location = new System.Drawing.Point(374, 93);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(66, 25);
-            this.textBox1.TabIndex = 3;
+            this.processName.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.processName.Location = new System.Drawing.Point(374, 102);
+            this.processName.Name = "processName";
+            this.processName.Size = new System.Drawing.Size(106, 25);
+            this.processName.TabIndex = 3;
+            this.processName.TextChanged += new System.EventHandler(this.processName_TextChanged);
             // 
-            // textBox2
+            // arrivalTime
             // 
-            this.textBox2.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox2.Location = new System.Drawing.Point(374, 153);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(66, 25);
-            this.textBox2.TabIndex = 4;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.arrivalTime.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.arrivalTime.Location = new System.Drawing.Point(374, 162);
+            this.arrivalTime.Name = "arrivalTime";
+            this.arrivalTime.Size = new System.Drawing.Size(106, 25);
+            this.arrivalTime.TabIndex = 4;
+            this.arrivalTime.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.arrivalTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.arrivalTime_KeyPress);
             // 
-            // textBox3
+            // burstTime
             // 
-            this.textBox3.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox3.Location = new System.Drawing.Point(374, 216);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(66, 25);
-            this.textBox3.TabIndex = 5;
+            this.burstTime.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.burstTime.Location = new System.Drawing.Point(374, 225);
+            this.burstTime.Name = "burstTime";
+            this.burstTime.Size = new System.Drawing.Size(106, 25);
+            this.burstTime.TabIndex = 5;
+            this.burstTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.burstTime_KeyPress);
             // 
-            // textBox4
+            // timeSlice
             // 
-            this.textBox4.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox4.Location = new System.Drawing.Point(374, 346);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(66, 25);
-            this.textBox4.TabIndex = 6;
+            this.timeSlice.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.timeSlice.Location = new System.Drawing.Point(374, 355);
+            this.timeSlice.Name = "timeSlice";
+            this.timeSlice.Size = new System.Drawing.Size(106, 25);
+            this.timeSlice.TabIndex = 6;
+            this.timeSlice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.timeSlice_KeyPress);
             // 
-            // textBox5
+            // priority
             // 
-            this.textBox5.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox5.Location = new System.Drawing.Point(374, 282);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(66, 25);
-            this.textBox5.TabIndex = 7;
+            this.priority.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.priority.Location = new System.Drawing.Point(374, 291);
+            this.priority.Name = "priority";
+            this.priority.Size = new System.Drawing.Size(106, 25);
+            this.priority.TabIndex = 7;
+            this.priority.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.priority_KeyPress);
             // 
             // button2
             // 
@@ -135,71 +149,71 @@
             this.button2.Text = "프로세스 추가";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // processName
+            // processNameText
             // 
-            this.processName.AutoSize = true;
-            this.processName.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.processName.Location = new System.Drawing.Point(371, 72);
-            this.processName.Name = "processName";
-            this.processName.Size = new System.Drawing.Size(69, 18);
-            this.processName.TabIndex = 9;
-            this.processName.Text = "프로세스 ID";
-            this.processName.Click += new System.EventHandler(this.label2_Click);
+            this.processNameText.AutoSize = true;
+            this.processNameText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.processNameText.Location = new System.Drawing.Point(371, 78);
+            this.processNameText.Name = "processNameText";
+            this.processNameText.Size = new System.Drawing.Size(80, 21);
+            this.processNameText.TabIndex = 9;
+            this.processNameText.Text = "프로세스 ID";
+            this.processNameText.Click += new System.EventHandler(this.label2_Click);
             // 
-            // InputTime
+            // arrivalTimeText
             // 
-            this.InputTime.AutoSize = true;
-            this.InputTime.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.InputTime.Location = new System.Drawing.Point(371, 132);
-            this.InputTime.Name = "InputTime";
-            this.InputTime.Size = new System.Drawing.Size(52, 18);
-            this.InputTime.TabIndex = 10;
-            this.InputTime.Text = "도착시간";
+            this.arrivalTimeText.AutoSize = true;
+            this.arrivalTimeText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.arrivalTimeText.Location = new System.Drawing.Point(370, 138);
+            this.arrivalTimeText.Name = "arrivalTimeText";
+            this.arrivalTimeText.Size = new System.Drawing.Size(62, 21);
+            this.arrivalTimeText.TabIndex = 10;
+            this.arrivalTimeText.Text = "도착시간";
             // 
-            // label1
+            // burstTimeText
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(371, 195);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 18);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "실행시간";
+            this.burstTimeText.AutoSize = true;
+            this.burstTimeText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.burstTimeText.Location = new System.Drawing.Point(370, 201);
+            this.burstTimeText.Name = "burstTimeText";
+            this.burstTimeText.Size = new System.Drawing.Size(62, 21);
+            this.burstTimeText.TabIndex = 11;
+            this.burstTimeText.Text = "실행시간";
             // 
-            // label2
+            // timeSliceText
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(371, 325);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 18);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "시간할당량";
+            this.timeSliceText.AutoSize = true;
+            this.timeSliceText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.timeSliceText.Location = new System.Drawing.Point(370, 331);
+            this.timeSliceText.Name = "timeSliceText";
+            this.timeSliceText.Size = new System.Drawing.Size(75, 21);
+            this.timeSliceText.TabIndex = 12;
+            this.timeSliceText.Text = "시간할당량";
             // 
-            // label3
+            // priorityText
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(371, 261);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 18);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "우선순위";
+            this.priorityText.AutoSize = true;
+            this.priorityText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.priorityText.Location = new System.Drawing.Point(370, 267);
+            this.priorityText.Name = "priorityText";
+            this.priorityText.Size = new System.Drawing.Size(62, 21);
+            this.priorityText.TabIndex = 13;
+            this.priorityText.Text = "우선순위";
             // 
-            // label4
+            // scheduleText
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.Location = new System.Drawing.Point(507, 67);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 18);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "스케줄링 알고리즘";
+            this.scheduleText.AutoSize = true;
+            this.scheduleText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.scheduleText.Location = new System.Drawing.Point(514, 78);
+            this.scheduleText.Name = "scheduleText";
+            this.scheduleText.Size = new System.Drawing.Size(118, 21);
+            this.scheduleText.TabIndex = 15;
+            this.scheduleText.Text = "스케줄링 알고리즘";
             // 
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(518, 102);
+            this.radioButton1.Location = new System.Drawing.Point(519, 111);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(54, 16);
             this.radioButton1.TabIndex = 16;
@@ -211,7 +225,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(518, 134);
+            this.radioButton2.Location = new System.Drawing.Point(519, 152);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(102, 16);
             this.radioButton2.TabIndex = 17;
@@ -223,7 +237,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(518, 167);
+            this.radioButton3.Location = new System.Drawing.Point(519, 190);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(90, 16);
             this.radioButton3.TabIndex = 18;
@@ -235,7 +249,7 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(518, 268);
+            this.radioButton4.Location = new System.Drawing.Point(518, 317);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(95, 16);
             this.radioButton4.TabIndex = 21;
@@ -246,7 +260,7 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(518, 234);
+            this.radioButton5.Location = new System.Drawing.Point(519, 272);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(47, 16);
             this.radioButton5.TabIndex = 20;
@@ -257,7 +271,7 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(518, 200);
+            this.radioButton6.Location = new System.Drawing.Point(519, 230);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(44, 16);
             this.radioButton6.TabIndex = 19;
@@ -268,7 +282,7 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(518, 300);
+            this.radioButton7.Location = new System.Drawing.Point(518, 364);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(48, 16);
             this.radioButton7.TabIndex = 22;
@@ -276,12 +290,41 @@
             this.radioButton7.Text = "HRN";
             this.radioButton7.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            this.panel1.Controls.Add(this.ProcessList);
+            this.panel1.Location = new System.Drawing.Point(-1, -1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(667, 43);
+            this.panel1.TabIndex = 23;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(12, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 21);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "프로세스 목록";
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(663, 527);
+            this.ClientSize = new System.Drawing.Size(663, 472);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.radioButton7);
             this.Controls.Add(this.radioButton4);
             this.Controls.Add(this.radioButton5);
@@ -289,25 +332,25 @@
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.InputTime);
-            this.Controls.Add(this.processName);
+            this.Controls.Add(this.scheduleText);
+            this.Controls.Add(this.priorityText);
+            this.Controls.Add(this.timeSliceText);
+            this.Controls.Add(this.burstTimeText);
+            this.Controls.Add(this.arrivalTimeText);
+            this.Controls.Add(this.processNameText);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.ProcessList);
+            this.Controls.Add(this.priority);
+            this.Controls.Add(this.timeSlice);
+            this.Controls.Add(this.burstTime);
+            this.Controls.Add(this.arrivalTime);
+            this.Controls.Add(this.processName);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
             this.Name = "main";
-            this.Text = "OS - Scheduling Simulation";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,18 +361,18 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label ProcessList;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox processName;
+        private System.Windows.Forms.TextBox arrivalTime;
+        private System.Windows.Forms.TextBox burstTime;
+        private System.Windows.Forms.TextBox timeSlice;
+        private System.Windows.Forms.TextBox priority;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label processName;
-        private System.Windows.Forms.Label InputTime;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label processNameText;
+        private System.Windows.Forms.Label arrivalTimeText;
+        private System.Windows.Forms.Label burstTimeText;
+        private System.Windows.Forms.Label timeSliceText;
+        private System.Windows.Forms.Label priorityText;
+        private System.Windows.Forms.Label scheduleText;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
@@ -337,6 +380,9 @@
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton6;
         private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
 
 
     }

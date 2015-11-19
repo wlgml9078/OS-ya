@@ -11,10 +11,14 @@ namespace Scheduling_Jh
 {
     public partial class main : Form
     {
+        private TextBox textbox;
+        private Button processNameval;
         private box chlid;
         public main()
         {
             InitializeComponent();
+            chlid = new box();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -44,7 +48,7 @@ namespace Scheduling_Jh
 
         private void button1_Click(object sender, EventArgs e)
         {
-            chlid= new box();
+            
             this.Hide();
             chlid.Show();
 
@@ -58,7 +62,7 @@ namespace Scheduling_Jh
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
@@ -73,7 +77,48 @@ namespace Scheduling_Jh
 
         private void main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Close();
+            Application.Exit();
+        }
+
+        private void processName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void arrivalTime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //숫자,백스페이스,마이너스,소숫점 만 입력받는다.
+            if (!(Char.IsDigit(e.KeyChar)) && e.KeyChar != 8 && e.KeyChar != 45 && e.KeyChar != 46) //8:백스페이스,45:마이너스,46:소수점
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void burstTime_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //숫자,백스페이스,마이너스,소숫점 만 입력받는다.
+            if (!(Char.IsDigit(e.KeyChar)) && e.KeyChar != 8 && e.KeyChar != 45 && e.KeyChar != 46) //8:백스페이스,45:마이너스,46:소수점
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void priority_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //숫자,백스페이스,마이너스,소숫점 만 입력받는다.
+            if (!(Char.IsDigit(e.KeyChar)) && e.KeyChar != 8 && e.KeyChar != 45 && e.KeyChar != 46) //8:백스페이스,45:마이너스,46:소수점
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void timeSlice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //숫자,백스페이스,마이너스,소숫점 만 입력받는다.
+            if (!(Char.IsDigit(e.KeyChar)) && e.KeyChar != 8 && e.KeyChar != 45 && e.KeyChar != 46) //8:백스페이스,45:마이너스,46:소수점
+            {
+                e.Handled = true;
+            }
         }
     }
 }
