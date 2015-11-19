@@ -124,7 +124,7 @@ namespace Scheduling_Jh
 
         private void button2_Click(object sender, EventArgs e)
         {
-            processList.
+            
         }
 
         private void processList_SelectedIndexChanged(object sender, EventArgs e)
