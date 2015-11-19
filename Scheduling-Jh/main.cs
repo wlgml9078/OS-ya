@@ -18,15 +18,13 @@ namespace Scheduling_Jh
         {
             InitializeComponent();
             chlid = new box();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             
             RadioButton[] radios = new RadioButton[7];
-            timeSlice.Hide();
-            timeSliceText.Hide();
+            
 
         }
 
@@ -126,31 +124,12 @@ namespace Scheduling_Jh
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            processList.
         }
 
         private void processList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!radioButton4.Checked)
-            {
-                timeSlice.Hide();
-                timeSliceText.Hide();
-            }
-            else
-            {
-                timeSlice.Show();
-                timeSliceText.Show();
-            }
         }
     }
 }
