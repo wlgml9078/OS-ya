@@ -51,21 +51,21 @@
             this.radioButton6 = new System.Windows.Forms.RadioButton();
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.processListText = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.processInfo = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.processList = new System.Windows.Forms.DataGridView();
             this.processNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.processArrivedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.processBurstTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.processPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.processList)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -216,6 +216,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(520, 125);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(54, 16);
@@ -300,6 +301,7 @@
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.titlebar);
             this.panel1.Location = new System.Drawing.Point(-1, -1);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(667, 56);
             this.panel1.TabIndex = 23;
@@ -307,6 +309,21 @@
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Red;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(631, -1);
+            this.button2.Margin = new System.Windows.Forms.Padding(0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(33, 57);
+            this.button2.TabIndex = 3;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // processListText
             // 
@@ -366,61 +383,50 @@
             this.panel4.Size = new System.Drawing.Size(133, 334);
             this.panel4.TabIndex = 25;
             // 
-            // dataGridView1
+            // processList
             // 
-            this.dataGridView1.ColumnHeadersHeight = 20;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.processList.ColumnHeadersHeight = 20;
+            this.processList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.processList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.processNameColumn,
             this.processArrivedTime,
             this.processBurstTime,
             this.processPriority});
-            this.dataGridView1.Location = new System.Drawing.Point(16, 92);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 20;
-            this.dataGridView1.RowTemplate.Height = 20;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(338, 400);
-            this.dataGridView1.TabIndex = 23;
+            this.processList.Location = new System.Drawing.Point(17, 92);
+            this.processList.Name = "processList";
+            this.processList.RowHeadersWidth = 20;
+            this.processList.RowTemplate.Height = 20;
+            this.processList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.processList.Size = new System.Drawing.Size(338, 400);
+            this.processList.TabIndex = 23;
             // 
             // processNameColumn
             // 
             this.processNameColumn.HeaderText = "프로세스 이름";
             this.processNameColumn.Name = "processNameColumn";
+            this.processNameColumn.ReadOnly = true;
             this.processNameColumn.Width = 90;
             // 
             // processArrivedTime
             // 
             this.processArrivedTime.HeaderText = "도착시간";
             this.processArrivedTime.Name = "processArrivedTime";
+            this.processArrivedTime.ReadOnly = true;
             this.processArrivedTime.Width = 80;
             // 
             // processBurstTime
             // 
             this.processBurstTime.HeaderText = "실행시간";
             this.processBurstTime.Name = "processBurstTime";
+            this.processBurstTime.ReadOnly = true;
             this.processBurstTime.Width = 80;
             // 
             // processPriority
             // 
             this.processPriority.HeaderText = "우선순위";
             this.processPriority.Name = "processPriority";
+            this.processPriority.ReadOnly = true;
             this.processPriority.Width = 80;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(603, 0);
-            this.button2.Margin = new System.Windows.Forms.Padding(0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(61, 20);
-            this.button2.TabIndex = 3;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // main
             // 
@@ -429,7 +435,7 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(663, 507);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.processList);
             this.Controls.Add(this.scheduleText);
             this.Controls.Add(this.processInfo);
             this.Controls.Add(this.processListText);
@@ -462,7 +468,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.processList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -498,12 +504,12 @@
         private System.Windows.Forms.Label processInfo;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView processList;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn processNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn processArrivedTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn processBurstTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn processPriority;
-        private System.Windows.Forms.Button button2;
 
 
     }
