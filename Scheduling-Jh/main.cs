@@ -17,6 +17,7 @@ namespace Scheduling_Jh
         private Button processNameval;
         private box chlid;
         private List<Process> processListval;
+        private List<Stamp> timestamp;
         bool[] radioChecks;
         public main()
         {
@@ -26,6 +27,7 @@ namespace Scheduling_Jh
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             radioChecks=new bool[7];
             radioChecks[0] = radioButton1.Checked;
             radioChecks[1] = radioButton2.Checked;
@@ -73,11 +75,13 @@ namespace Scheduling_Jh
             chlid.Show();
             int target=0;
             for(int i=0;i<7;i++){
-                if(radioChecks[i]){
+                if(radioChecks[i]==true){
                     target = i;
                     break;
                 }
             }
+            
+            target = 5;
             switch (target)
             {
                 case 0:
@@ -85,16 +89,27 @@ namespace Scheduling_Jh
                     break;
                 case 5:
                     if(timeSlice.Text==""){
+                        Console.WriteLine("before run");
                         timeSliceText.ForeColor=Color.Red;
                     }
                     else{
                         int quant;
                         Int32.TryParse(timeSlice.Text,out quant);
                         RR rr=new RR(getData(), quant);
+                        Console.WriteLine("before run");
                         rr.rr_alg();
+                        Console.WriteLine("after run");
+                        timestamp = rr.getTimestamp();
+                        Console.WriteLine(timestamp.Count);
+                        for(int i = 0; i < timestamp.Count; i++)
+                        {
+                            Console.WriteLine(timestamp[i].getName(), timestamp[i].getStartTime(),timestamp[i].getEndTime());
+                        }
                         
                     }
-                    
+                    break;
+                default:
+                    Console.WriteLine("왜앙대영");
                     break;
             }
         }
@@ -194,9 +209,7 @@ namespace Scheduling_Jh
             else
                 name = processName.Text;
             Int32.TryParse(arrivalTime.Text,out temp1);
-            Console.Write(temp1);
             Int32.TryParse(burstTime.Text,out temp2);
-            Console.WriteLine(temp2);
             if (flag){
                 newProcess = new Process(name, temp1,temp2);
                 processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), 0 + "");
@@ -209,9 +222,7 @@ namespace Scheduling_Jh
                 
             }
             processListval.Add(newProcess);
-            for(int i=0;i<processListval.Count;i++){
-                Console.WriteLine(processListval[i].getName()+"");
-            }
+            
             
 
         }
@@ -287,7 +298,6 @@ namespace Scheduling_Jh
             is_down = true;
             position.X = e.X;
             position.Y = e.Y;
-            Console.WriteLine(position.X+" "+position.Y+" "+in_position.X+" "+in_position.Y);
         }
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)

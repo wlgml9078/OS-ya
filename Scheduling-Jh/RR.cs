@@ -14,7 +14,7 @@ namespace Scheduling_Jh
         {
             quant = n;
             IEnumerator<Process> e = inputData.GetEnumerator();
-
+            Ready=new Queue<Process>();
             while(!e.MoveNext())
             {
                 Ready.Enqueue(e.Current);
@@ -30,7 +30,6 @@ namespace Scheduling_Jh
                 if (Ready.Peek().getArrivalTime() >= currentTime)  //현재 시간이 도착 시간보다 큰 경우
                 {
                     Process p = Ready.Dequeue();    //큐에서 삭제
-                    Stamp s;
                     if (p.getBurstTime() > quant)   //BURST 시간이 단위 시간보다 큰 경우
                     {
                         start = currentTime;    //시작 시간 계산
@@ -39,8 +38,7 @@ namespace Scheduling_Jh
                         end = currentTime;  //끝 시간 계산
 
                         Ready.Enqueue(p);
-
-                        s = new Stamp(p.getName(), start, end); //stamp 추가
+                        addStamp(new Stamp(p.getName(), start, end)); //stamp 추가
                     }
                     else
                     {
@@ -48,7 +46,7 @@ namespace Scheduling_Jh
                         currentTime += p.getBurstTime();    //BURST 시간만큼 현재 시간 늘림
                         end = currentTime;  //끝 시간 계산
 
-                        s = new Stamp(p.getName(), start, end); //stamp 추가
+                        addStamp(new Stamp(p.getName(), start, end)); //stamp 추가
                     }
                 }
                 else
