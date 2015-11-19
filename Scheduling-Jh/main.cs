@@ -23,6 +23,11 @@ namespace Scheduling_Jh
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            RadioButton[] radios = new RadioButton[7];
+            for (int i = 0; i < 7; i++)
+            {
+                radios[i] = radioButton+i;
+            }
 
         }
 
