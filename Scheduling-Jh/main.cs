@@ -16,6 +16,8 @@ namespace Scheduling_Jh
         private TextBox textbox;
         private Button processNameval;
         private box chlid;
+        private List<Process> processListval;
+        bool[] radioChecks;
         public main()
         {
             InitializeComponent();
@@ -24,10 +26,22 @@ namespace Scheduling_Jh
 
         private void Form1_Load(object sender, EventArgs e)
         {
-                        
+            radioChecks=new bool[7];
+            radioChecks[0] = radioButton1.Checked;
+            radioChecks[1] = radioButton2.Checked;
+            radioChecks[2] = radioButton3.Checked;
+            radioChecks[3] = radioButton4.Checked;
+            radioChecks[4] = radioButton5.Checked;
+            radioChecks[5] = radioButton6.Checked;
+            radioChecks[6] = radioButton7.Checked;
+            processListval=new List<Process>();
             timeSlice.Hide();
             timeSliceText.Hide();
+            priority.Hide();
+            priorityText.Hide();
             is_down = false;
+            
+            
             
         }
 
@@ -51,24 +65,43 @@ namespace Scheduling_Jh
 
         }
         private List<Process> getData() {
-            return null;
+            return processListval;
         }
         private void button1_Click(object sender, EventArgs e)
         {
             
             this.Hide();
             chlid.Show();
-            if (radioButton1.Checked){
-                
+            int target=0;
+            for(int i=0;i<7;i++){
+                if(radioChecks[i]){
+                    target = i;
+                    break;
+                }
             }
-            else{
-
+            switch (target)
+            {
+                case 0:
+                    new FCFS(getData());
+                    break;
+                case 5:
+                    break;
             }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (radioButton2.Checked)
+            {
+                priority.Show();
+                priorityText.Show();
+                
+            }
+            else
+            {
+                priority.Hide();
+                priorityText.Hide();
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -78,7 +111,16 @@ namespace Scheduling_Jh
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (radioButton3.Checked)
+            {
+                priority.Show();
+                priorityText.Show();
+            }
+            else
+            {
+                priority.Hide();
+                priorityText.Hide();                
+            }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -131,13 +173,68 @@ namespace Scheduling_Jh
                 e.Handled = true;
             }
         }
+        private void addProcessToList(bool flag)
+        {
+            int temp1,temp2,temp3;
+            Process newProcess;
+            String name;
+            if (processName.Text == "")
+                name = (processListval.Count + 1) + "";
 
+            else
+                name = processName.Text;
+            Int32.TryParse(arrivalTime.Text,out temp1);
+            Int32.TryParse(burstTime.Text,out temp2);
+            if (flag){
+                newProcess = new Process(name, temp1,temp2);
+            }
+            else
+            {
+                Int32.TryParse(priority.Text, out temp3);
+                newProcess = new Process(name, temp1, temp3);
+            }
+            processListval.Add(newProcess);
+            for(int i=0;i<processListval.Count;i++){
+                Console.WriteLine(processListval[i].getName()+"");
+            }
+
+        }
         private void button2_Click(object sender, EventArgs e)
         {
-            if (processName.Text == null)
-            {
-
+            
+            if(arrivalTime.Text==""){
+                Console.WriteLine("arrival Null");
+                arrivalTimeText.ForeColor = Color.Red;
             }
+            else
+            {
+                arrivalTimeText.ForeColor = Color.Black;
+                if(burstTime.Text=="")
+                {
+                    burstTimeText.ForeColor = Color.Red;
+                }
+                else
+                {
+                    burstTimeText.ForeColor = Color.Black;
+                    if (radioButton2.Checked || radioButton3.Checked)
+                    {
+                        if (priority.Text == "")
+                        {
+                            priorityText.ForeColor = Color.Red;
+                        }
+                        else
+                        {
+                            priorityText.ForeColor = Color.Black;
+                            addProcessToList(true);
+                        }
+                    }
+                    else
+                    {
+                        addProcessToList(false);
+                    }
+                }
+            }
+            
         }
 
         private void processList_SelectedIndexChanged(object sender, EventArgs e)
