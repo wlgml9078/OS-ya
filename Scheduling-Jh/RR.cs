@@ -12,9 +12,10 @@ namespace Scheduling_Jh
         public RR(List<Process> list, int n)
             :base(list)
         {
+            Ready = new Queue<Process>();
             quant = n;
             IEnumerator<Process> e = inputData.GetEnumerator();
-            Ready=new Queue<Process>();
+
             while(!e.MoveNext())
             {
                 Ready.Enqueue(e.Current);
@@ -27,9 +28,10 @@ namespace Scheduling_Jh
             {
                 int start, end;
 
-                if (Ready.Peek().getArrivalTime() >= currentTime)  //현재 시간이 도착 시간보다 큰 경우
+                if (Ready.Peek().getArrivalTime() > currentTime)  //현재 시간이 도착 시간보다 큰 경우
                 {
-                    Process p = Ready.Dequeue();    //큐에서 삭제
+                    Process p = Ready.Dequeue();    //먼저 큐에서 삭제
+
                     if (p.getBurstTime() > quant)   //BURST 시간이 단위 시간보다 큰 경우
                     {
                         start = currentTime;    //시작 시간 계산
@@ -38,6 +40,7 @@ namespace Scheduling_Jh
                         end = currentTime;  //끝 시간 계산
 
                         Ready.Enqueue(p);
+
                         addStamp(new Stamp(p.getName(), start, end)); //stamp 추가
                     }
                     else
@@ -45,6 +48,14 @@ namespace Scheduling_Jh
                         start = currentTime;    //시작 시간 계산
                         currentTime += p.getBurstTime();    //BURST 시간만큼 현재 시간 늘림
                         end = currentTime;  //끝 시간 계산
+
+                        for(int i=0; i<inputData.Capacity; i++)
+                        {
+                            if( inputData[i].getName().Equals(p.getName()) )
+                            {
+                                inputData[i].setEndTime(end);
+                            }
+                        }
 
                         addStamp(new Stamp(p.getName(), start, end)); //stamp 추가
                     }
