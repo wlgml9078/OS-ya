@@ -16,5 +16,9 @@ namespace Scheduling_Jh
             this.starttime = startpoint;
             this.endtime = endpoint;
         }
+        public int getTimeGap()
+        {
+            return endtime - starttime; 
+        }
     }
 }

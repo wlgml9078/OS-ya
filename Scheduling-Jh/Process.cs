@@ -11,13 +11,11 @@ namespace Scheduling_Jh
         private String name;
         private int arrival_time;
         private int burst_time;
-        private double awt;
-        private double art;
+        private int end_time;   //완전 프로세스 끝나는 시간
         private int priority;
         public Process(String name, int arrival_time, int burst_time)
         {
             isEnd = false;
-            art = 0; awt = 0;
             this.name = name;
             this.arrival_time = arrival_time;
             this.burst_time = burst_time;
@@ -25,7 +23,6 @@ namespace Scheduling_Jh
         public Process(String name, int arrival_time, int burst_time, int priority)
         {
             isEnd = false;
-            art = 0; awt = 0;
             this.name = name;
             this.arrival_time = arrival_time;
             this.burst_time = burst_time;
@@ -35,7 +32,9 @@ namespace Scheduling_Jh
         public int getArrivalTime() { return arrival_time; }
         public int getBurstTime() { return burst_time; }
         public int getPriority() { return priority; }
+        public int getEndTime() { return end_time; }
         public void setBurstTime(int time) { burst_time = time; }
+        public void setEndTime(int time) { end_time = time; }
     }
 }
  
