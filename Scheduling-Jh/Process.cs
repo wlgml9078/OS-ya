@@ -35,6 +35,7 @@ namespace Scheduling_Jh
         public int getArrivalTime() { return arrival_time; }
         public int getBurstTime() { return burst_time; }
         public int getPriority() { return priority; }
+        public void setBurstTime(int time) { burst_time = time; }
     }
 }
  

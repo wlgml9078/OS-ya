@@ -10,7 +10,7 @@ namespace Scheduling_Jh
         String name;
         int starttime;
         int endtime;
-        public Stamp(string name, int startpoint,int endpoint) 
+        public Stamp(string name, int startpoint, int endpoint) 
         {
             this.name = name;
             this.starttime = startpoint;
