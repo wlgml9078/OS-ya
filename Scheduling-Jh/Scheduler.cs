@@ -12,6 +12,7 @@ namespace Scheduling_Jh
         public List<Process> inputData;
         private List<Stamp> timestamp;
         public Scheduler(List<Process> list){
+            timestamp= new List<Stamp>();
             currentTime = 0;
             inputData = new List<Process>();
             timestamp = new List<Stamp>();
