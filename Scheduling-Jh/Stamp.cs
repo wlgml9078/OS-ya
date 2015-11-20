@@ -24,5 +24,6 @@ namespace Scheduling_Jh
         {
             Console.WriteLine("s"+this.name+":"+starttime+","+endtime);
         }
+        public String getName() { return name; }
     }
 }

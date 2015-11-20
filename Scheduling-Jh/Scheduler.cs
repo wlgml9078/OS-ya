@@ -31,12 +31,15 @@ namespace Scheduling_Jh
         public double getATT()
         {
             int sum=0;
+            int data = 0;
+
             for(int i=0; i<inputData.Count; i++)
             {
-                sum += inputData[i].getEndTime()-inputData[i].getArrivalTime(); //각 반환시간 더함
+                data = inputData[i].getEndTime() - inputData[i].getArrivalTime();
+                sum += data; //각 반환시간 더함
             }
 
-            ATT = sum / inputData.Count; //프로세스 수로 나누어줌
+            ATT = Convert.ToDouble(sum) / inputData.Count; //프로세스 수로 나누어줌
 
             return ATT;
         }
@@ -44,12 +47,15 @@ namespace Scheduling_Jh
         public double getAWT()
         {
             int sum = 0;
+            int data = 0;
+
             for (int i = 0; i < inputData.Count; i++)
             {
-                sum += inputData[i].getEndTime() - inputData[i].getBurstTime(); //각 대기시간 더함
+                data = inputData[i].getEndTime() - inputData[i].getArrivalTime() - inputData[i].getBurstTime();
+                sum += data;
             }
 
-            AWT = sum / inputData.Count; //프로세스 수로 나누어줌
+            AWT = Convert.ToDouble(sum) / inputData.Count; //프로세스 수로 나누어줌
 
             return AWT;
         }

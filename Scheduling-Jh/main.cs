@@ -95,15 +95,13 @@ namespace Scheduling_Jh
                         int quant;
                         Int32.TryParse(timeSlice.Text,out quant);
                         RR rr=new RR(getData(), quant);
-                        //Console.WriteLine("before run");
                         rr.rr_alg();
-                        //Console.WriteLine("after run");
                         timestamp = rr.getTimestamp();
                         for(int i = 0; i < timestamp.Count; i++)
                         {
                             timestamp[i].print();
                         }
-                        Console.WriteLine(rr.getAWT()+" "+rr.getATT());
+                        Console.WriteLine("awt="+rr.getAWT()+", att="+rr.getATT());
                         
                     }
                     break;
