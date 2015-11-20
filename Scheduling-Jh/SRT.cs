@@ -5,8 +5,11 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
-    class SRT :Scheduler
+    class SRT
     {
+        public SRT()
+        {
 
+        }
     }
 }

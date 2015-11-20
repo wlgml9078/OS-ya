@@ -40,7 +40,6 @@ namespace Scheduling_Jh
                         end = currentTime;  //끝 시간 계산
 
                         Ready.Enqueue(p);
-
                         addStamp(new Stamp(p.getName(), start, end)); //stamp 추가
                     }
                     else

@@ -73,7 +73,7 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(509, 443);
             this.button1.Name = "button1";
@@ -86,64 +86,64 @@
             // titlebar
             // 
             this.titlebar.AutoSize = true;
-            this.titlebar.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.titlebar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.titlebar.ForeColor = System.Drawing.Color.White;
             this.titlebar.Location = new System.Drawing.Point(13, 16);
             this.titlebar.Name = "titlebar";
-            this.titlebar.Size = new System.Drawing.Size(135, 24);
+            this.titlebar.Size = new System.Drawing.Size(150, 20);
             this.titlebar.TabIndex = 2;
             this.titlebar.Text = "스케줄러 프로그램";
             this.titlebar.Click += new System.EventHandler(this.label1_Click);
             // 
             // processName
             // 
-            this.processName.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.processName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.processName.Location = new System.Drawing.Point(375, 148);
             this.processName.Name = "processName";
-            this.processName.Size = new System.Drawing.Size(106, 25);
+            this.processName.Size = new System.Drawing.Size(106, 21);
             this.processName.TabIndex = 3;
             this.processName.TextChanged += new System.EventHandler(this.processName_TextChanged);
             // 
             // arrivalTime
             // 
-            this.arrivalTime.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.arrivalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.arrivalTime.Location = new System.Drawing.Point(375, 208);
             this.arrivalTime.Name = "arrivalTime";
-            this.arrivalTime.Size = new System.Drawing.Size(106, 25);
+            this.arrivalTime.Size = new System.Drawing.Size(106, 21);
             this.arrivalTime.TabIndex = 4;
             this.arrivalTime.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.arrivalTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.arrivalTime_KeyPress);
             // 
             // burstTime
             // 
-            this.burstTime.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.burstTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.burstTime.Location = new System.Drawing.Point(375, 271);
             this.burstTime.Name = "burstTime";
-            this.burstTime.Size = new System.Drawing.Size(106, 25);
+            this.burstTime.Size = new System.Drawing.Size(106, 21);
             this.burstTime.TabIndex = 5;
             this.burstTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.burstTime_KeyPress);
             // 
             // timeSlice
             // 
-            this.timeSlice.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.timeSlice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.timeSlice.Location = new System.Drawing.Point(375, 467);
             this.timeSlice.Name = "timeSlice";
-            this.timeSlice.Size = new System.Drawing.Size(106, 25);
+            this.timeSlice.Size = new System.Drawing.Size(106, 21);
             this.timeSlice.TabIndex = 6;
             this.timeSlice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.timeSlice_KeyPress);
             // 
             // priority
             // 
-            this.priority.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.priority.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.priority.Location = new System.Drawing.Point(375, 337);
             this.priority.Name = "priority";
-            this.priority.Size = new System.Drawing.Size(106, 25);
+            this.priority.Size = new System.Drawing.Size(106, 21);
             this.priority.TabIndex = 7;
             this.priority.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.priority_KeyPress);
             // 
             // addProcess
             // 
-            this.addProcess.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.addProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.addProcess.Location = new System.Drawing.Point(375, 378);
             this.addProcess.Name = "addProcess";
             this.addProcess.Size = new System.Drawing.Size(106, 32);
@@ -155,10 +155,10 @@
             // processNameText
             // 
             this.processNameText.AutoSize = true;
-            this.processNameText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.processNameText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.processNameText.Location = new System.Drawing.Point(372, 124);
             this.processNameText.Name = "processNameText";
-            this.processNameText.Size = new System.Drawing.Size(80, 21);
+            this.processNameText.Size = new System.Drawing.Size(88, 17);
             this.processNameText.TabIndex = 9;
             this.processNameText.Text = "프로세스 ID";
             this.processNameText.Click += new System.EventHandler(this.label2_Click);
@@ -166,50 +166,50 @@
             // arrivalTimeText
             // 
             this.arrivalTimeText.AutoSize = true;
-            this.arrivalTimeText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.arrivalTimeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.arrivalTimeText.Location = new System.Drawing.Point(371, 184);
             this.arrivalTimeText.Name = "arrivalTimeText";
-            this.arrivalTimeText.Size = new System.Drawing.Size(62, 21);
+            this.arrivalTimeText.Size = new System.Drawing.Size(68, 17);
             this.arrivalTimeText.TabIndex = 10;
             this.arrivalTimeText.Text = "도착시간";
             // 
             // burstTimeText
             // 
             this.burstTimeText.AutoSize = true;
-            this.burstTimeText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.burstTimeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.burstTimeText.Location = new System.Drawing.Point(371, 247);
             this.burstTimeText.Name = "burstTimeText";
-            this.burstTimeText.Size = new System.Drawing.Size(62, 21);
+            this.burstTimeText.Size = new System.Drawing.Size(68, 17);
             this.burstTimeText.TabIndex = 11;
             this.burstTimeText.Text = "실행시간";
             // 
             // timeSliceText
             // 
             this.timeSliceText.AutoSize = true;
-            this.timeSliceText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.timeSliceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.timeSliceText.Location = new System.Drawing.Point(371, 443);
             this.timeSliceText.Name = "timeSliceText";
-            this.timeSliceText.Size = new System.Drawing.Size(75, 21);
+            this.timeSliceText.Size = new System.Drawing.Size(83, 17);
             this.timeSliceText.TabIndex = 12;
             this.timeSliceText.Text = "시간할당량";
             // 
             // priorityText
             // 
             this.priorityText.AutoSize = true;
-            this.priorityText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.priorityText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.priorityText.Location = new System.Drawing.Point(371, 313);
             this.priorityText.Name = "priorityText";
-            this.priorityText.Size = new System.Drawing.Size(62, 21);
+            this.priorityText.Size = new System.Drawing.Size(68, 17);
             this.priorityText.TabIndex = 13;
             this.priorityText.Text = "우선순위";
             // 
             // scheduleText
             // 
             this.scheduleText.AutoSize = true;
-            this.scheduleText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.scheduleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.scheduleText.Location = new System.Drawing.Point(516, 81);
             this.scheduleText.Name = "scheduleText";
-            this.scheduleText.Size = new System.Drawing.Size(118, 21);
+            this.scheduleText.Size = new System.Drawing.Size(133, 17);
             this.scheduleText.TabIndex = 15;
             this.scheduleText.Text = "스케줄링 알고리즘";
             // 
@@ -329,11 +329,11 @@
             // 
             this.processListText.AutoSize = true;
             this.processListText.BackColor = System.Drawing.Color.Transparent;
-            this.processListText.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.processListText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.processListText.ForeColor = System.Drawing.Color.Black;
             this.processListText.Location = new System.Drawing.Point(12, 58);
             this.processListText.Name = "processListText";
-            this.processListText.Size = new System.Drawing.Size(92, 21);
+            this.processListText.Size = new System.Drawing.Size(103, 17);
             this.processListText.TabIndex = 3;
             this.processListText.Text = "프로세스 목록";
             // 
@@ -366,10 +366,10 @@
             // processInfo
             // 
             this.processInfo.AutoSize = true;
-            this.processInfo.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.processInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.processInfo.Location = new System.Drawing.Point(372, 81);
             this.processInfo.Name = "processInfo";
-            this.processInfo.Size = new System.Drawing.Size(92, 21);
+            this.processInfo.Size = new System.Drawing.Size(103, 17);
             this.processInfo.TabIndex = 25;
             this.processInfo.Text = "프로세스 정보";
             // 
@@ -399,6 +399,7 @@
             this.processList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.processList.Size = new System.Drawing.Size(338, 400);
             this.processList.TabIndex = 23;
+            this.processList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.processList_CellContentClick);
             // 
             // processNameColumn
             // 
