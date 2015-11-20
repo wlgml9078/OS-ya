@@ -103,6 +103,7 @@ namespace Scheduling_Jh
                         {
                             timestamp[i].print();
                         }
+                        Console.WriteLine(rr.getAWT()+" "+rr.getATT());
                         
                     }
                     break;
