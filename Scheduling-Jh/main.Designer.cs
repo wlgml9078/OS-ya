@@ -229,7 +229,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(520, 166);
+            this.radioButton2.Location = new System.Drawing.Point(520, 165);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(102, 16);
             this.radioButton2.TabIndex = 17;
@@ -241,7 +241,7 @@
             // radioButton3
             // 
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(520, 204);
+            this.radioButton3.Location = new System.Drawing.Point(520, 205);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(90, 16);
             this.radioButton3.TabIndex = 18;
@@ -253,7 +253,7 @@
             // radioButton4
             // 
             this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(519, 334);
+            this.radioButton4.Location = new System.Drawing.Point(519, 325);
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(95, 16);
             this.radioButton4.TabIndex = 21;
@@ -265,7 +265,7 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(520, 295);
+            this.radioButton5.Location = new System.Drawing.Point(520, 285);
             this.radioButton5.Name = "radioButton5";
             this.radioButton5.Size = new System.Drawing.Size(47, 16);
             this.radioButton5.TabIndex = 20;
@@ -276,7 +276,7 @@
             // radioButton6
             // 
             this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(520, 248);
+            this.radioButton6.Location = new System.Drawing.Point(520, 245);
             this.radioButton6.Name = "radioButton6";
             this.radioButton6.Size = new System.Drawing.Size(44, 16);
             this.radioButton6.TabIndex = 19;
@@ -287,7 +287,7 @@
             // radioButton7
             // 
             this.radioButton7.AutoSize = true;
-            this.radioButton7.Location = new System.Drawing.Point(519, 378);
+            this.radioButton7.Location = new System.Drawing.Point(519, 365);
             this.radioButton7.Name = "radioButton7";
             this.radioButton7.Size = new System.Drawing.Size(48, 16);
             this.radioButton7.TabIndex = 22;
@@ -404,28 +404,24 @@
             // 
             this.processNameColumn.HeaderText = "프로세스 이름";
             this.processNameColumn.Name = "processNameColumn";
-            this.processNameColumn.ReadOnly = true;
             this.processNameColumn.Width = 90;
             // 
             // processArrivedTime
             // 
             this.processArrivedTime.HeaderText = "도착시간";
             this.processArrivedTime.Name = "processArrivedTime";
-            this.processArrivedTime.ReadOnly = true;
             this.processArrivedTime.Width = 80;
             // 
             // processBurstTime
             // 
             this.processBurstTime.HeaderText = "실행시간";
             this.processBurstTime.Name = "processBurstTime";
-            this.processBurstTime.ReadOnly = true;
             this.processBurstTime.Width = 80;
             // 
             // processPriority
             // 
             this.processPriority.HeaderText = "우선순위";
             this.processPriority.Name = "processPriority";
-            this.processPriority.ReadOnly = true;
             this.processPriority.Width = 80;
             // 
             // main

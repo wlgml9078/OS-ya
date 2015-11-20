@@ -13,7 +13,23 @@ namespace Scheduling_Jh
         {
             
         }
+        public int fcfs_compare(Process a, Process b){
+            if (a.getArrivalTime() > b.getArrivalTime())
+                return 1;
+            else if (a.getArrivalTime() == b.getArrivalTime())
+                return 0;
+            else
+                return -1;
+        }
+        public void fcfs_print()
+        {   
+            for (int i = 0; i < inputData.Count; i++)
+            {
+                Console.WriteLine(inputData[i].getArrivalTime());
+            }
+        }
         public void run(){
+            inputData.Sort(fcfs_compare);
             currentTime += inputData[0].getArrivalTime();
             for (int i = 0; i < inputData.Count; i++)
             {

@@ -20,5 +20,14 @@ namespace Scheduling_Jh
         {
             return endtime - starttime; 
         }
+        public String getName(){
+            return name;
+        }
+        public int getStartTime() {
+            return starttime;
+        }
+        public int getEndTime() {
+            return endtime;
+        }
     }
 }

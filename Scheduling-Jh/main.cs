@@ -71,8 +71,7 @@ namespace Scheduling_Jh
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            chlid.Show();
+            
             int target=0;
             for(int i=0;i<7;i++){
                 if(radioChecks[i]==true){
@@ -81,11 +80,14 @@ namespace Scheduling_Jh
                 }
             }
             
-            target = 5;
+            target = 0;
             switch (target)
             {
                 case 0:
                     FCFS fcfs=new FCFS(getData());
+                    fcfs.fcfs_print();
+
+                    chlid.Show();
                     break;
                 case 5:
                     if(timeSlice.Text==""){
@@ -103,9 +105,10 @@ namespace Scheduling_Jh
                         Console.WriteLine(timestamp.Count);
                         for(int i = 0; i < timestamp.Count; i++)
                         {
-                            Console.WriteLine(timestamp[i].getName(), timestamp[i].getStartTime(),timestamp[i].getEndTime());
+                            Console.WriteLine(timestamp[i].getName()+""+timestamp[i].getStartTime()+timestamp[i].getEndTime());
                         }
-                        
+
+                        chlid.Show();
                     }
                     break;
                 default:
@@ -222,7 +225,9 @@ namespace Scheduling_Jh
                 
             }
             processListval.Add(newProcess);
-            
+            processName.Text = "";
+            arrivalTime.Text = "";
+            burstTime.Text = "";
             
 
         }
