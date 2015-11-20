@@ -170,6 +170,8 @@ namespace Scheduling_Jh
                         
                         }
                         break;
+                    case 6:
+                        break;
                     default:
                         break;
                 }
