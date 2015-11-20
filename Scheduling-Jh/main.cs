@@ -71,7 +71,8 @@ namespace Scheduling_Jh
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            this.Hide();
+            chlid.Show();
             int target=0;
             for(int i=0;i<7;i++){
                 if(radioChecks[i]==true){
@@ -80,39 +81,32 @@ namespace Scheduling_Jh
                 }
             }
             
-            target = 0;
+            target = 5;
             switch (target)
             {
                 case 0:
                     FCFS fcfs=new FCFS(getData());
-                    fcfs.fcfs_print();
-
-                    chlid.Show();
                     break;
                 case 5:
                     if(timeSlice.Text==""){
-                        Console.WriteLine("before run");
                         timeSliceText.ForeColor=Color.Red;
                     }
                     else{
                         int quant;
                         Int32.TryParse(timeSlice.Text,out quant);
                         RR rr=new RR(getData(), quant);
-                        Console.WriteLine("before run");
+                        //Console.WriteLine("before run");
                         rr.rr_alg();
-                        Console.WriteLine("after run");
+                        //Console.WriteLine("after run");
                         timestamp = rr.getTimestamp();
-                        Console.WriteLine(timestamp.Count);
                         for(int i = 0; i < timestamp.Count; i++)
                         {
-                            Console.WriteLine(timestamp[i].getName()+""+timestamp[i].getStartTime()+timestamp[i].getEndTime());
+                            timestamp[i].print();
                         }
-
-                        chlid.Show();
+                        
                     }
                     break;
                 default:
-                    Console.WriteLine("왜앙대영");
                     break;
             }
         }
@@ -225,11 +219,6 @@ namespace Scheduling_Jh
                 
             }
             processListval.Add(newProcess);
-            processName.Text = "";
-            arrivalTime.Text = "";
-            burstTime.Text = "";
-            
-
         }
         private void button2_Click(object sender, EventArgs e)
         {

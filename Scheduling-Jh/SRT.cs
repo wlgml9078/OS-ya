@@ -7,7 +7,7 @@ namespace Scheduling_Jh
 {
     class SRT
     {
-        public SRT()
+        public SRT() :
         {
 
         }
