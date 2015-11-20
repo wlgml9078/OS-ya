@@ -29,7 +29,7 @@ namespace Scheduling_Jh
         {
             while(Ready.Count>0)
             {
-                int start = 0, end = 0;
+                int start = 0, remained = 0, end = 0;
 
                 if (Ready.Peek().getArrivalTime() <= currentTime)  //현재 시간이 도착 시간보다 큰 경우
                 {
@@ -39,12 +39,14 @@ namespace Scheduling_Jh
                     {
                         start = currentTime;    //시작 시간 계산
 
-                        p.setBurstTime(p.getBurstTime() - quant);   //남은 BURST 시간 QUANT만큼 줄임
+                        remained = p.getBurstTime() - quant;
+                        p.setBurstTime(remained);   //남은 BURST 시간 QUANT만큼 줄임
                         currentTime += quant;   //현재 시간을 QUANT만큼 늘림
+
                         end = currentTime;  //끝 시간 계산
 
                         Ready.Enqueue(p);
-                        Stamp s = new Stamp(p.getName(), start, end, p.getBurstTime()-quant);
+                        Stamp s = new Stamp(p.getName(), start, end, remained);
                         addStamp(s); //stamp 추가
                     }
                     else
@@ -53,14 +55,14 @@ namespace Scheduling_Jh
                         currentTime += p.getBurstTime();    //BURST 시간만큼 현재 시간 늘림
                         end = currentTime;  //끝 시간 계산
 
-                        for (int i = 0; i < inputData.Count; i++)
+                        for (int i = 0; i < inputData.Count;)
                         {
                             if ( inputData[i].getName().Equals(p.getName()) )
                                 inputData[i].setEndTime(currentTime);
                             break;
                         }
 
-                        Stamp s = new Stamp(p.getName(), start, end, 0); 
+                        Stamp s = new Stamp(p.getName(), start, end); 
                         addStamp(s); //stamp 추가
                     }
                 }

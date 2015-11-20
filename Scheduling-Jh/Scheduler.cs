@@ -5,6 +5,22 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
+    class Burst_Comparer : IComparer<Process>
+    {
+        public int Compare(Process x, Process y)
+        {
+            return x.getBurstTime().CompareTo(y.getBurstTime());
+        }
+    }
+
+    class Comparer : IComparer<Process>
+    {
+        public int Compare(Process x, Process y)
+        {
+            return x.getArrivalTime().CompareTo(y.getArrivalTime());
+        }
+    }
+
     class Scheduler
     {
         public int currentTime;
@@ -14,9 +30,11 @@ namespace Scheduling_Jh
         public Scheduler(List<Process> list){
             timestamp= new List<Stamp>();
             currentTime = 0;
+
             inputData = new List<Process>();
             timestamp = new List<Stamp>();
             inputData = list;
+            inputData.Sort(new Comparer());
             ATT = 0;
             AWT = 0;
         }
