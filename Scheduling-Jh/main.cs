@@ -157,7 +157,20 @@ namespace Scheduling_Jh
                     }
                     Console.WriteLine(System.Convert.ToDouble(fcfs.getAWT()) + " " +System.Convert.ToDouble(fcfs.getATT()));
                     break;
-                case 5:
+                case 3:     //sjf
+                    SJF sjf = new SJF(getData());
+                    timestamp = sjf.getTimestamp();
+                    sjf.sjf_alg();
+                    for (int i = 0; i < timestamp.Count; i++)
+                    {
+                        timestamp[i].print();
+                    }
+                    Console.WriteLine(sjf.getAWT() + "," + sjf.getATT());
+                    break;
+                case 4:
+
+                    break;
+                case 5:     //rr
                     if(timeSlice.Text==""){
                         timeSliceText.ForeColor=Color.Red;
                     }

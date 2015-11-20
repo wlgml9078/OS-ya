@@ -9,6 +9,7 @@ namespace Scheduling_Jh
     {
         Queue<Process> Ready;   //레디큐
         int quant;
+
         public RR(List<Process> list, int q)
             :base(list)
         {            
@@ -16,7 +17,7 @@ namespace Scheduling_Jh
             quant = q;
             currentTime = 0;
 
-            for (int i = 0; i < inputData.Count; i++)
+            for (int i = 0; i < inputData.Count; i++)   //큐에 리스트 복사
             {
                 Process p = new Process(list[i].getName(),list[i].getArrivalTime(),list[i].getBurstTime());
                 Ready.Enqueue(p);
@@ -37,12 +38,13 @@ namespace Scheduling_Jh
                     if (p.getBurstTime() > quant)   //BURST 시간이 단위 시간보다 큰 경우
                     {
                         start = currentTime;    //시작 시간 계산
+
                         p.setBurstTime(p.getBurstTime() - quant);   //남은 BURST 시간 QUANT만큼 줄임
                         currentTime += quant;   //현재 시간을 QUANT만큼 늘림
                         end = currentTime;  //끝 시간 계산
 
                         Ready.Enqueue(p);
-                        Stamp s = new Stamp(p.getName(), start, end);
+                        Stamp s = new Stamp(p.getName(), start, end, p.getBurstTime()-quant);
                         addStamp(s); //stamp 추가
                     }
                     else
@@ -55,9 +57,10 @@ namespace Scheduling_Jh
                         {
                             if ( inputData[i].getName().Equals(p.getName()) )
                                 inputData[i].setEndTime(currentTime);
+                            break;
                         }
 
-                        Stamp s = new Stamp(p.getName(), start, end); 
+                        Stamp s = new Stamp(p.getName(), start, end, 0); 
                         addStamp(s); //stamp 추가
                     }
                 }
