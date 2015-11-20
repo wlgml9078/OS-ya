@@ -89,27 +89,24 @@ namespace Scheduling_Jh
                     break;
                 case 5:
                     if(timeSlice.Text==""){
-                        Console.WriteLine("before run");
                         timeSliceText.ForeColor=Color.Red;
                     }
                     else{
                         int quant;
                         Int32.TryParse(timeSlice.Text,out quant);
                         RR rr=new RR(getData(), quant);
-                        Console.WriteLine("before run");
+                        //Console.WriteLine("before run");
                         rr.rr_alg();
-                        Console.WriteLine("after run");
+                        //Console.WriteLine("after run");
                         timestamp = rr.getTimestamp();
-                        Console.WriteLine(timestamp.Count);
                         for(int i = 0; i < timestamp.Count; i++)
                         {
-                            Console.WriteLine(timestamp[i].getName(), timestamp[i].getStartTime(),timestamp[i].getEndTime());
+                            timestamp[i].print();
                         }
                         
                     }
                     break;
                 default:
-                    Console.WriteLine("왜앙대영");
                     break;
             }
         }
@@ -222,9 +219,6 @@ namespace Scheduling_Jh
                 
             }
             processListval.Add(newProcess);
-            
-            
-
         }
         private void button2_Click(object sender, EventArgs e)
         {

@@ -20,5 +20,9 @@ namespace Scheduling_Jh
         {
             return endtime - starttime; 
         }
+        public void print()
+        {
+            Console.WriteLine("s"+this.name+":"+starttime+","+endtime);
+        }
     }
 }

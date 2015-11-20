@@ -10,15 +10,15 @@ namespace Scheduling_Jh
         public int currentTime;
         private double ATT, AWT;
         public List<Process> inputData;
-        private List<Stamp> timestamp;
+        protected List<Stamp> timestamp;
         public Scheduler(List<Process> list){
             timestamp= new List<Stamp>();
             currentTime = 0;
             inputData = new List<Process>();
             timestamp = new List<Stamp>();
             inputData = list;
-            ATT = 0.0;
-            AWT = 0.0;
+            ATT = 0;
+            AWT = 0;
         }
         public void addStamp(Stamp stamp) {
             timestamp.Add(stamp);
@@ -55,8 +55,4 @@ namespace Scheduling_Jh
         }
     }
 
-    public void showData()
-    {
-        console.
-    }
 }
