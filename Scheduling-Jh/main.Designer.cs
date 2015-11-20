@@ -36,7 +36,6 @@
             this.burstTime = new System.Windows.Forms.TextBox();
             this.timeSlice = new System.Windows.Forms.TextBox();
             this.priority = new System.Windows.Forms.TextBox();
-            this.addProcess = new System.Windows.Forms.Button();
             this.processNameText = new System.Windows.Forms.Label();
             this.arrivalTimeText = new System.Windows.Forms.Label();
             this.burstTimeText = new System.Windows.Forms.Label();
@@ -52,10 +51,12 @@
             this.radioButton7 = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.processListText = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.addProcess = new System.Windows.Forms.Button();
             this.processInfo = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.processList = new System.Windows.Forms.DataGridView();
@@ -75,7 +76,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(509, 443);
+            this.button1.Location = new System.Drawing.Point(509, 446);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(133, 49);
             this.button1.TabIndex = 0;
@@ -88,12 +89,11 @@
             this.titlebar.AutoSize = true;
             this.titlebar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.titlebar.ForeColor = System.Drawing.Color.White;
-            this.titlebar.Location = new System.Drawing.Point(13, 16);
+            this.titlebar.Location = new System.Drawing.Point(13, 30);
             this.titlebar.Name = "titlebar";
-            this.titlebar.Size = new System.Drawing.Size(150, 20);
+            this.titlebar.Size = new System.Drawing.Size(110, 20);
             this.titlebar.TabIndex = 2;
             this.titlebar.Text = "스케줄러 프로그램";
-            this.titlebar.Click += new System.EventHandler(this.label1_Click);
             // 
             // processName
             // 
@@ -102,7 +102,6 @@
             this.processName.Name = "processName";
             this.processName.Size = new System.Drawing.Size(106, 21);
             this.processName.TabIndex = 3;
-            this.processName.TextChanged += new System.EventHandler(this.processName_TextChanged);
             // 
             // arrivalTime
             // 
@@ -111,7 +110,6 @@
             this.arrivalTime.Name = "arrivalTime";
             this.arrivalTime.Size = new System.Drawing.Size(106, 21);
             this.arrivalTime.TabIndex = 4;
-            this.arrivalTime.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.arrivalTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.arrivalTime_KeyPress);
             // 
             // burstTime
@@ -126,7 +124,7 @@
             // timeSlice
             // 
             this.timeSlice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.timeSlice.Location = new System.Drawing.Point(375, 467);
+            this.timeSlice.Location = new System.Drawing.Point(375, 471);
             this.timeSlice.Name = "timeSlice";
             this.timeSlice.Size = new System.Drawing.Size(106, 21);
             this.timeSlice.TabIndex = 6;
@@ -141,27 +139,15 @@
             this.priority.TabIndex = 7;
             this.priority.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.priority_KeyPress);
             // 
-            // addProcess
-            // 
-            this.addProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.addProcess.Location = new System.Drawing.Point(375, 378);
-            this.addProcess.Name = "addProcess";
-            this.addProcess.Size = new System.Drawing.Size(106, 32);
-            this.addProcess.TabIndex = 8;
-            this.addProcess.Text = "프로세스 추가";
-            this.addProcess.UseVisualStyleBackColor = true;
-            this.addProcess.Click += new System.EventHandler(this.button2_Click);
-            // 
             // processNameText
             // 
             this.processNameText.AutoSize = true;
             this.processNameText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.processNameText.Location = new System.Drawing.Point(372, 124);
             this.processNameText.Name = "processNameText";
-            this.processNameText.Size = new System.Drawing.Size(88, 17);
+            this.processNameText.Size = new System.Drawing.Size(76, 17);
             this.processNameText.TabIndex = 9;
             this.processNameText.Text = "프로세스 ID";
-            this.processNameText.Click += new System.EventHandler(this.label2_Click);
             // 
             // arrivalTimeText
             // 
@@ -169,7 +155,7 @@
             this.arrivalTimeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.arrivalTimeText.Location = new System.Drawing.Point(371, 184);
             this.arrivalTimeText.Name = "arrivalTimeText";
-            this.arrivalTimeText.Size = new System.Drawing.Size(68, 17);
+            this.arrivalTimeText.Size = new System.Drawing.Size(56, 17);
             this.arrivalTimeText.TabIndex = 10;
             this.arrivalTimeText.Text = "도착시간";
             // 
@@ -179,7 +165,7 @@
             this.burstTimeText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.burstTimeText.Location = new System.Drawing.Point(371, 247);
             this.burstTimeText.Name = "burstTimeText";
-            this.burstTimeText.Size = new System.Drawing.Size(68, 17);
+            this.burstTimeText.Size = new System.Drawing.Size(56, 17);
             this.burstTimeText.TabIndex = 11;
             this.burstTimeText.Text = "실행시간";
             // 
@@ -187,9 +173,9 @@
             // 
             this.timeSliceText.AutoSize = true;
             this.timeSliceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.timeSliceText.Location = new System.Drawing.Point(371, 443);
+            this.timeSliceText.Location = new System.Drawing.Point(371, 447);
             this.timeSliceText.Name = "timeSliceText";
-            this.timeSliceText.Size = new System.Drawing.Size(83, 17);
+            this.timeSliceText.Size = new System.Drawing.Size(68, 17);
             this.timeSliceText.TabIndex = 12;
             this.timeSliceText.Text = "시간할당량";
             // 
@@ -199,7 +185,7 @@
             this.priorityText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.priorityText.Location = new System.Drawing.Point(371, 313);
             this.priorityText.Name = "priorityText";
-            this.priorityText.Size = new System.Drawing.Size(68, 17);
+            this.priorityText.Size = new System.Drawing.Size(56, 17);
             this.priorityText.TabIndex = 13;
             this.priorityText.Text = "우선순위";
             // 
@@ -209,7 +195,7 @@
             this.scheduleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.scheduleText.Location = new System.Drawing.Point(516, 81);
             this.scheduleText.Name = "scheduleText";
-            this.scheduleText.Size = new System.Drawing.Size(133, 17);
+            this.scheduleText.Size = new System.Drawing.Size(109, 17);
             this.scheduleText.TabIndex = 15;
             this.scheduleText.Text = "스케줄링 알고리즘";
             // 
@@ -272,6 +258,7 @@
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "SRT";
             this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
             // 
             // radioButton6
             // 
@@ -283,6 +270,7 @@
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "SJF";
             this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
             // radioButton7
             // 
@@ -294,16 +282,18 @@
             this.radioButton7.TabStop = true;
             this.radioButton7.Text = "HRN";
             this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
             this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.titlebar);
             this.panel1.Location = new System.Drawing.Point(-1, -1);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(667, 56);
+            this.panel1.Size = new System.Drawing.Size(667, 61);
             this.panel1.TabIndex = 23;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
@@ -312,18 +302,31 @@
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.BackColor = System.Drawing.Color.Red;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button2.Font = new System.Drawing.Font("Noto Sans CJK KR Bold", 8.249999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(631, -1);
+            this.button2.Location = new System.Drawing.Point(608, 0);
             this.button2.Margin = new System.Windows.Forms.Padding(0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(33, 57);
+            this.button2.Size = new System.Drawing.Size(56, 19);
             this.button2.TabIndex = 3;
-            this.button2.UseVisualStyleBackColor = false;
+            this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Margin = new System.Windows.Forms.Padding(0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(667, 18);
+            this.panel5.TabIndex = 24;
+            this.panel5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel5_MouseDown);
+            this.panel5.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel5_MouseMove);
+            this.panel5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel5_MouseUp);
             // 
             // processListText
             // 
@@ -331,9 +334,9 @@
             this.processListText.BackColor = System.Drawing.Color.Transparent;
             this.processListText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.processListText.ForeColor = System.Drawing.Color.Black;
-            this.processListText.Location = new System.Drawing.Point(12, 58);
+            this.processListText.Location = new System.Drawing.Point(14, 72);
             this.processListText.Name = "processListText";
-            this.processListText.Size = new System.Drawing.Size(103, 17);
+            this.processListText.Size = new System.Drawing.Size(85, 17);
             this.processListText.TabIndex = 3;
             this.processListText.Text = "프로세스 목록";
             // 
@@ -346,22 +349,41 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.addProcess);
             this.panel2.ForeColor = System.Drawing.Color.Transparent;
             this.panel2.Location = new System.Drawing.Point(360, 92);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(133, 334);
+            this.panel2.Size = new System.Drawing.Size(133, 348);
             this.panel2.TabIndex = 24;
             // 
-            // panel3
+            // button3
             // 
-            this.panel3.BackColor = System.Drawing.Color.Transparent;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.ForeColor = System.Drawing.Color.Transparent;
-            this.panel3.Location = new System.Drawing.Point(-1, -1);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(133, 334);
-            this.panel3.TabIndex = 25;
+            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button3.Location = new System.Drawing.Point(13, 312);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(105, 25);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "랜덤 추가";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // addProcess
+            // 
+            this.addProcess.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.addProcess.FlatAppearance.BorderSize = 0;
+            this.addProcess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.addProcess.Location = new System.Drawing.Point(13, 281);
+            this.addProcess.Name = "addProcess";
+            this.addProcess.Size = new System.Drawing.Size(106, 25);
+            this.addProcess.TabIndex = 8;
+            this.addProcess.Text = "프로세스 추가";
+            this.addProcess.UseVisualStyleBackColor = false;
+            this.addProcess.Click += new System.EventHandler(this.button2_Click);
             // 
             // processInfo
             // 
@@ -369,7 +391,7 @@
             this.processInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.processInfo.Location = new System.Drawing.Point(372, 81);
             this.processInfo.Name = "processInfo";
-            this.processInfo.Size = new System.Drawing.Size(103, 17);
+            this.processInfo.Size = new System.Drawing.Size(85, 17);
             this.processInfo.TabIndex = 25;
             this.processInfo.Text = "프로세스 정보";
             // 
@@ -380,11 +402,13 @@
             this.panel4.ForeColor = System.Drawing.Color.Transparent;
             this.panel4.Location = new System.Drawing.Point(509, 92);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(133, 334);
+            this.panel4.Size = new System.Drawing.Size(133, 348);
             this.panel4.TabIndex = 25;
             // 
             // processList
             // 
+            this.processList.BackgroundColor = System.Drawing.Color.Silver;
+            this.processList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.processList.ColumnHeadersHeight = 20;
             this.processList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.processList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -449,7 +473,6 @@
             this.Controls.Add(this.burstTimeText);
             this.Controls.Add(this.arrivalTimeText);
             this.Controls.Add(this.processNameText);
-            this.Controls.Add(this.addProcess);
             this.Controls.Add(this.priority);
             this.Controls.Add(this.timeSlice);
             this.Controls.Add(this.burstTime);
@@ -480,7 +503,6 @@
         private System.Windows.Forms.TextBox burstTime;
         private System.Windows.Forms.TextBox timeSlice;
         private System.Windows.Forms.TextBox priority;
-        private System.Windows.Forms.Button addProcess;
         private System.Windows.Forms.Label processNameText;
         private System.Windows.Forms.Label arrivalTimeText;
         private System.Windows.Forms.Label burstTimeText;
@@ -499,7 +521,6 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label processInfo;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DataGridView processList;
         private System.Windows.Forms.Button button2;
@@ -507,6 +528,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn processArrivedTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn processBurstTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn processPriority;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button addProcess;
 
 
     }

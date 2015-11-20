@@ -22,5 +22,10 @@ namespace Scheduling_Jh
         {
             Application.Exit();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Hide();
+        }
     }
 }
