@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 
@@ -11,14 +12,115 @@ namespace Scheduling_Jh
 {
     public partial class main : Form
     {
+            
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect, // x-coordinate of upper-left corner
+            int nTopRect, // y-coordinate of upper-left corner
+            int nRightRect, // x-coordinate of lower-right corner
+            int nBottomRect, // y-coordinate of lower-right corner
+            int nWidthEllipse, // height of ellipse
+            int nHeightEllipse // width of ellipse
+         );
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
+
+        [DllImport("dwmapi.dll")]
+        public static extern int DwmIsCompositionEnabled(ref int pfEnabled);
+        private bool m_aeroEnabled;                     // variables for box shadow
+        private const int CS_DROPSHADOW = 0x00020000;
+        private const int WM_NCPAINT = 0x0085;
+        private const int WM_ACTIVATEAPP = 0x001C;
+
+        public struct MARGINS                           // struct for box shadow
+        {
+            public int leftWidth;
+            public int rightWidth;
+            public int topHeight;
+            public int bottomHeight;
+        }
+
+        private const int WM_NCHITTEST = 0x84;          // variables for dragging the form
+        private const int HTCLIENT = 0x1;
+        private const int HTCAPTION = 0x2;
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                m_aeroEnabled = CheckAeroEnabled();
+
+                CreateParams cp = base.CreateParams;
+                if (!m_aeroEnabled)
+                    cp.ClassStyle |= CS_DROPSHADOW;
+
+                return cp;
+            }
+        }
+
+        private bool CheckAeroEnabled()
+        {
+            if (Environment.OSVersion.Version.Major >= 6)
+            {
+                int enabled = 0;
+                DwmIsCompositionEnabled(ref enabled);
+                return (enabled == 1) ? true : false;
+            }
+            return false;
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case WM_NCPAINT:                        // box shadow
+                    if (m_aeroEnabled)
+                    {
+                        var v = 2;
+                        DwmSetWindowAttribute(this.Handle, 2, ref v, 4);
+                        MARGINS margins = new MARGINS()
+                        {
+                            bottomHeight = 1,
+                            leftWidth = 1,
+                            rightWidth = 1,
+                            topHeight = 1
+                        };
+                        DwmExtendFrameIntoClientArea(this.Handle, ref margins);
+
+                    }
+                    break;
+                default:
+                    break;
+            }
+            base.WndProc(ref m);
+
+            if (m.Msg == WM_NCHITTEST && (int)m.Result == HTCLIENT)     // drag the form
+                m.Result = (IntPtr)HTCAPTION;
+
+        }
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {   
+        //        const int CS_DROPSHADOW = 0x00020000;
+        //        CreateParams cp = base.CreateParams;
+        //        cp.ClassStyle |= CS_DROPSHADOW;
+        //        return cp;
+        //    }
+        //}
         private bool is_down;
-        private Point position,in_position;
-        private TextBox textbox;
-        private Button processNameval;
+        private Point position;
         private box chlid;
         private List<Process> processListval;
         private List<Stamp> timestamp;
-        bool[] radioChecks;
+        int target_scheduler;
+        
+       
         public main()
         {
             InitializeComponent();
@@ -26,66 +128,34 @@ namespace Scheduling_Jh
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            
-            radioChecks=new bool[7];
-            radioChecks[0] = radioButton1.Checked;
-            radioChecks[1] = radioButton2.Checked;
-            radioChecks[2] = radioButton3.Checked;
-            radioChecks[3] = radioButton4.Checked;
-            radioChecks[4] = radioButton5.Checked;
-            radioChecks[5] = radioButton6.Checked;
-            radioChecks[6] = radioButton7.Checked;
+        {           
             processListval=new List<Process>();
             timeSlice.Hide();
             timeSliceText.Hide();
             priority.Hide();
             priorityText.Hide();
             is_down = false;
-            
-            
-            
-        }
-
-        private void btn1_Click(object sender, EventArgs e)
-        {
-         
-        }
-
-        private void btn1_KeyDown(object sender, KeyEventArgs e)
-        {
-         
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
+            target_scheduler = 0;
+           
+        }       
         private List<Process> getData() {
             return processListval;
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            chlid.Show();
-            int target=0;
-            for(int i=0;i<7;i++){
-                if(radioChecks[i]==true){
-                    target = i;
-                    break;
-                }
-            }
-            
-            target = 5;
-            switch (target)
+            chlid.SetBounds(Location.X+665,Location.Y,350,507);
+            chlid.Show();           
+            switch (target_scheduler)
             {
                 case 0:
                     FCFS fcfs=new FCFS(getData());
+                    timestamp = fcfs.getTimestamp();
+                    fcfs.fcfs_run();
+                    for (int i = 0; i < timestamp.Count; i++)
+                    {
+                        timestamp[i].print();
+                    }
+                    Console.WriteLine(System.Convert.ToDouble(fcfs.getAWT()) + " " +System.Convert.ToDouble(fcfs.getATT()));
                     break;
                 case 5:
                     if(timeSlice.Text==""){
@@ -110,10 +180,65 @@ namespace Scheduling_Jh
             }
         }
 
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton7.Checked)
+            {
+                target_scheduler = 6;
+            }
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton6.Checked)
+            {
+                target_scheduler = 3;
+            }
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked)
+            {
+                target_scheduler = 4;
+            }
+        }
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton4.Checked)
+            {
+                target_scheduler = 5;
+                timeSlice.Show();
+                timeSliceText.Show();
+                
+            }
+            else
+            {
+                
+                timeSlice.Hide();
+                timeSliceText.Hide();
+            }
+        }
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton3.Checked)
+            {
+                target_scheduler = 2;
+                priority.Show();
+                priorityText.Show();
+            }
+            else
+            {
+                priority.Hide();
+                priorityText.Hide();
+            }
+        }
+
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton2.Checked)
             {
+                target_scheduler = 1;
                 priority.Show();
                 priorityText.Show();
                 
@@ -125,28 +250,14 @@ namespace Scheduling_Jh
             }
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButton3.Checked)
-            {
-                priority.Show();
-                priorityText.Show();
-            }
-            else
-            {
-                priority.Hide();
-                priorityText.Hide();                
-            }
-        }
+        
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (radioButton1.Checked)
+            {
+                target_scheduler = 0;
+            }
         }
 
         private void main_FormClosing(object sender, FormClosingEventArgs e)
@@ -154,10 +265,7 @@ namespace Scheduling_Jh
             Application.Exit();
         }
 
-        private void processName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void arrivalTime_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -215,9 +323,13 @@ namespace Scheduling_Jh
                 Int32.TryParse(priority.Text, out temp3);
                 newProcess = new Process(name, temp1, temp2,temp3);
                 processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), priority.Text);
+                priority.Text = "";
                 
             }
             processListval.Add(newProcess);
+            processName.Text = "";
+            arrivalTime.Text = "";
+            burstTime.Text = "";
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -262,19 +374,7 @@ namespace Scheduling_Jh
 
         }
 
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!radioButton4.Checked)
-            {
-                timeSlice.Hide();
-                timeSliceText.Hide();
-            }
-            else
-            {
-                timeSlice.Show();
-                timeSliceText.Show();
-            }
-        }
+       
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -298,7 +398,7 @@ namespace Scheduling_Jh
             if (is_down)
             {
                 Point p = PointToScreen(e.Location);
-                Location = new Point(p.X-position.X , p.Y-position.Y );
+                Location = new Point(p.X - position.X, p.Y - position.Y);
                 //Location.X = e.Location.X - position.X;
                 //Location.Y = e.Location.Y - position.Y;
             }
@@ -313,5 +413,56 @@ namespace Scheduling_Jh
         {
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Random r=new Random();
+            Process newProcess;
+            arrivalTime.Text = "";
+            burstTime.Text = "";
+            priority.Text = "";
+            processName.Text = "";
+            int temp1=r.Next(0,10);
+            int temp2=r.Next(0,10);
+            int temp3=r.Next(0,10);
+
+            if (radioButton2.Checked || radioButton3.Checked)
+            {
+                newProcess= new Process(processListval.Count+1+"",temp1,temp2,temp3);
+                processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), priority.Text);
+            }
+            else
+            {
+                newProcess = new Process(processListval.Count + 1 + "", temp1, temp2);
+                processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime());
+            }
+            processListval.Add(newProcess);
+        }
+
+        private void panel5_MouseDown(object sender, MouseEventArgs e)
+        {
+            is_down = true;
+            position.X = e.X;
+            position.Y = e.Y;
+        }
+
+        private void panel5_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (is_down)
+            {
+                Point p = PointToScreen(e.Location);
+                Location = new Point(p.X - position.X, p.Y - position.Y);
+            }
+        }
+
+        private void panel5_MouseUp(object sender, MouseEventArgs e)
+        {
+            is_down = false;
+        }
+
+        
+        
+
+        
     }
 }

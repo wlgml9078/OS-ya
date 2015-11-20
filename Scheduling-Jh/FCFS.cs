@@ -28,13 +28,14 @@ namespace Scheduling_Jh
                 Console.WriteLine(inputData[i].getArrivalTime());
             }
         }
-        public void run(){
+        public void fcfs_run()
+        {
             inputData.Sort(fcfs_compare);
             currentTime += inputData[0].getArrivalTime();
             for (int i = 0; i < inputData.Count; i++)
             {
-                addStamp(new Stamp(inputData[i].getName(), currentTime, (inputData[i].getBurstTime() + currentTime)));
-                currentTime += inputData[i].getBurstTime();
+                addStamp(new Stamp(inputData[i].getName(), currentTime, (currentTime+=inputData[i].getBurstTime())));
+                inputData[i].setEndTime(currentTime);
             }
         }
         
