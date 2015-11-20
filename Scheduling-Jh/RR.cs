@@ -60,8 +60,7 @@ namespace Scheduling_Jh
                         end = currentTime;  //끝 시간 계산
 
                         Stamp s = new Stamp(p.getName(), start, end);
-                        addStamp(s); //stamp 추가
-                        s.print();
+                        addStamp(s); //stamp 추가                      
                         //Console.WriteLine("2:" + start + " " + end, currentTime);
                         //Console.WriteLine("Ready:" + Ready.Peek().getName() + "," + Ready.Peek().getBurstTime());
                     }
