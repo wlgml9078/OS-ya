@@ -54,6 +54,7 @@
             this.processListText = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.timeSliceText = new System.Windows.Forms.Label();
             this.processInfo = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.processList = new System.Windows.Forms.DataGridView();
@@ -62,7 +63,6 @@
             this.processBurstTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.processPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeSlice = new System.Windows.Forms.TextBox();
-            this.timeSliceText = new System.Windows.Forms.Label();
             this.addProcess = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -92,13 +92,14 @@
             // titlebar
             // 
             this.titlebar.AutoSize = true;
-            this.titlebar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.titlebar.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.titlebar.ForeColor = System.Drawing.Color.White;
-            this.titlebar.Location = new System.Drawing.Point(13, 30);
+            this.titlebar.Location = new System.Drawing.Point(13, 26);
             this.titlebar.Name = "titlebar";
-            this.titlebar.Size = new System.Drawing.Size(110, 20);
+            this.titlebar.Size = new System.Drawing.Size(155, 26);
             this.titlebar.TabIndex = 2;
             this.titlebar.Text = "스케줄러 프로그램";
+            this.titlebar.Click += new System.EventHandler(this.titlebar_Click);
             // 
             // processName
             // 
@@ -353,6 +354,17 @@
             this.panel2.TabIndex = 24;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // timeSliceText
+            // 
+            this.timeSliceText.AutoSize = true;
+            this.timeSliceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.timeSliceText.ForeColor = System.Drawing.Color.Black;
+            this.timeSliceText.Location = new System.Drawing.Point(10, 275);
+            this.timeSliceText.Name = "timeSliceText";
+            this.timeSliceText.Size = new System.Drawing.Size(68, 17);
+            this.timeSliceText.TabIndex = 12;
+            this.timeSliceText.Text = "시간할당량";
+            // 
             // processInfo
             // 
             this.processInfo.AutoSize = true;
@@ -432,17 +444,6 @@
             this.timeSlice.TabIndex = 6;
             this.timeSlice.TextChanged += new System.EventHandler(this.timeSlice_TextChanged);
             this.timeSlice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.timeSlice_KeyPress);
-            // 
-            // timeSliceText
-            // 
-            this.timeSliceText.AutoSize = true;
-            this.timeSliceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.timeSliceText.ForeColor = System.Drawing.Color.Black;
-            this.timeSliceText.Location = new System.Drawing.Point(10, 275);
-            this.timeSliceText.Name = "timeSliceText";
-            this.timeSliceText.Size = new System.Drawing.Size(68, 17);
-            this.timeSliceText.TabIndex = 12;
-            this.timeSliceText.Text = "시간할당량";
             // 
             // addProcess
             // 

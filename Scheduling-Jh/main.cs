@@ -135,7 +135,7 @@ namespace Scheduling_Jh
         private void button1_Click(object sender, EventArgs e)
         {
             if (processListval.Count > 0) { 
-                chlid.SetBounds(Location.X+665,Location.Y,350,507);
+                chlid.SetBounds(Location.X+665,Location.Y,700,507);
                 chlid.setBox(processListval);
                 chlid.Show();           
                 switch (target_scheduler)
@@ -512,6 +512,11 @@ namespace Scheduling_Jh
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void titlebar_Click(object sender, EventArgs e)
         {
 
         }
