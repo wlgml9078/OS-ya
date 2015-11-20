@@ -103,16 +103,7 @@ namespace Scheduling_Jh
                 m.Result = (IntPtr)HTCAPTION;
 
         }
-        //protected override CreateParams CreateParams
-        //{
-        //    get
-        //    {   
-        //        const int CS_DROPSHADOW = 0x00020000;
-        //        CreateParams cp = base.CreateParams;
-        //        cp.ClassStyle |= CS_DROPSHADOW;
-        //        return cp;
-        //    }
-        //}
+        
         private bool is_down;
         private Point position;
         private box chlid;
@@ -143,53 +134,49 @@ namespace Scheduling_Jh
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            chlid.SetBounds(Location.X+665,Location.Y,350,507);
-            chlid.Show();           
-            switch (target_scheduler)
-            {
-                case 0:
-                    FCFS fcfs=new FCFS(getData());
-                    timestamp = fcfs.getTimestamp();
-                    fcfs.fcfs_run();
-                    for (int i = 0; i < timestamp.Count; i++)
-                    {
-                        timestamp[i].print();
-                    }
-                    Console.WriteLine(System.Convert.ToDouble(fcfs.getAWT()) + " " +System.Convert.ToDouble(fcfs.getATT()));
-                    break;
-                case 3:     //sjf
-                    SJF sjf = new SJF(getData());
-                    timestamp = sjf.getTimestamp();
-                    sjf.sjf_alg();
-                    for (int i = 0; i < timestamp.Count; i++)
-                    {
-                        timestamp[i].print();
-                    }
-                    Console.WriteLine(sjf.getAWT() + "," + sjf.getATT());
-                    break;
-                case 4:
-
-                    break;
-                case 5:     //rr
-                    if(timeSlice.Text==""){
-                        timeSliceText.ForeColor=Color.Red;
-                    }
-                    else{
-                        int quant;
-                        Int32.TryParse(timeSlice.Text,out quant);
-                        RR rr=new RR(getData(), quant);
-                        rr.rr_alg();
-                        timestamp = rr.getTimestamp();
-                        for(int i = 0; i < timestamp.Count; i++)
+            if (processListval.Count > 0) { 
+                chlid.SetBounds(Location.X+665,Location.Y,700,507);
+                chlid.setBox(processListval);
+                chlid.Show();           
+                switch (target_scheduler)
+                {
+                    case 0:
+                        FCFS fcfs=new FCFS(getData());
+                        timestamp = fcfs.getTimestamp();
+                        fcfs.fcfs_run();
+                        for (int i = 0; i < timestamp.Count; i++)
                         {
                             timestamp[i].print();
                         }
-                        Console.WriteLine("awt="+rr.getAWT()+", att="+rr.getATT());
+                        Console.WriteLine(System.Convert.ToDouble(fcfs.getAWT()) + " " +System.Convert.ToDouble(fcfs.getATT()));
+                        break;
+                    case 5:
+                        if(timeSlice.Text==""){
+                            timeSliceText.ForeColor=Color.Red;
+                        }
+                        else{
+                            int quant;
+                            Int32.TryParse(timeSlice.Text,out quant);
+                            RR rr=new RR(getData(), quant);
+                            //Console.WriteLine("before run");
+                            rr.rr_alg();
+                            //Console.WriteLine("after run");
+                            timestamp = rr.getTimestamp();
+                            for(int i = 0; i < timestamp.Count; i++)
+                            {
+                                timestamp[i].print();
+                            }
+                            Console.WriteLine(rr.getAWT()+" "+rr.getATT());
                         
-                    }
-                    break;
-                default:
-                    break;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                listBox1.Items.Insert(0, "프로세스를 추가해주세요");
             }
         }
 
@@ -348,7 +335,7 @@ namespace Scheduling_Jh
         {
             
             if(arrivalTime.Text==""){
-                Console.WriteLine("arrival Null");
+                listBox1.Items.Insert(0,"도착시간을 기입해주세요");
                 arrivalTimeText.ForeColor = Color.Red;
             }
             else
@@ -356,6 +343,7 @@ namespace Scheduling_Jh
                 arrivalTimeText.ForeColor = Color.Black;
                 if(burstTime.Text=="")
                 {
+                    listBox1.Items.Insert(0, "실행시간을 기입해주세요");
                     burstTimeText.ForeColor = Color.Red;
                 }
                 else
@@ -365,6 +353,7 @@ namespace Scheduling_Jh
                     {
                         if (priority.Text == "")
                         {
+                            listBox1.Items.Insert(0, "우선순위를 기입해주세요");
                             priorityText.ForeColor = Color.Red;
                         }
                         else
@@ -471,6 +460,65 @@ namespace Scheduling_Jh
         private void panel5_MouseUp(object sender, MouseEventArgs e)
         {
             is_down = false;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (processListval.Count > 0) { 
+                int index=processListval.Count - 1;
+                processListval.RemoveAt(index);
+                processList.Rows.RemoveAt(index);
+            }
+        }
+
+        private void timeSlice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void processInfo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void arrivalTimeText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void processNameText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void priority_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void burstTime_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void arrivalTime_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void processName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void titlebar_Click(object sender, EventArgs e)
+        {
+
         }
 
         
