@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
-    class SRT
+    class SRT :Scheduler
     {
-        public SRT() :
+        public SRT(List<Process> list)
+            :base(list)
         {
 
         }
