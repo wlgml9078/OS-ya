@@ -147,6 +147,26 @@ namespace Scheduling_Jh
                         fcfs.fcfs_run();
                         chlid.setStamp(fcfs.getTimestamp());
                         break;
+                    case 1:
+                        Priority p1 = new Priority(getData());
+                        timestamp = p1.getTimestamp();
+                        p1.pri_alg(true);
+                        for (int i = 0; i < timestamp.Count; i++)
+                        {
+                            timestamp[i].print();
+                        }
+                        Console.WriteLine(System.Convert.ToDouble(p1.getAWT()) + " " + System.Convert.ToDouble(p1.getATT()));
+                        break;
+                    case 4:
+                        SRT srt = new SRT(getData());
+                        timestamp = srt.getTimestamp();
+                        srt.srt_alg();
+                        for (int i = 0; i < timestamp.Count; i++)
+                        {
+                            timestamp[i].print();
+                        }
+                        Console.WriteLine(System.Convert.ToDouble(srt.getAWT()) + " " + System.Convert.ToDouble(srt.getATT()));
+                        break;
                     case 5:
                         if(timeSlice.Text==""){
                             timeSliceText.ForeColor=Color.Red;

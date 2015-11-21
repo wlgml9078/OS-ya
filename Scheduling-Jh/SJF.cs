@@ -5,14 +5,6 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
-    class Comparer :IComparer<Process>
-    {
-        public int Compare(Process x, Process y)
-        {
-            return x.getBurstTime().CompareTo(y.getBurstTime());
-        }
-    }
-
     class SJF :Scheduler
     {
         List<Process> Ready;   //레디큐
@@ -21,7 +13,7 @@ namespace Scheduling_Jh
             :base(list)
         {
             Ready = new List<Process>();
-            Comparer c = new Comparer();
+            Burst_Comparer c = new Burst_Comparer();
             currentTime = 0;
 
             for (int i = 0; i < inputData.Count; i++)
