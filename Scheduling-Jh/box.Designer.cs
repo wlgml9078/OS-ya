@@ -29,20 +29,20 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Ghannt_base = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -52,11 +52,20 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Controls.Add(this.Ghannt_base);
             this.panel1.Location = new System.Drawing.Point(12, 91);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(676, 92);
             this.panel1.TabIndex = 0;
+            // 
+            // Ghannt_base
+            // 
+            this.Ghannt_base.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Ghannt_base.Location = new System.Drawing.Point(5, 8);
+            this.Ghannt_base.Name = "Ghannt_base";
+            this.Ghannt_base.Size = new System.Drawing.Size(640, 51);
+            this.Ghannt_base.TabIndex = 0;
+            this.Ghannt_base.Paint += new System.Windows.Forms.PaintEventHandler(this.Ghannt_base_Paint);
             // 
             // button1
             // 
@@ -78,8 +87,9 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(554, 53);
             this.button2.TabIndex = 2;
-            this.button2.Text = "한 단계씩 진행";
+            this.button2.Text = "자동 출력";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -106,6 +116,17 @@
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             this.panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseUp);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(6, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 33);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Output";
             // 
             // panel3
             // 
@@ -153,6 +174,24 @@
             this.panel4.Size = new System.Drawing.Size(676, 246);
             this.panel4.TabIndex = 6;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label3.Location = new System.Drawing.Point(188, 4);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(87, 12);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "ready queue";
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Location = new System.Drawing.Point(188, 21);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(483, 220);
+            this.panel6.TabIndex = 6;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -175,42 +214,6 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Ghantt- Chart";
             // 
-            // panel5
-            // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(18, 8);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(640, 51);
-            this.panel5.TabIndex = 0;
-            // 
-            // panel6
-            // 
-            this.panel6.Location = new System.Drawing.Point(188, 21);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(483, 220);
-            this.panel6.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(188, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 12);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "ready queue";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(6, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 33);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Output";
-            // 
             // box
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -231,6 +234,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "box";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.box_FormClosing);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.box_Paint);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -255,7 +259,7 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel Ghannt_base;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel6;

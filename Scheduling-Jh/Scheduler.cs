@@ -25,6 +25,7 @@ namespace Scheduling_Jh
     {
         public int currentTime;
         private double ATT, AWT;
+        private int last_end;//스케줄러가 가진 최근의 종료 시점
         public List<Process> inputData;
         protected List<Stamp> timestamp;
         public Scheduler(List<Process> list){

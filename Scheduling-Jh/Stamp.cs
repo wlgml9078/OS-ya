@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
-    class Stamp
+    public class Stamp
     {
         String name;
         int starttime;
