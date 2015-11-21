@@ -31,10 +31,18 @@ namespace Scheduling_Jh
         public void fcfs_run()
         {
             inputData.Sort(fcfs_compare);
+            //airgap
             currentTime += inputData[0].getArrivalTime();
             for (int i = 0; i < inputData.Count; i++)
             {
-                addStamp(new Stamp(inputData[i].getName(), currentTime, (currentTime+=inputData[i].getBurstTime())));
+                if (currentTime > inputData[i].getArrivalTime()) { 
+                    addStamp(new Stamp(inputData[i].getName(), currentTime, (currentTime+=inputData[i].getBurstTime())));
+                }
+                else
+                {
+                    currentTime += inputData[i].getArrivalTime();
+                    addStamp(new Stamp(inputData[i].getName(), inputData[i].getArrivalTime(), (currentTime += inputData[i].getBurstTime())));
+                }
                 inputData[i].setEndTime(currentTime);
             }
         }

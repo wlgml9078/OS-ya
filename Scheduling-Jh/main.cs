@@ -115,7 +115,7 @@ namespace Scheduling_Jh
         public main()
         {
             InitializeComponent();
-            chlid = new box();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -134,9 +134,10 @@ namespace Scheduling_Jh
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (processListval.Count > 0) { 
-                chlid.SetBounds(Location.X+665,Location.Y,700,507);
-                chlid.setBox(processListval);
+            if (processListval.Count > 0) {
+                
+                chlid = new box(processListval);
+                chlid.SetBounds(Location.X+665,Location.Y,700,507);                
                 chlid.Show();           
                 switch (target_scheduler)
                 {
@@ -144,11 +145,7 @@ namespace Scheduling_Jh
                         FCFS fcfs=new FCFS(getData());
                         timestamp = fcfs.getTimestamp();
                         fcfs.fcfs_run();
-                        for (int i = 0; i < timestamp.Count; i++)
-                        {
-                            timestamp[i].print();
-                        }
-                        Console.WriteLine(System.Convert.ToDouble(fcfs.getAWT()) + " " +System.Convert.ToDouble(fcfs.getATT()));
+                        chlid.setStamp(fcfs.getTimestamp());
                         break;
                     case 5:
                         if(timeSlice.Text==""){
@@ -170,7 +167,16 @@ namespace Scheduling_Jh
                         
                         }
                         break;
-                    case 6:
+                    case 3:
+                        SJF sjf = new SJF(processListval);
+                        sjf.sjf_alg();
+                        timestamp = sjf.getTimestamp();
+                        Console.WriteLine(timestamp.Count+"SJF");
+                        for(int i = 0; i < timestamp.Count; i++)
+                        {
+                            timestamp[i].print();
+                        }
+                        Console.WriteLine(sjf.getAWT()+" "+sjf.getATT());
                         break;
                     default:
                         break;
