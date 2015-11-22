@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.ghattbox = new System.Windows.Forms.Panel();
             this.Ghannt_base = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -43,25 +43,26 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.ghattbox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // ghattbox
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.Ghannt_base);
-            this.panel1.Location = new System.Drawing.Point(12, 91);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(676, 92);
-            this.panel1.TabIndex = 0;
+            this.ghattbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ghattbox.Controls.Add(this.Ghannt_base);
+            this.ghattbox.Location = new System.Drawing.Point(12, 91);
+            this.ghattbox.Name = "ghattbox";
+            this.ghattbox.Size = new System.Drawing.Size(676, 92);
+            this.ghattbox.TabIndex = 0;
             // 
             // Ghannt_base
             // 
             this.Ghannt_base.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Ghannt_base.Location = new System.Drawing.Point(5, 8);
+            this.Ghannt_base.Margin = new System.Windows.Forms.Padding(0);
             this.Ghannt_base.Name = "Ghannt_base";
             this.Ghannt_base.Size = new System.Drawing.Size(640, 51);
             this.Ghannt_base.TabIndex = 0;
@@ -80,6 +81,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "<";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -103,6 +105,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = ">";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // panel2
             // 
@@ -226,7 +229,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.ghattbox);
             this.Controls.Add(this.panel4);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -235,7 +238,7 @@
             this.Text = "box";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.box_FormClosing);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.box_Paint);
-            this.panel1.ResumeLayout(false);
+            this.ghattbox.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -248,7 +251,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel ghattbox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;

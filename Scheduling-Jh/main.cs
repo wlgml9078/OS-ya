@@ -106,7 +106,7 @@ namespace Scheduling_Jh
         
         private bool is_down;
         private Point position;
-        private box chlid;
+        private box chlid=null;
         private List<Process> processListval;
         private List<Stamp> timestamp;
         int target_scheduler;
@@ -127,7 +127,8 @@ namespace Scheduling_Jh
             priorityText.Hide();
             is_down = false;
             target_scheduler = 0;
-           
+            this.ActiveControl = arrivalTime;
+            
         }       
         private List<Process> getData() {
             return processListval;
@@ -136,7 +137,7 @@ namespace Scheduling_Jh
         {
             if (processListval.Count > 0) {
                 
-                chlid = new box(processListval);
+                chlid = new box(processListval,this);
                 chlid.SetBounds(Location.X+665,Location.Y,700,507);                
                 chlid.Show();           
                 switch (target_scheduler)
@@ -158,9 +159,11 @@ namespace Scheduling_Jh
                         Console.WriteLine(System.Convert.ToDouble(p1.getAWT()) + " " + System.Convert.ToDouble(p1.getATT()));
                         break;
                     case 4:
+                        Console.WriteLine("SRT");
                         SRT srt = new SRT(getData());
                         timestamp = srt.getTimestamp();
                         srt.srt_alg();
+                        chlid.setStamp(srt.getTimestamp());
                         for (int i = 0; i < timestamp.Count; i++)
                         {
                             timestamp[i].print();
@@ -172,25 +175,27 @@ namespace Scheduling_Jh
                             timeSliceText.ForeColor=Color.Red;
                         }
                         else{
+                            timeSliceText.ForeColor = Color.Black;
                             int quant;
                             Int32.TryParse(timeSlice.Text,out quant);
                             RR rr=new RR(getData(), quant);
-                            //Console.WriteLine("before run");
                             rr.rr_alg();
-                            //Console.WriteLine("after run");
-                            timestamp = rr.getTimestamp();
+                            chlid.setStamp(rr.getTimestamp());
+                            //about to deprecate
+                            timestamp = rr.getTimestamp();                            
                             for(int i = 0; i < timestamp.Count; i++)
                             {
                                 timestamp[i].print();
                             }
                             Console.WriteLine(rr.getAWT()+" "+rr.getATT());
-                        
+                            //about to deprecate
                         }
                         break;
                     case 3:
                         SJF sjf = new SJF(processListval);
                         sjf.sjf_alg();
                         timestamp = sjf.getTimestamp();
+                        chlid.setStamp(sjf.getTimestamp());
                         Console.WriteLine(timestamp.Count+"SJF");
                         for(int i = 0; i < timestamp.Count; i++)
                         {
@@ -311,6 +316,45 @@ namespace Scheduling_Jh
             {
                 e.Handled = true;
             }
+            if (Convert.ToInt32(e.KeyChar) == 13)
+            {
+                arrivalTime.Focus();
+                if (arrivalTime.Text == "")
+                {
+                    listBox1.Items.Insert(0, "도착시간을 기입해주세요");
+                    arrivalTimeText.ForeColor = Color.Red;
+                }
+                else
+                {
+                    arrivalTimeText.ForeColor = Color.Black;
+                    if (burstTime.Text == "")
+                    {
+                        listBox1.Items.Insert(0, "실행시간을 기입해주세요");
+                        burstTimeText.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        burstTimeText.ForeColor = Color.Black;
+                        if (radioButton2.Checked || radioButton3.Checked)
+                        {
+                            if (priority.Text == "")
+                            {
+                                listBox1.Items.Insert(0, "우선순위를 기입해주세요");
+                                priorityText.ForeColor = Color.Red;
+                            }
+                            else
+                            {
+                                priorityText.ForeColor = Color.Black;
+                                addProcessToList(true);
+                            }
+                        }
+                        else
+                        {
+                            addProcessToList(false);
+                        }
+                    }
+                }
+            }
         }
 
         private void priority_KeyPress(object sender, KeyPressEventArgs e)
@@ -336,7 +380,7 @@ namespace Scheduling_Jh
             Process newProcess;
             String name;
             if (processName.Text == "")
-                name = (processListval.Count + 1) + "";
+                name = ("p"+(processListval.Count + 1));
 
             else
                 name = processName.Text;
@@ -408,6 +452,8 @@ namespace Scheduling_Jh
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            if(chlid!=null)
+                chlid.Close();
             Application.Exit();
         }
 
@@ -453,7 +499,7 @@ namespace Scheduling_Jh
             priority.Text = "";
             processName.Text = "";
             int temp1=r.Next(0,10);
-            int temp2=r.Next(0,10);
+            int temp2=r.Next(1,10);
             int temp3=r.Next(0,10);
 
             if (radioButton2.Checked || radioButton3.Checked)
