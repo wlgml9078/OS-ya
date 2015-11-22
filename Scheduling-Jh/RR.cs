@@ -55,13 +55,25 @@ namespace Scheduling_Jh
                         currentTime += p.getBurstTime();    //BURST 시간만큼 현재 시간 늘림
                         end = currentTime;  //끝 시간 계산
 
+<<<<<<< HEAD
                         for (int i = 0; i < inputData.Count; i++)
+=======
+                        for (int i = 0; i < inputData.Count;i++)
+>>>>>>> origin/master
                         {
                             if (inputData[i].getName().Equals(p.getName()))
                             {
                                 inputData[i].setEndTime(currentTime);
+<<<<<<< HEAD
                                 break;
                             }
+=======
+                                
+                                break;
+                            }
+                            
+                                                       
+>>>>>>> origin/master
                         }
 
                         Stamp s = new Stamp(p.getName(), start, end); 

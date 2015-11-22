@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Scheduling_Jh
 {
     class FCFS :Scheduler
     {
-        
+       
         public FCFS(List<Process> list)
             : base(list)
         {
@@ -32,19 +35,19 @@ namespace Scheduling_Jh
         {
             inputData.Sort(fcfs_compare);
             //airgap
-            currentTime += inputData[0].getArrivalTime();
             for (int i = 0; i < inputData.Count; i++)
             {
-                if (currentTime > inputData[i].getArrivalTime()) { 
-                    addStamp(new Stamp(inputData[i].getName(), currentTime, (currentTime+=inputData[i].getBurstTime())));
+                if (currentTime > inputData[i].getArrivalTime()) {
+                    addStamp(new Stamp(inputData[i].getName(), currentTime, (currentTime+=inputData[i].getBurstTime())));                    
                 }
                 else
                 {
-                    currentTime += inputData[i].getArrivalTime();
-                    addStamp(new Stamp(inputData[i].getName(), inputData[i].getArrivalTime(), (currentTime += inputData[i].getBurstTime())));
+                    currentTime = inputData[i].getArrivalTime();
+                    addStamp(new Stamp(inputData[i].getName(), currentTime, (currentTime += inputData[i].getBurstTime())));                    
                 }
-                inputData[i].setEndTime(currentTime);
+                inputData[i].setEndTime(currentTime);                                 
             }
+            
         }
         
     }

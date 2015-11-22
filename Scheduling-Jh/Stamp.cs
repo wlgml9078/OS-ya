@@ -28,12 +28,14 @@ namespace Scheduling_Jh
         }
         public int getTimeGap()
         {
-            return endtime - starttime; 
+            return endtime - starttime;
         }
         public int getRemained()
         {
             return remained;
         }
+        public int getStartTime() { return starttime; }
+        public int getEndTime() { return endtime; }
         public void print()
         {
             Console.WriteLine("s"+this.name+":"+starttime+","+endtime);
