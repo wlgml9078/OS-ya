@@ -157,6 +157,17 @@ namespace Scheduling_Jh
                         }
                         Console.WriteLine(System.Convert.ToDouble(p1.getAWT()) + " " + System.Convert.ToDouble(p1.getATT()));
                         break;
+                    case 3:
+                        SJF sjf = new SJF(processListval);
+                        sjf.sjf_alg();
+                        timestamp = sjf.getTimestamp();
+                        Console.WriteLine(timestamp.Count + "SJF");
+                        for (int i = 0; i < timestamp.Count; i++)
+                        {
+                            timestamp[i].print();
+                        }
+                        Console.WriteLine(sjf.getAWT() + " " + sjf.getATT());
+                        break;
                     case 4:
                         SRT srt = new SRT(getData());
                         timestamp = srt.getTimestamp();
@@ -184,20 +195,9 @@ namespace Scheduling_Jh
                                 timestamp[i].print();
                             }
                             Console.WriteLine(rr.getAWT()+" "+rr.getATT());
-                        
                         }
                         break;
-                    case 3:
-                        SJF sjf = new SJF(processListval);
-                        sjf.sjf_alg();
-                        timestamp = sjf.getTimestamp();
-                        Console.WriteLine(timestamp.Count+"SJF");
-                        for(int i = 0; i < timestamp.Count; i++)
-                        {
-                            timestamp[i].print();
-                        }
-                        Console.WriteLine(sjf.getAWT()+" "+sjf.getATT());
-                        break;
+                    
                     default:
                         break;
                 }
@@ -404,7 +404,10 @@ namespace Scheduling_Jh
 
         }
 
-       
+        private void processList_CellContentClick(object sender, EventArgs e)
+        {
+
+        }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
@@ -437,11 +440,6 @@ namespace Scheduling_Jh
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             is_down = false;
-        }
-
-        private void processList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -13,7 +13,7 @@ namespace Scheduling_Jh
             :base(list)
         {
             Ready = new List<Process>();
-            Burst_Comparer c = new Burst_Comparer();
+            Comparer c = new Comparer(1);
             currentTime = 0;
 
             for (int i = 0; i < inputData.Count; i++)

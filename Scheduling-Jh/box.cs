@@ -32,7 +32,7 @@ namespace Scheduling_Jh
         public void setStamp(List<Stamp> list){
             stmp_list = list;
             graphs = new Rectangle[list.Count];
-            Console.WriteLine("stampsize=" + list.Count);
+                //Console.WriteLine("stampsize=" + list.Count);
         }
         //그릴 함수
         public void drawAutoGhanttChart(object sender, PaintEventArgs e) 
@@ -54,12 +54,12 @@ namespace Scheduling_Jh
                     int red = r.Next(0, 100), green = r.Next(0, 100), blue = r.Next(0, 100);
                     brush[i] = new SolidBrush(Color.FromArgb(0, red, green, blue));
                 }
-                Console.WriteLine("MAX: " + max_end);
+                    //Console.WriteLine("MAX: " + max_end);
 
 
                 startPoint.X = (Ghannt_base.Location.X);
                 startPoint.Y = (Ghannt_base.Location.Y);
-                Console.WriteLine(stmp_list.Count);
+                    //Console.WriteLine(stmp_list.Count);
                 for (; currentPosition < stmp_list.Count; currentPosition++)
                 {
 
@@ -73,9 +73,9 @@ namespace Scheduling_Jh
                         }
                     }
                     //get width in pixel
-                    Console.WriteLine(stmp_list[currentPosition].getTimeGap() + "");
+                        //Console.WriteLine(stmp_list[currentPosition].getTimeGap() + "");
                     double width = (stmp_list[currentPosition].getTimeGap() * 640) / max_end;
-                    Console.WriteLine("Location: " + startPoint.X + "  " + startPoint.Y+" width: " +width);
+                        //Console.WriteLine("Location: " + startPoint.X + "  " + startPoint.Y+" width: " +width);
 
                     graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, 51));
 
@@ -166,12 +166,12 @@ namespace Scheduling_Jh
                     //brush[1] = new SolidBrush(Color.Blue);
                     
                 }
-                Console.WriteLine("MAX: " + max_end);
+                    //Console.WriteLine("MAX: " + max_end);
 
 
                 startPoint.X = (Ghannt_base.Location.X);
                 startPoint.Y = (Ghannt_base.Location.Y);
-                Console.WriteLine(stmp_list.Count);
+                    //Console.WriteLine(stmp_list.Count);
                 for (; currentPosition < stmp_list.Count; currentPosition++)
                 {
 
@@ -185,17 +185,17 @@ namespace Scheduling_Jh
                         }
                     }
                     //get width in pixel
-                    Console.WriteLine(stmp_list[currentPosition].getTimeGap() + "");
+                        //Console.WriteLine(stmp_list[currentPosition].getTimeGap() + "");
                     double width = (stmp_list[currentPosition].getTimeGap() * 640) / max_end;
-                    Console.WriteLine("Location: " + startPoint.X + "  " + startPoint.Y + " width: " + width);
+                        //Console.WriteLine("Location: " + startPoint.X + "  " + startPoint.Y + " width: " + width);
 
                     graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, 51));
 
-                    //(brush, graphs[i]);
+                        //(brush, graphs[i]);
                     p = new Pen(brush[index], graphs[currentPosition].Width);
                     g.DrawRectangle(p, graphs[currentPosition]);
                     Ghannt_base.Refresh();
-                    //startPoint = new Point(startPoint.X + (int)width, startPoint.Y);
+                        //startPoint = new Point(startPoint.X + (int)width, startPoint.Y);
                     startPoint.X += (int)width;
 
                 }

@@ -5,19 +5,26 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
-    class Burst_Comparer : IComparer<Process>
-    {
-        public int Compare(Process x, Process y)
-        {
-            return x.getBurstTime().CompareTo(y.getBurstTime());
-        }
-    }
-
     class Comparer : IComparer<Process>
     {
+        int flag;
+
+        public Comparer(int flag)
+        {
+            this.flag = flag;
+        }
+
         public int Compare(Process x, Process y)
         {
-            return x.getArrivalTime().CompareTo(y.getArrivalTime());
+            switch(flag)
+            { 
+                case 0:
+                    return x.getArrivalTime().CompareTo(y.getArrivalTime());
+                case 1:
+                    return x.getPriority().CompareTo(y.getPriority());
+                default:
+                    return x.getBurstTime().CompareTo(y.getBurstTime());
+            }
         }
     }
 
@@ -35,7 +42,7 @@ namespace Scheduling_Jh
             inputData = new List<Process>();
             timestamp = new List<Stamp>();
             inputData = list;
-            inputData.Sort(new Comparer());
+            inputData.Sort(new Comparer(0));
             ATT = 0;
             AWT = 0;
         }
