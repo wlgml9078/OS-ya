@@ -64,7 +64,7 @@
             this.Ghannt_base.Location = new System.Drawing.Point(5, 8);
             this.Ghannt_base.Margin = new System.Windows.Forms.Padding(0);
             this.Ghannt_base.Name = "Ghannt_base";
-            this.Ghannt_base.Size = new System.Drawing.Size(640, 51);
+            this.Ghannt_base.Size = new System.Drawing.Size(664, 51);
             this.Ghannt_base.TabIndex = 0;
             this.Ghannt_base.Paint += new System.Windows.Forms.PaintEventHandler(this.Ghannt_base_Paint);
             // 

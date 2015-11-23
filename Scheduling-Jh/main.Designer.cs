@@ -54,9 +54,12 @@
             this.processListText = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.DEV2 = new System.Windows.Forms.Button();
+            this.DEV1 = new System.Windows.Forms.Button();
             this.timeSliceText = new System.Windows.Forms.Label();
             this.processInfo = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.Dev3 = new System.Windows.Forms.Button();
             this.processList = new System.Windows.Forms.DataGridView();
             this.processNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.processArrivedTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +73,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processList)).BeginInit();
             this.panel3.SuspendLayout();
             this.SuspendLayout();
@@ -188,7 +192,7 @@
             // 
             this.scheduleText.AutoSize = true;
             this.scheduleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.scheduleText.Location = new System.Drawing.Point(516, 81);
+            this.scheduleText.Location = new System.Drawing.Point(506, 72);
             this.scheduleText.Name = "scheduleText";
             this.scheduleText.Size = new System.Drawing.Size(109, 17);
             this.scheduleText.TabIndex = 15;
@@ -344,6 +348,8 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.Transparent;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.DEV2);
+            this.panel2.Controls.Add(this.DEV1);
             this.panel2.Controls.Add(this.timeSliceText);
             this.panel2.Controls.Add(this.burstTimeText);
             this.panel2.Controls.Add(this.priorityText);
@@ -353,6 +359,28 @@
             this.panel2.Size = new System.Drawing.Size(133, 331);
             this.panel2.TabIndex = 24;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // DEV2
+            // 
+            this.DEV2.ForeColor = System.Drawing.Color.Black;
+            this.DEV2.Location = new System.Drawing.Point(68, 4);
+            this.DEV2.Name = "DEV2";
+            this.DEV2.Size = new System.Drawing.Size(52, 23);
+            this.DEV2.TabIndex = 15;
+            this.DEV2.Text = "DEV2";
+            this.DEV2.UseVisualStyleBackColor = true;
+            this.DEV2.Click += new System.EventHandler(this.DEV2_Click);
+            // 
+            // DEV1
+            // 
+            this.DEV1.ForeColor = System.Drawing.Color.Black;
+            this.DEV1.Location = new System.Drawing.Point(13, 4);
+            this.DEV1.Name = "DEV1";
+            this.DEV1.Size = new System.Drawing.Size(49, 23);
+            this.DEV1.TabIndex = 14;
+            this.DEV1.Text = "DEV1";
+            this.DEV1.UseVisualStyleBackColor = true;
+            this.DEV1.Click += new System.EventHandler(this.button5_Click);
             // 
             // timeSliceText
             // 
@@ -369,7 +397,7 @@
             // 
             this.processInfo.AutoSize = true;
             this.processInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.processInfo.Location = new System.Drawing.Point(378, 81);
+            this.processInfo.Location = new System.Drawing.Point(363, 72);
             this.processInfo.Name = "processInfo";
             this.processInfo.Size = new System.Drawing.Size(85, 17);
             this.processInfo.TabIndex = 25;
@@ -380,15 +408,27 @@
             // 
             this.panel4.BackColor = System.Drawing.Color.Transparent;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.Dev3);
             this.panel4.ForeColor = System.Drawing.Color.Transparent;
             this.panel4.Location = new System.Drawing.Point(509, 92);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(133, 331);
             this.panel4.TabIndex = 25;
             // 
+            // Dev3
+            // 
+            this.Dev3.ForeColor = System.Drawing.Color.Black;
+            this.Dev3.Location = new System.Drawing.Point(10, 292);
+            this.Dev3.Name = "Dev3";
+            this.Dev3.Size = new System.Drawing.Size(102, 31);
+            this.Dev3.TabIndex = 0;
+            this.Dev3.Text = "DEV3";
+            this.Dev3.UseVisualStyleBackColor = true;
+            this.Dev3.Click += new System.EventHandler(this.button5_Click_1);
+            // 
             // processList
             // 
-            this.processList.BackgroundColor = System.Drawing.Color.Silver;
+            this.processList.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.processList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.processList.ColumnHeadersHeight = 20;
             this.processList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -550,6 +590,7 @@
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.processList)).EndInit();
             this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -597,6 +638,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panel3;
         public System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button DEV1;
+        private System.Windows.Forms.Button DEV2;
+        private System.Windows.Forms.Button Dev3;
 
 
     }

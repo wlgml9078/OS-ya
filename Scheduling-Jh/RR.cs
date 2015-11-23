@@ -5,21 +5,21 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
-    class RR : Scheduler
+    class RR :Scheduler
     {
         Queue<Process> Ready;   //레디큐
         int quant;
 
         public RR(List<Process> list, int q)
-            : base(list)
-        {
+            :base(list)
+        {            
             Ready = new Queue<Process>();
             quant = q;
             currentTime = 0;
 
             for (int i = 0; i < inputData.Count; i++)   //큐에 리스트 복사
             {
-                Process p = new Process(list[i].getName(), list[i].getArrivalTime(), list[i].getBurstTime());
+                Process p = new Process(list[i].getName(),list[i].getArrivalTime(),list[i].getBurstTime());
                 Ready.Enqueue(p);
             }
         }
@@ -27,7 +27,7 @@ namespace Scheduling_Jh
 
         public void rr_alg()
         {
-            while (Ready.Count > 0)
+            while(Ready.Count>0)
             {
                 int start = 0, remained = 0, end = 0;
 
@@ -64,7 +64,7 @@ namespace Scheduling_Jh
                                 break;
                             }
                         }
-                        Stamp s = new Stamp(p.getName(), start, end);
+                        Stamp s = new Stamp(p.getName(), start, end); 
                         addStamp(s); //stamp 추가
                     }
                 }
