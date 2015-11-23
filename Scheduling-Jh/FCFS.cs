@@ -16,14 +16,7 @@ namespace Scheduling_Jh
         {
             
         }
-        public int fcfs_compare(Process a, Process b){
-            if (a.getArrivalTime() > b.getArrivalTime())
-                return 1;
-            else if (a.getArrivalTime() == b.getArrivalTime())
-                return 0;
-            else
-                return -1;
-        }
+        
         public void fcfs_print()
         {   
             for (int i = 0; i < inputData.Count; i++)
@@ -33,7 +26,7 @@ namespace Scheduling_Jh
         }
         public void fcfs_run()
         {
-            inputData.Sort(fcfs_compare);
+            inputData.Sort(pro_compare);
             //airgap
             for (int i = 0; i < inputData.Count; i++)
             {

@@ -110,7 +110,7 @@ namespace Scheduling_Jh
         private List<Process> processListval;
         private List<Stamp> timestamp;
         int target_scheduler;
-        
+        private bool avail;
        
         public main()
         {
@@ -137,39 +137,85 @@ namespace Scheduling_Jh
         {
             if (processListval.Count > 0) {
                 
-                chlid = new box(processListval,this);
-                chlid.SetBounds(Location.X+665,Location.Y,700,507);                
-                chlid.Show();           
+                         
                 switch (target_scheduler)
                 {
-                    case 0:
+                    case 0://선입선출 알고리즘
+                        chlid = new box(processListval,this);
+                        chlid.SetBounds(Location.X+665,Location.Y,700,507);                
+                        chlid.Show();  
                         FCFS fcfs=new FCFS(getData());
                         timestamp = fcfs.getTimestamp();
                         fcfs.fcfs_run();
                         chlid.setStamp(fcfs.getTimestamp());
+                        Console.WriteLine(System.Convert.ToDouble(fcfs.getAWT()) + " " + System.Convert.ToDouble(fcfs.getATT()));
                         break;
-                    case 1:
-                        Priority p1 = new Priority(getData());
-                        timestamp = p1.getTimestamp();
-                        p1.pri_alg(true);
-                        for (int i = 0; i < timestamp.Count; i++)
+                    case 1://비선점 우선순위 알고리즘
+                        avail = true;
+                        for (int i = 0; i < processListval.Count; i++)
                         {
-                            timestamp[i].print();
+                            if (processListval[i].getPriority() == -1)
+                            {
+                                avail = false;
+                            }
                         }
-                        Console.WriteLine(System.Convert.ToDouble(p1.getAWT()) + " " + System.Convert.ToDouble(p1.getATT()));
+                        if (avail)
+                        {
+                            chlid = new box(processListval, this);
+                            chlid.SetBounds(Location.X + 665, Location.Y, 700, 507);
+                            chlid.Show();  
+                            Priority p1 = new Priority(getData());
+                            p1.pri_run(false);
+                            chlid.setStamp(p1.getTimestamp());
+                        }
+                        else
+                        {
+                            listBox1.Items.Insert(0,"우선순위가 없는 프로세스가 존재합니다");
+                        }
                         break;
-                    case 3:
+                    case 2://선점 우선순위 알고리즘
+                        avail = true;
+                        for (int i = 0; i < processListval.Count; i++)
+                        {
+                            if (processListval[i].getPriority() == -1)
+                            {
+                                avail = false;
+                            }
+                        }
+                        if (avail)
+                        {
+                            Console.WriteLine("preemptive");
+                            chlid = new box(processListval, this);
+                            chlid.SetBounds(Location.X + 665, Location.Y, 700, 507);
+                            chlid.Show();
+                            Priority p1 = new Priority(getData());
+                            p1.pri_run(true);
+                            chlid.setStamp(p1.getTimestamp());
+                        }
+                        else
+                        {
+                            listBox1.Items.Insert(0,"우선순위가 없는 프로세스가 존재합니다");
+                        }
+                        break;
+                    case 3://숏잡먼저
+                        chlid = new box(processListval,this);
+                        chlid.SetBounds(Location.X+665,Location.Y,700,507);                
+                        chlid.Show();
                         SJF sjf = new SJF(processListval);
                         sjf.sjf_alg();
                         timestamp = sjf.getTimestamp();
+                        chlid.setStamp(sjf.getTimestamp());
                         Console.WriteLine(timestamp.Count + "SJF");
                         for (int i = 0; i < timestamp.Count; i++)
                         {
                             timestamp[i].print();
                         }
                         Console.WriteLine(sjf.getAWT() + " " + sjf.getATT());
-                        break;
-                    case 4:
+                        break;                    
+                    case 4://스르트
+                        chlid = new box(processListval,this);
+                        chlid.SetBounds(Location.X+665,Location.Y,700,507);                
+                        chlid.Show();
                         Console.WriteLine("SRT");
                         SRT srt = new SRT(getData());
                         timestamp = srt.getTimestamp();
@@ -181,45 +227,25 @@ namespace Scheduling_Jh
                         }
                         Console.WriteLine(System.Convert.ToDouble(srt.getAWT()) + " " + System.Convert.ToDouble(srt.getATT()));
                         break;
-                    case 5:
+                    case 5://랄랄
                         if(timeSlice.Text==""){
                             timeSliceText.ForeColor=Color.Red;
                         }
                         else{
+                            chlid = new box(processListval, this);
+                            chlid.SetBounds(Location.X + 665, Location.Y, 700, 507);
+                            chlid.Show();
+
                             timeSliceText.ForeColor = Color.Black;
                             int quant;
-                            Int32.TryParse(timeSlice.Text,out quant);
+                            Int32.TryParse(timeSlice.Text, out quant);
+
                             RR rr=new RR(getData(), quant);
                             rr.rr_alg();
                             chlid.setStamp(rr.getTimestamp());
-                            //about to deprecate
-                            timestamp = rr.getTimestamp();                            
-                            for(int i = 0; i < timestamp.Count; i++)
-                            {
-                                timestamp[i].print();
-                            }
-                            Console.WriteLine(rr.getAWT()+" "+rr.getATT());
-<<<<<<< HEAD
+                            Console.WriteLine(System.Convert.ToDouble(rr.getAWT()) + " " + System.Convert.ToDouble(rr.getATT()));
                         }
                         break;
-                    
-=======
-                            //about to deprecate
-                        }
-                        break;
-                    case 3:
-                        SJF sjf = new SJF(processListval);
-                        sjf.sjf_alg();
-                        timestamp = sjf.getTimestamp();
-                        chlid.setStamp(sjf.getTimestamp());
-                        Console.WriteLine(timestamp.Count+"SJF");
-                        for(int i = 0; i < timestamp.Count; i++)
-                        {
-                            timestamp[i].print();
-                        }
-                        Console.WriteLine(sjf.getAWT()+" "+sjf.getATT());
-                        break;
->>>>>>> origin/master
                     default:
                         break;
                 }
@@ -417,7 +443,7 @@ namespace Scheduling_Jh
             }
             processListval.Add(newProcess);
             processName.Text = "";
-            arrivalTime.Text = "";
+            arrivalTime.Text = "";            
             burstTime.Text = "";
         }
         private void button2_Click(object sender, EventArgs e)
@@ -505,7 +531,7 @@ namespace Scheduling_Jh
             is_down = false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)//랜덤추가 버튼
         {
             Random r=new Random();
             Process newProcess;
@@ -519,12 +545,12 @@ namespace Scheduling_Jh
 
             if (radioButton2.Checked || radioButton3.Checked)
             {
-                newProcess= new Process(processListval.Count+1+"",temp1,temp2,temp3);
-                processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), priority.Text);
+                newProcess= new Process("p"+(processListval.Count+1)+"",temp1,temp2,temp3);
+                processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), temp3+"");
             }
             else
             {
-                newProcess = new Process(processListval.Count + 1 + "", temp1, temp2);
+                newProcess = new Process("p"+(processListval.Count + 1), temp1, temp2);
                 processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime());
             }
             processListval.Add(newProcess);
@@ -608,6 +634,63 @@ namespace Scheduling_Jh
         private void titlebar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Process newProcess;
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 8);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(),"");
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 1, 4);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), "");
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 2, 9);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), "");
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 3, 5);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), "");
+            processListval.Add(newProcess);
+        }
+
+        private void DEV2_Click(object sender, EventArgs e)
+        {
+            Process newProcess;
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 10,3);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 1,1);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 2,3);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0,1, 4);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 5, 2);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+        }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            Process newProcess;
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 10, 3);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 1, 1, 1);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 2,2, 3);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 3, 1, 4);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 4, 5, 2);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
         }
 
         

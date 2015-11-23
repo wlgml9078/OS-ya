@@ -19,6 +19,7 @@ namespace Scheduling_Jh
             this.name = name;
             this.arrival_time = arrival_time;
             this.burst_time = burst_time;
+            this.priority = -1;
         }
         public Process(String name, int arrival_time, int burst_time, int priority)
         {
@@ -29,6 +30,7 @@ namespace Scheduling_Jh
             this.priority = priority;
         }
         public String getName() { return name; }
+        public bool getIsEnd() { return isEnd; }
         public int getArrivalTime() { return arrival_time; }
         public int getBurstTime() { return burst_time; }
         public int getPriority() { return priority; }

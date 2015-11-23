@@ -52,7 +52,33 @@ namespace Scheduling_Jh
         public List<Stamp> getTimestamp() {
             return timestamp;
         }
-
+        public int SortStampInTime(Stamp a, Stamp b)//오름차순으로 찍힌 시간순으로 정렬
+        {
+            if (a.getStartTime() > b.getStartTime())
+                return 1;
+            else if (a.getStartTime() == b.getStartTime())
+                return 0;
+            else
+                return -1;
+        }
+        public int pro_compare(Process a, Process b)//내림차순으로 온 순서대로 정렬
+        {
+            if (a.getArrivalTime() > b.getArrivalTime())
+                return 1;
+            else if (a.getArrivalTime() == b.getArrivalTime())
+                return 0;
+            else
+                return -1;
+        }
+        public int pro_compare_desc(Process a, Process b)//오름차순으로 온 순서대로 정렬
+        {
+            if (a.getArrivalTime() > b.getArrivalTime())
+                return -1;
+            else if (a.getArrivalTime() == b.getArrivalTime())
+                return 0;
+            else
+                return 1;
+        }
         //추가
         public double getATT()
         {
