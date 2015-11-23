@@ -104,7 +104,6 @@ namespace Scheduling_Jh
                         }
                     }
                 }
-                //Console.WriteLine("나옴");
                 currentTime++;
             }
         }

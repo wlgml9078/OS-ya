@@ -28,6 +28,14 @@ namespace Scheduling_Jh
         }
     }
 
+    class Comparer_HRN : IComparer<Process_HRN>
+    {
+        public int Compare(Process_HRN x, Process_HRN y)
+        { 
+            return x.getPriority().CompareTo(y.getPriority()); 
+        }
+    }
+
     class Scheduler
     {
         public int currentTime;

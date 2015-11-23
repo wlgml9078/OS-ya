@@ -242,11 +242,25 @@ namespace Scheduling_Jh
 
                             RR rr=new RR(getData(), quant);
                             rr.rr_alg();
-                            chlid.setStamp(rr.getTimestamp());
+                            timestamp = rr.getTimestamp();
+                            chlid.setStamp(timestamp);
                             Console.WriteLine(System.Convert.ToDouble(rr.getAWT()) + " " + System.Convert.ToDouble(rr.getATT()));
                         }
                         break;
                     default:
+                        chlid = new box(processListval, this);
+                            chlid.SetBounds(Location.X + 665, Location.Y, 700, 507);
+                            chlid.Show();
+
+                            HRN hrn = new HRN(getData());
+                            timestamp = hrn.getTimestamp();
+                            hrn.hrn_alg();
+                            chlid.setStamp(hrn.getTimestamp());
+                            for (int i = 0; i < timestamp.Count; i++ )
+                            {
+                                timestamp[i].print();
+                            }
+                            Console.WriteLine(System.Convert.ToDouble(hrn.getAWT()) + " " + System.Convert.ToDouble(hrn.getATT()));
                         break;
                 }
             }
@@ -639,16 +653,19 @@ namespace Scheduling_Jh
         private void button5_Click(object sender, EventArgs e)
         {
             Process newProcess;
-            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 8);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 3);
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(),"");
             processListval.Add(newProcess);
-            newProcess = new Process("p" + (processListval.Count + 1) + "", 1, 4);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 1, 7);
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), "");
             processListval.Add(newProcess);
-            newProcess = new Process("p" + (processListval.Count + 1) + "", 2, 9);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 3, 2);
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), "");
             processListval.Add(newProcess);
-            newProcess = new Process("p" + (processListval.Count + 1) + "", 3, 5);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 5, 5);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), "");
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 6, 3);
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), "");
             processListval.Add(newProcess);
         }
@@ -682,7 +699,7 @@ namespace Scheduling_Jh
             newProcess = new Process("p" + (processListval.Count + 1) + "", 1, 1, 1);
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
             processListval.Add(newProcess);
-            newProcess = new Process("p" + (processListval.Count + 1) + "", 2,2, 3);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 2, 2, 3);
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
             processListval.Add(newProcess);
             newProcess = new Process("p" + (processListval.Count + 1) + "", 3, 1, 4);

@@ -36,11 +36,11 @@ namespace Scheduling_Jh
             
             stmp_list = list;
             graphs = new Rectangle[list.Count];
-            Console.WriteLine("stampsize=" + list.Count);
+            //Console.WriteLine("stampsize=" + list.Count);
             for (int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine("name:" + list[i].getName() + "arr:" + list[i].getStartTime() + "end:" + list[i].getEndTime());
-                Console.WriteLine("arr:" + stmp_list[i].getStartTime() + " burst:" + (stmp_list[i].getTimeGap()+stmp_list[i].getStartTime()));
+                //Console.WriteLine("name:" + list[i].getName() + "arr:" + list[i].getStartTime() + "end:" + list[i].getEndTime());
+                //Console.WriteLine("arr:" + stmp_list[i].getStartTime() + " burst:" + (stmp_list[i].getTimeGap()+stmp_list[i].getStartTime()));
             }
         }
         //그릴 함수
