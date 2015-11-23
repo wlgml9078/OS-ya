@@ -13,7 +13,6 @@ namespace Scheduling_Jh
         private int burst_time;
         private int end_time;   //완전 프로세스 끝나는 시간
         private int priority;
-        private double hrn_priority;
         public Process(String name, int arrival_time, int burst_time)
         {
             isEnd = false;
