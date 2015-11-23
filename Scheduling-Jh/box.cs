@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Scheduling_Jh
 {
@@ -20,7 +21,8 @@ namespace Scheduling_Jh
         private List<Process> pro_list;     //프로세스 리스트
         bool draw = false;
         int targetPosition;
-        public box(List<Process> list,main main)
+        bool is_run = false;
+        public box(List<Process> list, main main)
         {
             this.main = main;
             this.pro_list = list;
@@ -29,85 +31,26 @@ namespace Scheduling_Jh
             position = new Point();
             currentPosition = 0;
             is_down = false;
-
-            
-
-            
         }
-        public void setStamp(List<Stamp> list){
-            
+        public void setStamp(List<Stamp> list)
+        {
+
             stmp_list = list;
             graphs = new Rectangle[list.Count];
-<<<<<<< HEAD
-                //Console.WriteLine("stampsize=" + list.Count);
-=======
             Console.WriteLine("stampsize=" + list.Count);
             for (int i = 0; i < list.Count; i++)
             {
-                Console.WriteLine("arr:" + stmp_list[i].getStartTime() + " burst:" + (stmp_list[i].getTimeGap()+stmp_list[i].getStartTime()));
+                Console.WriteLine("name:" + list[i].getName() + "arr:" + list[i].getStartTime() + "end:" + list[i].getEndTime());
+                Console.WriteLine("arr:" + stmp_list[i].getStartTime() + " burst:" + (stmp_list[i].getTimeGap() + stmp_list[i].getStartTime()));
             }
->>>>>>> origin/master
         }
         //그릴 함수
-        public void drawAutoGhanttChart(object sender, PaintEventArgs e) 
+        public void drawAutoGhanttChart(object sender, PaintEventArgs e)
         {
-<<<<<<< HEAD
-            if (draw)
-            {
-                Graphics g = Ghannt_base.CreateGraphics();
-                Random r = new Random();
-                Brush[] brush = new SolidBrush[pro_list.Count];
-                Pen p;
-                
-                Point startPoint = new Point();
-                int max_end = 0;
-                for (int i = 0; i < pro_list.Count; i++)
-                {
-                    //최대 프로세스 종료 시간을 구한다.
-                    max_end = (max_end > pro_list[i].getEndTime() ? max_end : pro_list[i].getEndTime());
-                    //같은 반복문 내에서 브러시를 만든다
-                    int red = r.Next(0, 100), green = r.Next(0, 100), blue = r.Next(0, 100);
-                    brush[i] = new SolidBrush(Color.FromArgb(0, red, green, blue));
-                }
-                    //Console.WriteLine("MAX: " + max_end);
 
-
-                startPoint.X = (Ghannt_base.Location.X);
-                startPoint.Y = (Ghannt_base.Location.Y);
-                    //Console.WriteLine(stmp_list.Count);
-                for (; currentPosition < stmp_list.Count; currentPosition++)
-                {
-
-                    int index = 0;
-                    for (int j = 0; j < pro_list.Count; j++)
-                    {
-                        if ((String.Compare(pro_list[j].getName(), stmp_list[currentPosition].getName()) == 0))
-                        {
-                            index = j;
-                            break;
-                        }
-                    }
-                    //get width in pixel
-                        //Console.WriteLine(stmp_list[currentPosition].getTimeGap() + "");
-                    double width = (stmp_list[currentPosition].getTimeGap() * 640) / max_end;
-                        //Console.WriteLine("Location: " + startPoint.X + "  " + startPoint.Y+" width: " +width);
-
-                    graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, 51));
-
-                    //(brush, graphs[i]);
-                    p = new Pen(brush[index], 4);
-                    g.DrawRectangle(p, graphs[currentPosition]);
-                    //startPoint = new Point(startPoint.X + (int)width, startPoint.Y);
-                    startPoint.X += (int)width;
-
-                }
-                draw = false;
-            }
-=======
-           
->>>>>>> origin/master
         }
-        public void getInfo(){
+        public void getInfo()
+        {
 
         }
         private void box_FormClosing(object sender, FormClosingEventArgs e)
@@ -161,163 +104,144 @@ namespace Scheduling_Jh
                 Location = new Point(p.X - position.X, p.Y - position.Y);
             }
         }
-        private bool isExist(List<int>list,int target) {
+        private bool isExist(List<int> list, int target)
+        {
             for (int i = 0; i < list.Count; i++)
             {
-                if (list[i] == target) {
+                if (list[i] == target)
+                {
                     return true;
                 }
             }
             return false;
         }
-        
+
         private void Ghannt_base_Paint(object sender, PaintEventArgs e)
         {
-            if (draw)
+            if (!is_run)
             {
-                List<int> log=new List<int>();
-                Graphics fg= ghattbox.CreateGraphics();
-                Graphics g = e.Graphics;
-                Random r = new Random();
-                Brush[] brush = new SolidBrush[pro_list.Count];
-                Pen p;
-
-                Point startPoint = new Point();
-                int max_end = 0;
-                for (int i = 0; i < pro_list.Count; i++)
+                if (draw)
                 {
-                    
-                    //최대 프로세스 종료 시간을 구한다.
-                    max_end = (max_end > pro_list[i].getEndTime() ? max_end : pro_list[i].getEndTime());
-                    Console.WriteLine("pro_endTime: ["+i+"]" + pro_list[i].getEndTime());
-                    //같은 반복문 내에서 브러시를 만든다
-                    byte red = (byte)r.Next(100, 200), green = (byte)r.Next(100, 200), blue = (byte)r.Next(100, 200);
-                    brush[i] = new SolidBrush(Color.FromArgb((byte)0xFF,red, green, blue));
-                }
+                    is_run = true;
+                    List<int> log = new List<int>();
+                    Graphics fg = ghattbox.CreateGraphics();
+                    Graphics g = e.Graphics;
+                    Random r = new Random();
+                    Brush[] brush = new SolidBrush[pro_list.Count];
+                    Pen p;
+
+                    Point startPoint = new Point();
+                    int max_end = 0;
+                    for (int i = 0; i < pro_list.Count; i++)
+                    {
+
+                        //최대 프로세스 종료 시간을 구한다.
+                        max_end = (max_end > pro_list[i].getEndTime() ? max_end : pro_list[i].getEndTime());
+                        Console.WriteLine("pro_endTime: [" + i + "]" + pro_list[i].getEndTime());
+                        //같은 반복문 내에서 브러시를 만든다
+                        byte red = (byte)r.Next(100, 200), green = (byte)r.Next(100, 200), blue = (byte)r.Next(100, 200);
+                        brush[i] = new SolidBrush(Color.FromArgb((byte)0xFF, red, green, blue));
+                    }
                     //Console.WriteLine("MAX: " + max_end);
 
 
-<<<<<<< HEAD
-                startPoint.X = (Ghannt_base.Location.X);
-                startPoint.Y = (Ghannt_base.Location.Y);
-                    //Console.WriteLine(stmp_list.Count);
-                for (; currentPosition < stmp_list.Count; currentPosition++)
-                {
-
-                    int index = 0;
-                    for (int j = 0; j < pro_list.Count; j++)
-=======
-                startPoint.X = (0);
-                startPoint.Y = (0);
-                fg.DrawString(0 + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
-                log.Add(0);
-                Console.WriteLine(stmp_list.Count);
-                if (targetPosition == -1) 
-                { 
-                    for (; currentPosition < stmp_list.Count; currentPosition++)
->>>>>>> origin/master
+                    startPoint.X = (0);
+                    startPoint.Y = (0);
+                    fg.DrawString(0 + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
+                    log.Add(0);
+                    Console.WriteLine(stmp_list.Count);
+                    if (targetPosition == -1)
                     {
-                        int index = 0;
-                        for (int j = 0; j < pro_list.Count; j++)
+                        for (; currentPosition < stmp_list.Count; currentPosition++)
                         {
-                            if ((String.Compare(pro_list[j].getName(), stmp_list[currentPosition].getName()) == 0))
+                            int index = 0;
+                            for (int j = 0; j < pro_list.Count; j++)
                             {
-                                index = j;
-                                break;
+                                if ((String.Compare(pro_list[j].getName(), stmp_list[currentPosition].getName()) == 0))
+                                {
+                                    index = j;
+                                    break;
+                                }
+                            }
+                            startPoint.X = (((stmp_list[currentPosition].getStartTime()) * 664) / max_end);
+
+                            //get width in pixel
+                            double width = (stmp_list[currentPosition].getTimeGap() * 664) / max_end;
+                            graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, 51));
+
+                            //(brush, graphs[i]);
+                            p = new Pen(brush[index], 5);
+                            g.FillRectangle(brush[index], graphs[currentPosition]);
+                            //startPoint = new Point(startPoint.X + (int)width, startPoint.Y);
+                            g.DrawString(stmp_list[currentPosition].getName(), new Font("Microsoft Sans Serif", 12), Brushes.White, graphs[currentPosition]);
+                            if (!isExist(log, stmp_list[currentPosition].getStartTime()))
+                            {
+                                fg.DrawString(stmp_list[currentPosition].getStartTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
+                                log.Add(stmp_list[currentPosition].getStartTime());
+                            }
+                            if (!isExist(log, stmp_list[currentPosition].getEndTime()))
+                            {
+                                fg.DrawString(stmp_list[currentPosition].getEndTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X + (int)width, startPoint.Y + 58));
+                                log.Add(stmp_list[currentPosition].getEndTime());
+                            }
+                            Thread.Sleep(500);
+                        }
+                        targetPosition = stmp_list.Count;
+                    }
+                    else//단계진행
+                    {
+                        for (; currentPosition < targetPosition; currentPosition++)
+                        {
+                            int index = 0;
+                            for (int j = 0; j < targetPosition; j++)
+                            {
+                                if ((String.Compare(pro_list[j].getName(), stmp_list[currentPosition].getName()) == 0))
+                                {
+                                    index = j;
+                                    break;
+                                }
+                            }
+                            startPoint.X = (((stmp_list[currentPosition].getStartTime()) * 664) / max_end);
+
+
+                            //get width in pixel
+                            double width = (stmp_list[currentPosition].getTimeGap() * 664) / max_end;
+                            graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, 51));
+
+
+                            //(brush, graphs[i]);
+                            p = new Pen(brush[index], 5);
+                            g.FillRectangle(brush[index], graphs[currentPosition]);
+                            //startPoint = new Point(startPoint.X + (int)width, startPoint.Y);
+                            g.DrawString(stmp_list[currentPosition].getName(), new Font("Microsoft Sans Serif", 12), Brushes.White, graphs[currentPosition]);
+                            if (!isExist(log, stmp_list[currentPosition].getStartTime()))
+                            {
+                                fg.DrawString(stmp_list[currentPosition].getStartTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
+                                log.Add(stmp_list[currentPosition].getStartTime());
+                            }
+                            if (!isExist(log, stmp_list[currentPosition].getEndTime()))
+                            {
+                                fg.DrawString(stmp_list[currentPosition].getEndTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X + (int)width, startPoint.Y + 58));
+                                log.Add(stmp_list[currentPosition].getEndTime());
                             }
                         }
-<<<<<<< HEAD
                     }
-                    //get width in pixel
-                        //Console.WriteLine(stmp_list[currentPosition].getTimeGap() + "");
-                    double width = (stmp_list[currentPosition].getTimeGap() * 640) / max_end;
-                        //Console.WriteLine("Location: " + startPoint.X + "  " + startPoint.Y + " width: " + width);
-=======
-                        startPoint.X = (((stmp_list[currentPosition].getStartTime()) * 640) / max_end);
-                                       
-                        //get width in pixel
-                        double width = (stmp_list[currentPosition].getTimeGap() * 640) / max_end;
-                        graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, 51));
->>>>>>> origin/master
+                    g.DrawString("" + max_end, new Font("Microsoft Sans Serif", 12), Brushes.Black, new Point(4, 53));
+                    draw = false;
 
-                        //(brush, graphs[i]);
-                        p = new Pen(brush[index], 5);
-                        g.FillRectangle(brush[index],graphs[currentPosition]);
-                        //startPoint = new Point(startPoint.X + (int)width, startPoint.Y);
-                        g.DrawString(stmp_list[currentPosition].getName(), new Font("Microsoft Sans Serif", 12), Brushes.Black, graphs[currentPosition]);
-                        if (!isExist(log, stmp_list[currentPosition].getStartTime())) 
-                        {
-                            fg.DrawString(stmp_list[currentPosition].getStartTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
-                            log.Add(stmp_list[currentPosition].getStartTime());
-                        }
-                        if (!isExist(log, stmp_list[currentPosition].getEndTime()))
-                        {
-                            fg.DrawString(stmp_list[currentPosition].getEndTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X + (int)width, startPoint.Y + 58));
-                            log.Add(stmp_list[currentPosition].getEndTime());
-                        }
-                    }
-                    targetPosition = stmp_list.Count;
                 }
-                else//단계진행
-                {                    
-                    for (; currentPosition < targetPosition; currentPosition++)
-                    {
-                        int index = 0;
-                        for (int j = 0; j < targetPosition; j++)
-                        {
-                            if ((String.Compare(pro_list[j].getName(), stmp_list[currentPosition].getName()) == 0))
-                            {
-                                index = j;
-                                break;
-                            }
-                        }
-                        startPoint.X = (((stmp_list[currentPosition].getStartTime()) * 640) / max_end);
-
-<<<<<<< HEAD
-                        //(brush, graphs[i]);
-                    p = new Pen(brush[index], graphs[currentPosition].Width);
-                    g.DrawRectangle(p, graphs[currentPosition]);
-                    Ghannt_base.Refresh();
-                        //startPoint = new Point(startPoint.X + (int)width, startPoint.Y);
-                    startPoint.X += (int)width;
-=======
-                        //get width in pixel
-                        double width = (stmp_list[currentPosition].getTimeGap() * 640) / max_end;
-                        graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, 51));
->>>>>>> origin/master
-
-                        //(brush, graphs[i]);
-                        p = new Pen(brush[index], 5);
-                        g.FillRectangle(brush[index], graphs[currentPosition]);
-                        //startPoint = new Point(startPoint.X + (int)width, startPoint.Y);
-                        g.DrawString(stmp_list[currentPosition].getName(), new Font("Microsoft Sans Serif", 12), Brushes.Black, graphs[currentPosition]);
-                        if (!isExist(log, stmp_list[currentPosition].getStartTime()))
-                        {
-                            fg.DrawString(stmp_list[currentPosition].getStartTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
-                            log.Add(stmp_list[currentPosition].getStartTime());
-                        }
-                        if (!isExist(log, stmp_list[currentPosition].getEndTime()))
-                        {
-                            fg.DrawString(stmp_list[currentPosition].getEndTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X + (int)width, startPoint.Y + 58));
-                            log.Add(stmp_list[currentPosition].getEndTime());
-                        }
-                    }
-                }
-                g.DrawString("" + max_end, new Font("Microsoft Sans Serif", 12), Brushes.Black, new Point(4, 53));
-                draw = false;
-               
+                is_run = false;
             }
-            
-         
+
         }
 
         private void box_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
         private void Ghantt_Chart_draw(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -331,7 +255,8 @@ namespace Scheduling_Jh
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (targetPosition < stmp_list.Count) {
+            if (targetPosition < stmp_list.Count)
+            {
                 currentPosition = 0;
                 targetPosition++;
                 draw = true;

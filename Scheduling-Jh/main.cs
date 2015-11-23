@@ -199,27 +199,8 @@ namespace Scheduling_Jh
                                 timestamp[i].print();
                             }
                             Console.WriteLine(rr.getAWT()+" "+rr.getATT());
-<<<<<<< HEAD
                         }
                         break;
-                    
-=======
-                            //about to deprecate
-                        }
-                        break;
-                    case 3:
-                        SJF sjf = new SJF(processListval);
-                        sjf.sjf_alg();
-                        timestamp = sjf.getTimestamp();
-                        chlid.setStamp(sjf.getTimestamp());
-                        Console.WriteLine(timestamp.Count+"SJF");
-                        for(int i = 0; i < timestamp.Count; i++)
-                        {
-                            timestamp[i].print();
-                        }
-                        Console.WriteLine(sjf.getAWT()+" "+sjf.getATT());
-                        break;
->>>>>>> origin/master
                     default:
                         break;
                 }

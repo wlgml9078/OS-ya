@@ -71,6 +71,7 @@
       <DependentUpon>box.cs</DependentUpon>
     </Compile>
     <Compile Include="FCFS.cs" />
+    <Compile Include="HRN.cs" />
     <Compile Include="main.cs">
       <SubType>Form</SubType>
     </Compile>

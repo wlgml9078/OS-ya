@@ -13,6 +13,7 @@ namespace Scheduling_Jh
         private int burst_time;
         private int end_time;   //완전 프로세스 끝나는 시간
         private int priority;
+        private double hrn_priority;
         public Process(String name, int arrival_time, int burst_time)
         {
             isEnd = false;
@@ -36,5 +37,16 @@ namespace Scheduling_Jh
         public void setBurstTime(int time) { burst_time = time; }
         public void setEndTime(int time) { end_time = time; }
     }
+
+    public class Process_HRN :Process
+    {
+        private double Priority;
+
+        public Process_HRN(String name, int arrival_time, int burst_time)
+            :base(name, arrival_time, burst_time)
+        { }
+
+        public void setPriority(double p) { Priority = p; }
+        public double getPriority() { return Priority; }
+    }
 }
- 
