@@ -8,10 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 
+
 namespace Scheduling_Jh
 {
     public partial class box : Form
     {
+        Color[] myPalette=new Color[20];
         main main;
         private Rectangle[] graphs;
         bool is_down;
@@ -22,6 +24,10 @@ namespace Scheduling_Jh
         bool draw = false;
         int targetPosition;
         bool is_run = false;
+        double usage;//사용시간 백분율
+        double awt, att,art;
+        float limit;//그리기 제한
+        bool isopen;
         public box(List<Process> list,main main)
         {
             this.main = main;
@@ -31,6 +37,29 @@ namespace Scheduling_Jh
             position = new Point();
             currentPosition = 0;
             is_down = false;
+            usage = 0;
+            isopen = false;
+            overPanel.Location=new Point(overPanel.Location.X-overPanel.Size.Width,overPanel.Location.Y);
+            this.DoubleBuffered = true;
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            UpdateStyles();
+            usageText.Text = "";
+            awtText.Text = "";
+            attText.Text = "";
+            artText.Text = "";
+            myPalette[0] = System.Drawing.ColorTranslator.FromHtml("#FF565A");
+            myPalette[1] = System.Drawing.ColorTranslator.FromHtml("#FF9379");
+            myPalette[2] = System.Drawing.ColorTranslator.FromHtml("#FFDD9E");
+            myPalette[3] = System.Drawing.ColorTranslator.FromHtml("#C2D5B0");
+            myPalette[4] = System.Drawing.ColorTranslator.FromHtml("#84CDC2");
+            myPalette[5] = System.Drawing.ColorTranslator.FromHtml("#18709C");
+            myPalette[6] = System.Drawing.ColorTranslator.FromHtml("#7E346B");
+            myPalette[7] = System.Drawing.ColorTranslator.FromHtml("#EF4089");
+            Graphics gc = chart.CreateGraphics();
+            Pen background = new Pen((new SolidBrush(Color.FromArgb((byte)0xFF, 66, 66, 66))), 20);
+            Rectangle range = new Rectangle(new Point(20, 20), new Size(chart.Size.Width - 40, chart.Size.Height - 40));
+            gc.DrawArc(background, range, 0, 360);
         }
         public void setStamp(List<Stamp> list){
             
@@ -44,6 +73,17 @@ namespace Scheduling_Jh
             }
         }
         //그릴 함수
+        public void setAwtATT(double AWT, double ATT) {
+            double ART=0;
+            for (int i = 0; i < pro_list.Count; i++)
+            {
+                ART += pro_list[i].getBurstTime();
+            }
+            ART /= pro_list.Count;
+            this.awt = AWT;
+            this.att = ATT;
+            this.art = ART;
+        }
         public void drawAutoGhanttChart(object sender, PaintEventArgs e) 
         {
            
@@ -118,6 +158,15 @@ namespace Scheduling_Jh
             {
                 if (draw)
                 {
+                    Application.DoEvents();
+                    artText.Text = Math.Round(art,4) + "";
+                    attText.Text = Math.Round(att, 4) + "";
+                    awtText.Text = Math.Round(awt, 4) + "";
+
+                    Graphics gc = chart.CreateGraphics();
+                    gc.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    int timesum = 0;
+                    usage = 0;
                     is_run = true;
                     List<int> log=new List<int>();
                     Graphics fg= ghattbox.CreateGraphics();
@@ -126,17 +175,22 @@ namespace Scheduling_Jh
                     Brush[] brush = new SolidBrush[pro_list.Count];
                     Pen p;
 
+                    Pen background = new Pen((new SolidBrush(Color.FromArgb((byte)0xFF, 66, 66, 66))), 20);
+                    Rectangle range = new Rectangle(new Point(20, 20), new Size(chart.Size.Width - 40, chart.Size.Height - 40));
+                    gc.DrawArc(background, range, 0, 360);
                     Point startPoint = new Point();
                     int max_end = 0;
                     for (int i = 0; i < pro_list.Count; i++)
-                    {
-                    
+                    {                    
                         //최대 프로세스 종료 시간을 구한다.
                         max_end = (max_end > pro_list[i].getEndTime() ? max_end : pro_list[i].getEndTime());
                         Console.WriteLine("pro_endTime: ["+i+"]" + pro_list[i].getEndTime());
                         //같은 반복문 내에서 브러시를 만든다
                         byte red = (byte)r.Next(100, 200), green = (byte)r.Next(100, 200), blue = (byte)r.Next(100, 200);
-                        brush[i] = new SolidBrush(Color.FromArgb((byte)0xFF,red, green, blue));
+                        if (i < 8)
+                            brush[i] = new SolidBrush(myPalette[i]);
+                        else
+                            brush[i] = new SolidBrush(Color.FromArgb((byte)0xFF,red, green, blue));
                     }
                         //Console.WriteLine("MAX: " + max_end);
 
@@ -146,10 +200,14 @@ namespace Scheduling_Jh
                     fg.DrawString(0 + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
                     log.Add(0);
                     Console.WriteLine(stmp_list.Count);
-                    if (targetPosition == -1) 
+                    if (targetPosition == -1)//자동진행
                     { 
                         for (; currentPosition < stmp_list.Count; currentPosition++)
                         {
+                            listBox1.Items.Insert(0,"<Process Inserted>");
+                            listBox1.Items.Insert(0, " : Name :" + stmp_list[currentPosition].getName() + "  At >"+stmp_list[currentPosition].getStartTime());
+                            listBox1.Refresh();
+                            usageText.Text = Math.Round(usage * 100, 2) + "%";
                             int index = 0;
                             for (int j = 0; j < pro_list.Count; j++)
                             {
@@ -159,11 +217,11 @@ namespace Scheduling_Jh
                                     break;
                                 }
                             }
-                            startPoint.X = (((stmp_list[currentPosition].getStartTime()) * 664) / max_end);
+                            startPoint.X = (((stmp_list[currentPosition].getStartTime()) * Ghannt_base.Size.Width) / max_end);
                                        
                             //get width in pixel
-                            double width = (stmp_list[currentPosition].getTimeGap() * 664) / max_end;
-                            graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, 51));
+                            double width = Convert.ToInt32(Math.Round((double)((stmp_list[currentPosition].getTimeGap() * Ghannt_base.Size.Width) / max_end)));
+                            graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, Ghannt_base.Size.Height));
 
                             //(brush, graphs[i]);
                             p = new Pen(brush[index], 5);
@@ -180,14 +238,24 @@ namespace Scheduling_Jh
                                 fg.DrawString(stmp_list[currentPosition].getEndTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X + (int)width, startPoint.Y + 58));
                                 log.Add(stmp_list[currentPosition].getEndTime());
                             }
+                            timesum += stmp_list[currentPosition].getTimeGap();
+                            usage=(double)timesum/(double)stmp_list[currentPosition].getEndTime();
+
+                            listBox1.Items.Insert(0, "<Process Ended>");
+                            listBox1.Items.Insert(0, " : Name :" + stmp_list[currentPosition].getName() + "  At >" + stmp_list[currentPosition].getStartTime());
+                            listBox1.Refresh();
+                            attText.Refresh();
+                            artText.Refresh();
+                            awtText.Refresh();
                             Thread.Sleep(500);
                         }
-                        targetPosition = stmp_list.Count;
+                        targetPosition = stmp_list.Count;                 
                     }
                     else//단계진행
                     {                    
                         for (; currentPosition < targetPosition; currentPosition++)
                         {
+                            
                             int index = 0;
                             for (int j = 0; j < targetPosition; j++)
                             {
@@ -197,12 +265,12 @@ namespace Scheduling_Jh
                                     break;
                                 }
                             }
-                            startPoint.X = (((stmp_list[currentPosition].getStartTime()) * 664) / max_end);
+                            startPoint.X = (((stmp_list[currentPosition].getStartTime()) * Ghannt_base.Size.Width) / max_end);
 
 
                             //get width in pixel
-                            double width = (stmp_list[currentPosition].getTimeGap() * 664) / max_end;
-                            graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, 51));
+                            double width = Convert.ToInt32(Math.Round((double)((stmp_list[currentPosition].getTimeGap() * Ghannt_base.Size.Width) / max_end)));
+                            graphs[currentPosition] = new Rectangle(new Point(startPoint.X, startPoint.Y), new Size((int)width, Ghannt_base.Size.Height));
 
 
                             //(brush, graphs[i]);
@@ -220,15 +288,78 @@ namespace Scheduling_Jh
                                 fg.DrawString(stmp_list[currentPosition].getEndTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X + (int)width, startPoint.Y + 58));
                                 log.Add(stmp_list[currentPosition].getEndTime());
                             }
+                            timesum += stmp_list[currentPosition].getTimeGap();
+                            usage = (double)timesum / (double)stmp_list[currentPosition].getEndTime();                                                                                    
                         }
+                        
                     }
-                    g.DrawString("" + max_end, new Font("Microsoft Sans Serif", 12), Brushes.Black, new Point(4, 53));
-                    draw = false;
-               
+                    if (currentPosition > 0)
+                    {
+                        gc.DrawArc(background, range, 0, 360);
+                        g.DrawString("" + max_end, new Font("Microsoft Sans Serif", 12), Brushes.Black, new Point(4, 53));
+                        Thread weedlink = new Thread(new ThreadStart(weeded));
+                        weedlink.Start();
+                        weedlink.Join();
+                        draw = false;
+                    }
+                    else
+                    {
+                        usageText.Text = "0%";
+                        usageText.Refresh();
+                    }                            
                 }
                 is_run = false;
             }
-         
+        }
+        
+        public void weeded() {
+            Pen background = new Pen((new SolidBrush(Color.FromArgb((byte)0xFF, 66, 66, 66))), 20);
+            Graphics gc = chart.CreateGraphics();            
+            gc.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            Pen foreground = new Pen((new SolidBrush(Color.FromArgb((byte)0xFF, 255, 193, 7))), 20);
+            Rectangle range = new Rectangle(new Point(20, 20), new Size(chart.Size.Width - 40, chart.Size.Height - 40));
+            gc.DrawArc(background, range, 0, 360);
+
+            float limit = (float)(usage * 360);
+            Console.WriteLine("limit:" + limit);
+            float bottom=0;
+            int time=Convert.ToInt32(limit/360*20);//시간
+            for (bottom=0; bottom < limit+1; bottom += limit / 50) 
+            {
+                usageText.Text = Math.Round(bottom /360*100, 2) + "%";
+                usageText.Refresh();
+                Console.WriteLine("bottom:" + bottom+" time:"+time);
+                gc.DrawArc(foreground, range, 0, bottom);
+                
+                Thread.Sleep(time);
+            }
+            return;
+            
+        }
+        //스레드를 위한 생각을 정리
+        private void weedCircle(float startAngle,float endAngle)
+        {
+            Graphics gc = chart.CreateGraphics();
+            gc.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            Pen foreground = new Pen((new SolidBrush(Color.FromArgb((byte)0xFF, 255, 193, 7))), 10);
+            Rectangle range = new Rectangle(new Point(20, 20), new Size(chart.Size.Width - 40, chart.Size.Height - 40));
+            
+            //쉬어야하는 단위시간
+            int timetoq = Convert.ToInt32(Math.Round(endAngle - startAngle, 0) * 2);
+            float startToq;
+            float angelToq=1;
+            
+            if (startAngle != 0)
+            {
+                gc.DrawArc(foreground,range,0,startAngle);
+                startToq=startAngle;
+            }
+            
+            for (int i = 0; i < Math.Round(endAngle - startAngle, 0); i++) 
+            { 
+                gc.DrawArc(foreground,range,startAngle,startAngle+=angelToq);
+                Thread.Sleep(timetoq);
+            }            
         }
 
         private void box_Paint(object sender, PaintEventArgs e)
@@ -251,6 +382,7 @@ namespace Scheduling_Jh
 
         private void button3_Click(object sender, EventArgs e)
         {
+            button1.ForeColor = Color.FromArgb(255, 255, 193, 7);
             if (targetPosition < stmp_list.Count) {
                 currentPosition = 0;
                 targetPosition++;
@@ -262,6 +394,10 @@ namespace Scheduling_Jh
             {
                 this.main.listBox1.Items.Insert(0, "프로세스의 끝입니다");
             }
+            if (targetPosition == stmp_list.Count)
+                button3.ForeColor = Color.Gray;
+            else
+                button3.ForeColor = Color.FromArgb(255, 255, 193, 7);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -271,12 +407,66 @@ namespace Scheduling_Jh
                 currentPosition = 0;
                 targetPosition--;
                 draw = true;
-                Ghannt_base.Paint += new PaintEventHandler(drawAutoGhanttChart);
+                if(!is_run)
+                    Ghannt_base.Paint += new PaintEventHandler(drawAutoGhanttChart);
                 Ghannt_base.Refresh();
             }
             else
             {
                 this.main.listBox1.Items.Insert(0, "프로세스의 처음입니다");
+            }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void artText_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void artLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (!isopen)
+            {
+                isopen = true;
+                overPanel.Location = new Point(overPanel.Location.X + overPanel.Size.Width, overPanel.Location.Y);
+            }
+            else
+            {
+                Ghannt_base.SuspendLayout();
+                isopen = false;
+                overPanel.Location = new Point(overPanel.Location.X - overPanel.Size.Width, overPanel.Location.Y);                
+                Ghannt_base.Refresh();
+                Ghannt_base.ResumeLayout();
+                
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Scheduling_Jh
 {
@@ -22,14 +23,7 @@ namespace Scheduling_Jh
         public Priority(List<Process> list)
             :base(list)
         {
-            Ready = new List<Process>();            
-            /*
-            for(int i=0; i<list.Count; i++)
-            {
-                Ready.Add(new Process(list[i].getName(),list[i].getArrivalTime(),list[i].getBurstTime(),list[i].getPriority()));    //큐 삽입
-            }
-            Ready.Sort(new Pri_Comparer());
-            */
+            Ready = new List<Process>();
         }
         private bool isNowInStamp(int currentTime, List<Stamp> list)//currentTime이 스탬프에 찍혀있는 범위 내의 값인지 확인
         {

@@ -114,8 +114,7 @@ namespace Scheduling_Jh
        
         public main()
         {
-            InitializeComponent();
-            
+            InitializeComponent();            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -123,11 +122,21 @@ namespace Scheduling_Jh
             processListval=new List<Process>();
             timeSlice.Hide();
             timeSliceText.Hide();
+            timesliceUnderline.Hide();
             priority.Hide();
             priorityText.Hide();
+            priorityUnderline.Hide();
             is_down = false;
             target_scheduler = 0;
             this.ActiveControl = arrivalTime;
+            button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            addProcess.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            listBox1.Items.Add("이 곳은 상태 메시지가 출력되는 곳입니다");
+
+                      
+            
             
         }       
         private List<Process> getData() {
@@ -148,7 +157,7 @@ namespace Scheduling_Jh
                         timestamp = fcfs.getTimestamp();
                         fcfs.fcfs_run();
                         chlid.setStamp(fcfs.getTimestamp());
-                        Console.WriteLine(System.Convert.ToDouble(fcfs.getAWT()) + " " + System.Convert.ToDouble(fcfs.getATT()));
+                        chlid.setAwtATT(System.Convert.ToDouble(fcfs.getAWT()),System.Convert.ToDouble(fcfs.getATT()));
                         break;
                     case 1://비선점 우선순위 알고리즘
                         avail = true;
@@ -167,6 +176,7 @@ namespace Scheduling_Jh
                             Priority p1 = new Priority(getData());
                             p1.pri_run(false);
                             chlid.setStamp(p1.getTimestamp());
+                            chlid.setAwtATT(System.Convert.ToDouble(p1.getAWT()), System.Convert.ToDouble(p1.getATT()));
                         }
                         else
                         {
@@ -191,6 +201,7 @@ namespace Scheduling_Jh
                             Priority p1 = new Priority(getData());
                             p1.pri_run(true);
                             chlid.setStamp(p1.getTimestamp());
+                            chlid.setAwtATT(System.Convert.ToDouble(p1.getAWT()), System.Convert.ToDouble(p1.getATT()));
                         }
                         else
                         {
@@ -205,12 +216,7 @@ namespace Scheduling_Jh
                         sjf.sjf_alg();
                         timestamp = sjf.getTimestamp();
                         chlid.setStamp(sjf.getTimestamp());
-                        Console.WriteLine(timestamp.Count + "SJF");
-                        for (int i = 0; i < timestamp.Count; i++)
-                        {
-                            timestamp[i].print();
-                        }
-                        Console.WriteLine(sjf.getAWT() + " " + sjf.getATT());
+                        chlid.setAwtATT(System.Convert.ToDouble(sjf.getAWT()), System.Convert.ToDouble(sjf.getATT()));
                         break;                    
                     case 4://스르트
                         chlid = new box(processListval,this);
@@ -225,11 +231,13 @@ namespace Scheduling_Jh
                         {
                             timestamp[i].print();
                         }
-                        Console.WriteLine(System.Convert.ToDouble(srt.getAWT()) + " " + System.Convert.ToDouble(srt.getATT()));
+                        chlid.setAwtATT(System.Convert.ToDouble(srt.getAWT()), System.Convert.ToDouble(srt.getATT()));
+                        
                         break;
                     case 5://랄랄
                         if(timeSlice.Text==""){
                             timeSliceText.ForeColor=Color.Red;
+                            listBox1.Items.Insert(0, "시간 할당량이 설정되지 않았습니다");
                         }
                         else{
                             chlid = new box(processListval, this);
@@ -243,19 +251,24 @@ namespace Scheduling_Jh
                             RR rr=new RR(getData(), quant);
                             rr.rr_alg();
                             chlid.setStamp(rr.getTimestamp());
-                            Console.WriteLine(System.Convert.ToDouble(rr.getAWT()) + " " + System.Convert.ToDouble(rr.getATT()));
+
+                            chlid.setAwtATT(System.Convert.ToDouble(rr.getAWT()), System.Convert.ToDouble(rr.getATT()));
                         }
                         break;
                     default:
                         break;
+                        
                 }
+                this.Focus();
             }
             else
             {
                 listBox1.Items.Insert(0, "프로세스를 추가해주세요");
             }
         }
+        public void DrawCircleThread() { 
 
+        }
         private void radioButton7_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButton7.Checked)
@@ -286,13 +299,14 @@ namespace Scheduling_Jh
                 target_scheduler = 5;
                 timeSlice.Show();
                 timeSliceText.Show();
-                
+                timesliceUnderline.Show();
             }
             else
             {
                 
                 timeSlice.Hide();
                 timeSliceText.Hide();
+                timesliceUnderline.Hide();
             }
         }
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
@@ -302,11 +316,13 @@ namespace Scheduling_Jh
                 target_scheduler = 2;
                 priority.Show();
                 priorityText.Show();
+                priorityUnderline.Show();
             }
             else
             {
                 priority.Hide();
                 priorityText.Hide();
+                priorityUnderline.Hide();
             }
         }
 
@@ -317,12 +333,13 @@ namespace Scheduling_Jh
                 target_scheduler = 1;
                 priority.Show();
                 priorityText.Show();
-                
+                priorityUnderline.Show();
             }
             else
             {
                 priority.Hide();
                 priorityText.Hide();
+                priorityUnderline.Hide();
             }
         }
 
@@ -456,9 +473,12 @@ namespace Scheduling_Jh
             else
             {
                 arrivalTimeText.ForeColor = Color.Black;
-                if(burstTime.Text=="")
+                if(burstTime.Text==""||burstTime.Text=="0")
                 {
-                    listBox1.Items.Insert(0, "실행시간을 기입해주세요");
+                    if (burstTime.Text == "") 
+                        listBox1.Items.Insert(0, "실행시간을 기입해주세요");
+                    else
+                        listBox1.Items.Insert(0, "프로세스의 실행시간은 0 이상의 정수입니다.");
                     burstTimeText.ForeColor = Color.Red;
                 }
                 else
@@ -545,15 +565,37 @@ namespace Scheduling_Jh
 
             if (radioButton2.Checked || radioButton3.Checked)
             {
-                newProcess= new Process("p"+(processListval.Count+1)+"",temp1,temp2,temp3);
+                newProcess= new Process("P"+(processListval.Count+1)+"",temp1,temp2,temp3);
                 processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), temp3+"");
             }
             else
             {
-                newProcess = new Process("p"+(processListval.Count + 1), temp1, temp2);
+                newProcess = new Process("P"+(processListval.Count + 1), temp1, temp2);
                 processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime());
             }
             processListval.Add(newProcess);
+            int icon = r.Next(0,5);
+            this.button3.Image = null;
+            switch (icon) { 
+                case 0:
+                    this.button3.Image = ((System.Drawing.Image)(Properties.Resources.dice1_icon));
+                    break;
+                case 1:
+                    this.button3.Image = ((System.Drawing.Image)(Properties.Resources.dice2_icon));
+                    break;
+                case 2:
+                    this.button3.Image = ((System.Drawing.Image)(Properties.Resources.dice3_icon));
+                    break;
+                case 3:
+                    this.button3.Image = ((System.Drawing.Image)(Properties.Resources.dice4_icon));
+                    break;
+                case 4:
+                    this.button3.Image = ((System.Drawing.Image)(Properties.Resources.dice5_icon));
+                    break;
+                case 5:
+                    this.button3.Image = ((System.Drawing.Image)(Properties.Resources.dice6_icon));
+                    break;
+            }
         }
 
         private void panel5_MouseDown(object sender, MouseEventArgs e)
@@ -658,7 +700,7 @@ namespace Scheduling_Jh
             Process newProcess;
             newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 10,3);
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
-            processListval.Add(newProcess);
+            processListval.Add(newProcess);            
             newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 1,1);
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
             processListval.Add(newProcess);
@@ -692,6 +734,89 @@ namespace Scheduling_Jh
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
             processListval.Add(newProcess);
         }
+
+        
+        private void button1_MouseHover(object sender, EventArgs e)
+        {
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void button1_MouseLeave(object sender, EventArgs e)
+        {
+            this.button1.BackgroundImage = null;
+        }
+
+        private void button1_MouseEnter(object sender, EventArgs e)
+        {
+            this.button1.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));
+        }
+
+        private void addProcess_MouseEnter(object sender, EventArgs e)
+        {
+            this.addProcess.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));
+        }
+
+        private void addProcess_MouseLeave(object sender, EventArgs e)
+        {
+            this.addProcess.BackgroundImage = null;
+        }
+
+        private void button4_MouseEnter(object sender, EventArgs e)
+        {
+            this.button4.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));
+        }
+
+        private void button4_MouseLeave(object sender, EventArgs e)
+        {
+            this.button4.BackgroundImage = null;
+        }
+
+        private void button4_MouseHover(object sender, EventArgs e)
+        {
+            this.button4.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void addProcess_MouseHover(object sender, EventArgs e)
+        {
+            this.addProcess.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void button3_MouseEnter(object sender, EventArgs e)
+        {
+            this.button3.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));
+        }
+
+        private void button3_MouseLeave(object sender, EventArgs e)
+        {
+            this.button3.BackgroundImage = null;
+        }
+
+        private void button3_MouseHover(object sender, EventArgs e)
+        {
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+        }
+
+        private void button1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.button1.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));
+        }
+
+        private void button4_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.button4.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));
+        }
+
+        private void addProcess_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.addProcess.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));
+        }
+
+        private void button3_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.button3.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));
+        }
+
+        private void main_Paint(object sender, PaintEventArgs e){}
 
         
         

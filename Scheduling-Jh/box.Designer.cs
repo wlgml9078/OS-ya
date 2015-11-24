@@ -39,28 +39,47 @@
             this.button4 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.artText = new System.Windows.Forms.Label();
+            this.artLabel = new System.Windows.Forms.Label();
+            this.attText = new System.Windows.Forms.Label();
+            this.attLabel = new System.Windows.Forms.Label();
+            this.awtText = new System.Windows.Forms.Label();
+            this.awtLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.chart = new Scheduling_Jh.DoubleBufferedPanel();
+            this.usageText = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.overPanel = new Scheduling_Jh.DoubleBufferedPanel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.process_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.arrival_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.burst_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProCessLabelText = new System.Windows.Forms.Label();
             this.ghattbox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.chart.SuspendLayout();
+            this.overPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // ghattbox
             // 
-            this.ghattbox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ghattbox.BackColor = System.Drawing.Color.White;
             this.ghattbox.Controls.Add(this.Ghannt_base);
-            this.ghattbox.Location = new System.Drawing.Point(12, 91);
+            this.ghattbox.Location = new System.Drawing.Point(12, 101);
             this.ghattbox.Name = "ghattbox";
             this.ghattbox.Size = new System.Drawing.Size(676, 92);
             this.ghattbox.TabIndex = 0;
             // 
             // Ghannt_base
             // 
-            this.Ghannt_base.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Ghannt_base.Location = new System.Drawing.Point(5, 8);
             this.Ghannt_base.Margin = new System.Windows.Forms.Padding(0);
             this.Ghannt_base.Name = "Ghannt_base";
@@ -73,9 +92,9 @@
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Gulim", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(12, 445);
+            this.button1.Location = new System.Drawing.Point(144, 445);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(55, 53);
             this.button1.TabIndex = 1;
@@ -85,21 +104,27 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(73, 445);
+            this.button2.BackColor = System.Drawing.Color.White;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button2.Location = new System.Drawing.Point(200, 445);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(554, 53);
+            this.button2.Size = new System.Drawing.Size(307, 53);
             this.button2.TabIndex = 2;
             this.button2.Text = "자동 출력";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(193)))), ((int)(((byte)(7)))));
+            this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Gulim", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button3.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(633, 445);
+            this.button3.Location = new System.Drawing.Point(508, 445);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(55, 53);
             this.button3.TabIndex = 3;
@@ -109,12 +134,13 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(150)))), ((int)(((byte)(243)))));
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(0, -1);
+            this.panel2.Location = new System.Drawing.Point(-1, -1);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(700, 61);
+            this.panel2.Size = new System.Drawing.Size(700, 73);
             this.panel2.TabIndex = 4;
             this.panel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseDown);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
@@ -123,17 +149,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label4.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(6, 21);
+            this.label4.Location = new System.Drawing.Point(66, 30);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 33);
+            this.label4.Size = new System.Drawing.Size(92, 33);
             this.label4.TabIndex = 6;
             this.label4.Text = "Output";
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(118)))), ((int)(((byte)(210)))));
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(121)))), ((int)(((byte)(107)))));
             this.panel3.Controls.Add(this.button4);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
@@ -152,79 +178,258 @@
             this.button4.Location = new System.Drawing.Point(644, 0);
             this.button4.Margin = new System.Windows.Forms.Padding(0);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(56, 19);
+            this.button4.Size = new System.Drawing.Size(56, 17);
             this.button4.TabIndex = 6;
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // listBox1
             // 
+            this.listBox1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(5, 21);
+            this.listBox1.ItemHeight = 18;
+            this.listBox1.Location = new System.Drawing.Point(5, 27);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(176, 220);
+            this.listBox1.Size = new System.Drawing.Size(176, 202);
             this.listBox1.TabIndex = 5;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // panel4
             // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.label3);
+            this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.Controls.Add(this.panel6);
+            this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.listBox1);
-            this.panel4.Location = new System.Drawing.Point(12, 190);
+            this.panel4.Location = new System.Drawing.Point(12, 198);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(676, 246);
+            this.panel4.Size = new System.Drawing.Size(676, 238);
             this.panel4.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label3.Location = new System.Drawing.Point(188, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 12);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "ready queue";
             // 
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(188, 21);
+            this.panel6.Controls.Add(this.chart);
+            this.panel6.Controls.Add(this.artText);
+            this.panel6.Controls.Add(this.artLabel);
+            this.panel6.Controls.Add(this.attText);
+            this.panel6.Controls.Add(this.attLabel);
+            this.panel6.Controls.Add(this.awtText);
+            this.panel6.Controls.Add(this.awtLabel);
+            this.panel6.Controls.Add(this.label5);
+            this.panel6.Location = new System.Drawing.Point(188, 25);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(483, 220);
+            this.panel6.Size = new System.Drawing.Size(483, 204);
             this.panel6.TabIndex = 6;
+            this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
+            // 
+            // artText
+            // 
+            this.artText.AutoSize = true;
+            this.artText.Font = new System.Drawing.Font("Sony Sketch EF", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.artText.Location = new System.Drawing.Point(204, 38);
+            this.artText.Name = "artText";
+            this.artText.Size = new System.Drawing.Size(80, 27);
+            this.artText.TabIndex = 7;
+            this.artText.Text = "label6";
+            this.artText.Click += new System.EventHandler(this.artText_Click);
+            // 
+            // artLabel
+            // 
+            this.artLabel.AutoSize = true;
+            this.artLabel.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.artLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.artLabel.Location = new System.Drawing.Point(206, 20);
+            this.artLabel.Name = "artLabel";
+            this.artLabel.Size = new System.Drawing.Size(225, 18);
+            this.artLabel.TabIndex = 6;
+            this.artLabel.Text = "평균 실행 시간(Average Running Time)";
+            this.artLabel.Click += new System.EventHandler(this.artLabel_Click);
+            // 
+            // attText
+            // 
+            this.attText.AutoSize = true;
+            this.attText.Font = new System.Drawing.Font("Sony Sketch EF", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attText.Location = new System.Drawing.Point(204, 149);
+            this.attText.Name = "attText";
+            this.attText.Size = new System.Drawing.Size(80, 27);
+            this.attText.TabIndex = 5;
+            this.attText.Text = "label8";
+            // 
+            // attLabel
+            // 
+            this.attLabel.AutoSize = true;
+            this.attLabel.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.attLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.attLabel.Location = new System.Drawing.Point(206, 131);
+            this.attLabel.Name = "attLabel";
+            this.attLabel.Size = new System.Drawing.Size(250, 18);
+            this.attLabel.TabIndex = 4;
+            this.attLabel.Text = "평균 반환 시간(Average Turn-around Time)";
+            // 
+            // awtText
+            // 
+            this.awtText.AutoSize = true;
+            this.awtText.Font = new System.Drawing.Font("Sony Sketch EF", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.awtText.Location = new System.Drawing.Point(204, 93);
+            this.awtText.Name = "awtText";
+            this.awtText.Size = new System.Drawing.Size(80, 27);
+            this.awtText.TabIndex = 3;
+            this.awtText.Text = "label6";
+            // 
+            // awtLabel
+            // 
+            this.awtLabel.AutoSize = true;
+            this.awtLabel.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.awtLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.awtLabel.Location = new System.Drawing.Point(206, 75);
+            this.awtLabel.Name = "awtLabel";
+            this.awtLabel.Size = new System.Drawing.Size(220, 18);
+            this.awtLabel.TabIndex = 2;
+            this.awtLabel.Text = "평균 대기 시간(Average Waiting Time)";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Noto Sans CJK KR Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.label5.Location = new System.Drawing.Point(11, 7);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(93, 24);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "CPU 사용률";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
-            this.label1.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.Location = new System.Drawing.Point(16, 186);
+            this.label1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.label1.Location = new System.Drawing.Point(3, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 12);
+            this.label1.Size = new System.Drawing.Size(33, 18);
             this.label1.TabIndex = 6;
             this.label1.Text = "LOG";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.White;
-            this.label2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(16, 85);
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.label2.Location = new System.Drawing.Point(13, 74);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 12);
+            this.label2.Size = new System.Drawing.Size(115, 24);
             this.label2.TabIndex = 7;
             this.label2.Text = "Ghantt- Chart";
+            // 
+            // chart
+            // 
+            this.chart.Controls.Add(this.usageText);
+            this.chart.Location = new System.Drawing.Point(15, 34);
+            this.chart.Name = "chart";
+            this.chart.Size = new System.Drawing.Size(160, 160);
+            this.chart.TabIndex = 1;
+            // 
+            // usageText
+            // 
+            this.usageText.AutoSize = true;
+            this.usageText.Font = new System.Drawing.Font("Sony Sketch EF", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usageText.Location = new System.Drawing.Point(56, 68);
+            this.usageText.Name = "usageText";
+            this.usageText.Size = new System.Drawing.Size(53, 16);
+            this.usageText.TabIndex = 0;
+            this.usageText.Text = "label3";
+            // 
+            // button5
+            // 
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Gulim", 27F);
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(16, 25);
+            this.button5.Margin = new System.Windows.Forms.Padding(0);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(47, 33);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "≡";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // overPanel
+            // 
+            this.overPanel.Controls.Add(this.ProCessLabelText);
+            this.overPanel.Controls.Add(this.dataGridView1);
+            this.overPanel.Location = new System.Drawing.Point(2, 74);
+            this.overPanel.Name = "overPanel";
+            this.overPanel.Size = new System.Drawing.Size(293, 437);
+            this.overPanel.TabIndex = 8;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.process_Name,
+            this.arrival_time,
+            this.burst_time,
+            this.priority});
+            this.dataGridView1.Location = new System.Drawing.Point(4, 39);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(284, 370);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // process_Name
+            // 
+            this.process_Name.HeaderText = "프로세스 이름";
+            this.process_Name.Name = "process_Name";
+            this.process_Name.ReadOnly = true;
+            this.process_Name.Width = 75;
+            // 
+            // arrival_time
+            // 
+            this.arrival_time.HeaderText = "도착시간";
+            this.arrival_time.Name = "arrival_time";
+            this.arrival_time.ReadOnly = true;
+            this.arrival_time.Width = 55;
+            // 
+            // burst_time
+            // 
+            this.burst_time.HeaderText = "실행시간";
+            this.burst_time.Name = "burst_time";
+            this.burst_time.ReadOnly = true;
+            this.burst_time.Width = 55;
+            // 
+            // priority
+            // 
+            this.priority.HeaderText = "우선순위";
+            this.priority.Name = "priority";
+            this.priority.ReadOnly = true;
+            this.priority.Width = 55;
+            // 
+            // ProCessLabelText
+            // 
+            this.ProCessLabelText.AutoSize = true;
+            this.ProCessLabelText.Font = new System.Drawing.Font("Noto Sans CJK KR Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProCessLabelText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
+            this.ProCessLabelText.Location = new System.Drawing.Point(9, 11);
+            this.ProCessLabelText.Name = "ProCessLabelText";
+            this.ProCessLabelText.Size = new System.Drawing.Size(104, 24);
+            this.ProCessLabelText.TabIndex = 1;
+            this.ProCessLabelText.Text = "프로세스 목록";
+            this.ProCessLabelText.Click += new System.EventHandler(this.label3_Click);
             // 
             // box
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(700, 507);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.ClientSize = new System.Drawing.Size(695, 507);
+            this.Controls.Add(this.overPanel);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -244,6 +449,13 @@
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.chart.ResumeLayout(false);
+            this.chart.PerformLayout();
+            this.overPanel.ResumeLayout(false);
+            this.overPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,7 +476,23 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel Ghannt_base;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label attLabel;
+        private System.Windows.Forms.Label awtText;
+        private System.Windows.Forms.Label awtLabel;
+        private System.Windows.Forms.Label attText;
+        private System.Windows.Forms.Label usageText;
+        private System.Windows.Forms.Label artText;
+        private System.Windows.Forms.Label artLabel;
+        private DoubleBufferedPanel chart;
+        private System.Windows.Forms.Button button5;
+        private DoubleBufferedPanel overPanel;
+        private System.Windows.Forms.Label ProCessLabelText;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn process_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn arrival_time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn burst_time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priority;
     }
 }

@@ -23,7 +23,9 @@ namespace Scheduling_Jh
                 Queue.Enqueue(p);
             }
         }
+        public void srt_run() { 
 
+        }
         public void srt_alg()
         {
             int start = 0, remained = 0, end = 0;
