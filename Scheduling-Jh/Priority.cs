@@ -97,10 +97,7 @@ namespace Scheduling_Jh
                     }
                 }
             }
-            else
-            {
-
-            }//비선점
+            else   //비선점
             {
                 temp=new List<Process>[10];
                 for (int i = 0; i < 10; i++) {
