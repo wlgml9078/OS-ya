@@ -163,7 +163,7 @@ namespace Scheduling_Jh
                         {
                             chlid = new box(processListval, this);
                             chlid.SetBounds(Location.X + 665, Location.Y, 700, 507);
-                            chlid.Show();  
+                            chlid.Show();
                             Priority p1 = new Priority(getData());
                             p1.pri_run(false);
                             chlid.setStamp(p1.getTimestamp());
@@ -184,13 +184,19 @@ namespace Scheduling_Jh
                         }
                         if (avail)
                         {
-                            Console.WriteLine("preemptive");
                             chlid = new box(processListval, this);
                             chlid.SetBounds(Location.X + 665, Location.Y, 700, 507);
                             chlid.Show();
-                            Priority p1 = new Priority(getData());
+                            List<Process> list = getData();
+                            
+                            Priority p1 = new Priority(list);
                             p1.pri_run(true);
+                            for (int i = 0; i < list.Count; i++)
+                            {
+                                Console.WriteLine("[" + list[i].getName() + "]" + list[i].getArrivalTime() + " " + list[i].getBurstTime());
+                            }
                             chlid.setStamp(p1.getTimestamp());
+                            Console.WriteLine(System.Convert.ToDouble(p1.getAWT()) + " " + System.Convert.ToDouble(p1.getATT()));
                         }
                         else
                         {
@@ -304,7 +310,6 @@ namespace Scheduling_Jh
             }
             else
             {
-                
                 timeSlice.Hide();
                 timeSliceText.Hide();
             }

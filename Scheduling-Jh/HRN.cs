@@ -34,6 +34,12 @@ namespace Scheduling_Jh
                     Arrived.Add(Ready.Dequeue());
                 }
 
+                if (Arrived.Count <= 0)
+                {
+                    currentTime++;
+                    break;
+                }
+
                 for (int i = 0; i < Arrived.Count; i++)
                 {
                     if (Arrived[i].getArrivalTime() <= currentTime)
@@ -65,7 +71,6 @@ namespace Scheduling_Jh
                         break;
                     }
                 }
-                if (Ready.Count > 0 && Arrived.Count == 0) currentTime++;
             } while (Ready.Count > 0 || Arrived.Count > 0);
         }
     }

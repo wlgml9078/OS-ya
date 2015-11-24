@@ -20,10 +20,8 @@ namespace Scheduling_Jh
             { 
                 case 0:
                     return x.getArrivalTime().CompareTo(y.getArrivalTime());
-                case 1:
-                    return x.getPriority().CompareTo(y.getPriority());
                 default:
-                    return x.getBurstTime().CompareTo(y.getBurstTime());
+                    return x.getBurstTime().CompareTo(y.getBurstTime());    //SRT, SJF
             }
         }
     }
