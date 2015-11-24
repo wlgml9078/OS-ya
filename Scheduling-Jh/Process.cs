@@ -38,5 +38,16 @@ namespace Scheduling_Jh
         public void setBurstTime(int time) { burst_time = time; }
         public void setEndTime(int time) { end_time = time; }
     }
+
+    public class Process_HRN :Process
+    {
+        private double Priority;
+
+        public Process_HRN(String name, int arrival_time, int burst_time)
+            :base(name, arrival_time, burst_time)
+        { }
+
+        public void setPriority(double p) { Priority = p; }
+        public double getPriority() { return Priority; }
+    }
 }
- 

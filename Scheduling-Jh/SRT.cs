@@ -7,108 +7,148 @@ namespace Scheduling_Jh
 {
     class SRT :Scheduler    //선점방식 사용
     {
-        Queue<Process> Queue;   //레디큐
+        int max_num;
+        List<Process>[] temp;
         List<Process> Ready;
-
         public SRT(List<Process> list)
             :base(list)
         {
-            Queue = new Queue<Process>();
-            Ready = new List<Process>();
             currentTime = 0;
-
-            for (int i = 0; i < inputData.Count; i++)   //큐에 리스트 복사
+            max_num = 0;
+            Ready = new List<Process>();
+            for(int i=0; i<list.Count; i++)
             {
-                Process p = new Process(list[i].getName(), list[i].getArrivalTime(), list[i].getBurstTime());
-                Queue.Enqueue(p);
+                if (max_num < list[i].getBurstTime())
+                    max_num = list[i].getBurstTime();
             }
         }
-        public void srt_run() { 
+        private int isNowInStamp(Process p, List<Stamp> list)//currentTime이 스탬프에 찍혀있는 범위 내의 값인지 확인
+        {
+            for (int i = 0; i < list.Count; i++) 
+            {
+                if (p.getArrivalTime() < list[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() > timestamp[i].getStartTime())    //스탬프의 앞쪽이 겹칠 때
+                {
+                    return 0;
+                }
+                if (p.getArrivalTime() >= list[i].getStartTime() && p.getArrivalTime() < list[i].getEndTime())   //스탬프랑 겹칠때 (FCFS 쓸 때)
+                {
+                    return 1;
+                }
+            }
+            return 2;   //아무 경우도 X
+        } 
 
+        private void Sorting()
+        {
+            temp = new List<Process>[max_num + 1];
+            for (int i = 0; i < max_num + 1; i++)
+            {
+                temp[i] = new List<Process>();
+            }
+            //들어온순-우선순위으로 정렬(기수정렬을 응용)
+            inputData.Sort(bur_compare);//우선순위
+            for (int i = 0; i < inputData.Count; i++)
+            {
+                temp[inputData[i].getBurstTime()].Add(inputData[i]);//우선순위의 범위가 0-9 이므로 이렇게 했습니다
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                temp[i].Sort(pro_compare);
+            }
+
+            inputData = new List<Process>();
+            for (int i = 0; i < max_num + 1; i++)
+            {
+                for (int j = 0; j < temp[i].Count; j++)
+                {
+                    inputData.Add(temp[i][j]);//저게 큐가 아니니까 이렇게 처리해야 순서대로 들어갑니다
+                    Ready.Add(temp[i][j]);
+                }
+            }
         }
+
+        private void StampProcess(Process p)
+        {
+            int type = isNowInStamp(p,timestamp);
+            Stamp s;
+            int startpoint=0, endpoint=0;
+            Process tmp, next;
+            switch(type)
+            {
+                case 0:
+                    Console.WriteLine("<type 0>");
+                    for(int i=0; i<timestamp.Count; i++)
+                    {
+                        if(p.getArrivalTime() < timestamp[i].getStartTime() && p.getArrivalTime()+p.getBurstTime()>timestamp[i].getStartTime())
+                        {
+                            startpoint = timestamp[i].getStartTime();
+                            endpoint = timestamp[i].getEndTime();
+                            break;
+                        }
+                    }
+                    int n_burst = p.getBurstTime() - (startpoint - p.getArrivalTime());
+
+                    tmp = new Process(p.getName(), endpoint, n_burst);
+                    Ready.Add(tmp);
+                    Sorting();
+
+                    s = new Stamp(p.getName(), p.getArrivalTime(), startpoint);
+                    addStamp(s);
+                    Console.WriteLine("<type 0 end>");
+                    break;
+                case 1:
+                    Console.WriteLine("<type 1>");
+                    for (int i = 0; i < timestamp.Count; i++)
+                    {
+                        if (p.getArrivalTime() >= timestamp[i].getStartTime() && p.getArrivalTime() < timestamp[i].getEndTime())
+                        {
+                            startpoint = timestamp[i].getStartTime();
+                            endpoint = timestamp[i].getEndTime();
+                            break;
+                        }
+                    }
+                    tmp = new Process(p.getName(), endpoint, p.getBurstTime());
+                    Ready.Add(tmp);
+                    Sorting();
+                    Console.WriteLine("<type 1 end>");
+                    break;
+                case 2:
+                    Console.WriteLine("<type 2>");
+                    int end = p.getArrivalTime() + p.getBurstTime();
+                    s = new Stamp(p.getName(), p.getArrivalTime(), end);
+                    addStamp(s);
+                    Console.WriteLine(s.getName()+":"+s.getStartTime() + "~" + s.getEndTime());
+                    for (int i = 0; i < inputData.Count; i++ )
+                    {
+                        if (inputData[i].getName().Equals(s.getName()))
+                        {
+                            inputData[i].setEndTime(end);
+                        }
+                    }
+                    Console.WriteLine("<type 2 end>");
+                    break;
+            }
+        }
+
         public void srt_alg()
         {
-            int start = 0, remained = 0, end = 0;
-            Process p = null;
-
-            while (Queue.Count > 0 || Ready.Count > 0)
+            Sorting();
+            do
             {
-                Console.WriteLine("Count:" + Queue.Count);
-                
-                while (Queue.Count > 0 && Queue.Peek().getArrivalTime() >= currentTime)
-                {
-                    Ready.Add(Queue.Dequeue());
-                    Ready.Sort(new Comparer(2));
-                }
-
-                if (p == null && Ready.Count > 0)
-                {
-                    Console.WriteLine("들어감 "+currentTime);
-                    p = Ready.First();
-                    start = currentTime;
-                }
-
-                if (p != null)
-                {
-                    if (Ready.Exists(x => (x.getBurstTime() >= p.getBurstTime())))    //레디큐에서 우선순위가 더 높은 프로세스 발견
-                    //if(Ready.Exists(x=>(x.getArrivaltime()<=p.getBurstTime()+currentTime) 이 경우 추가하기☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
-                    {
-                        Console.WriteLine("들어감1 " + currentTime);
-                        Process next = Ready.Find(x => (x.getBurstTime() >= p.getBurstTime()));
-
-                        remained = start + next.getBurstTime() - next.getArrivalTime();
-                        currentTime = next.getArrivalTime();
-                        end = currentTime;
-                        Stamp s = new Stamp(p.getName(), start, end);
-                        addStamp(s);
-                        if (end - start != 0)
-                        {
-                            Process newP = new Process(p.getName(), p.getArrivalTime(), p.getBurstTime());
-                            Ready.Add(newP);
-                            Console.WriteLine("들어감2 " + currentTime);
-                        }
-                        else
-                        {
-                            Console.WriteLine("들어감3 " + currentTime);
-                            for (int i = 0; i < inputData.Count; i++)
-                            {
-                                if (inputData[i].getName().Equals(p.getName()))
-                                {
-                                    Console.WriteLine(i+":들어감4");
-                                    inputData[i].setEndTime(end);
-                                }
-                                Console.WriteLine("들어감5");
-                            }
-                        }
-                        Ready.Remove(p);
-                        p = next;
-                    }
-                    else
-                    {
-                        Console.WriteLine("들어감6");
-                        if (p!=null && start + p.getBurstTime() - currentTime <= p.getBurstTime())
-                        {
-                            end = currentTime;
-                            for (int i = 0; i < inputData.Count; i++)
-                            {
-                                if (inputData[i].getName().Equals(p.getName()))
-                                {
-                                    inputData[i].setEndTime(end);
-                                    Console.WriteLine("들어감7");
-                                }
-                                Stamp s = new Stamp(p.getName(), start, end);
-                                addStamp(s);
-
-                                Ready.Remove(p);
-                                p = null;
-                                Console.WriteLine("들어감8");
-                            }
-                        }
-                    }
-                }
-                //Console.WriteLine("나옴");
-                currentTime++;
-            }
+                Process p = Ready.First();
+                StampProcess(p);
+            } while (Ready.Count > 0);
+        }
+        public int bur_compare(Process a, Process b)    //정렬 BurstTime 기준으로 할라고 만듬
+        {
+            if (a.getBurstTime() > b.getBurstTime())
+                return -1;
+            else if (a.getArrivalTime() == b.getArrivalTime())
+                return 0;
+            else
+                return 1;
         }
     }
 }
+
