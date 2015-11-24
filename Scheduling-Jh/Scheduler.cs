@@ -49,6 +49,9 @@ namespace Scheduling_Jh
             timestamp = new List<Stamp>();
             inputData = list;
             inputData.Sort(new Comparer(0));
+            for (int i = 0; i < inputData.Count; i++)
+                Console.WriteLine(inputData
+                    [i].getName()); 
             ATT = 0;
             AWT = 0;
         }
