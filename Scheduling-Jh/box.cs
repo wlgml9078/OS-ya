@@ -180,12 +180,12 @@ namespace Scheduling_Jh
                                 fg.DrawString(stmp_list[currentPosition].getEndTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X + (int)width, startPoint.Y + 58));
                                 log.Add(stmp_list[currentPosition].getEndTime());
                             }
-                            for (int i = 0; i < stmp_list.Count; i++ )
-                            {
-                                Console.WriteLine("!!!!" + stmp_list[i].getName());
-                            }
-                            Console.WriteLine("\n");
-                                Thread.Sleep(500);
+                            //for (int i = 0; i < stmp_list.Count; i++ )
+                            //{
+                            //    Console.WriteLine("!!!!" + stmp_list[i].getName());
+                            //}
+                            //Console.WriteLine("\n");
+                            Thread.Sleep(500);
                         }
                         targetPosition = stmp_list.Count;
                     }

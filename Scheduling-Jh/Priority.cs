@@ -5,14 +5,6 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
-    class Pri_Comparer :IComparer<Process>
-    {
-        public int Compare(Process x, Process y)
-        {
-            return x.getPriority().CompareTo(y.getPriority());
-        }
-    }
-
     class Priority :Scheduler
     {
         List<Process>[] temp;
@@ -21,30 +13,16 @@ namespace Scheduling_Jh
             :base(list)
         {
             currentTime = 0;
-            Ready = new List<Process>();            
-            /*
-            for(int i=0; i<list.Count; i++)
-            {
-                Ready.Add(new Process(list[i].getName(),list[i].getArrivalTime(),list[i].getBurstTime(),list[i].getPriority()));    //큐 삽입
-            }
-            Ready.Sort(new Pri_Comparer());
-            */
+            Ready = new List<Process>();
         }
         private int isNowInStamp(Process p, List<Stamp> list)//currentTime이 스탬프에 찍혀있는 범위 내의 값인지 확인
         {
             for (int i = 0; i < list.Count; i++) 
             {
-                Console.WriteLine("**list : " + list[i].getName() + "," + list[i].getStartTime() + list[i].getEndTime());
                 if (p.getArrivalTime() < list[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() > timestamp[i].getStartTime())    //스탬프의 앞쪽이 겹칠 때
-                {
-                    Console.WriteLine("**list : " + list[i].getName() + "," + list[i].getStartTime() + list[i].getEndTime());
                     return 0;
-                }
                 if (p.getArrivalTime() >= list[i].getStartTime() && p.getArrivalTime() < list[i].getEndTime())   //스탬프랑 겹칠때 (FCFS 쓸 때)
-                {
-                    Console.WriteLine("**list : " + list[i].getName() + "," + list[i].getStartTime() + list[i].getEndTime());
                     return 1;
-                }
             }
             return 2;   //아무 경우도 X
         } 
@@ -82,12 +60,9 @@ namespace Scheduling_Jh
                 do
                 {
                     Process p = Ready.First();
-                    Console.WriteLine("**p : " + p.getName() + "," + p.getArrivalTime() + p.getBurstTime());
                     StampProcess(p);
-                    Console.WriteLine("end Stamp Process");
                     Ready.RemoveAt(0);
                 } while (Ready.Count > 0);
-                Console.WriteLine("끝남!");
             }
             else   //비선점
             {

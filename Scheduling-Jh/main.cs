@@ -191,10 +191,10 @@ namespace Scheduling_Jh
                             
                             Priority p1 = new Priority(list);
                             p1.pri_run(true);
-                            for (int i = 0; i < list.Count; i++)
-                            {
-                                Console.WriteLine("[" + list[i].getName() + "]" + list[i].getArrivalTime() + " " + list[i].getBurstTime());
-                            }
+                            //for (int i = 0; i < list.Count; i++)
+                            //{
+                             //   Console.WriteLine("[" + list[i].getName() + "]" + list[i].getArrivalTime() + " " + list[i].getBurstTime());
+                            //}
                             chlid.setStamp(p1.getTimestamp());
                             Console.WriteLine(System.Convert.ToDouble(p1.getAWT()) + " " + System.Convert.ToDouble(p1.getATT()));
                         }

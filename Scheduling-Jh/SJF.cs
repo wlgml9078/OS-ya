@@ -56,7 +56,7 @@ namespace Scheduling_Jh
                     }
                     else        //현재 시간에 실행할 수 있는 프로세스가 없는 경우
                     {
-                        if (i >= Ready.Count) currentTime++;
+                        currentTime++;
                     }
                 }
             }
