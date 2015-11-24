@@ -32,7 +32,6 @@ namespace Scheduling_Jh
                 while (Ready.Count > 0 && Ready.Peek().getArrivalTime() <= currentTime)
                 {
                     Arrived.Add(Ready.Dequeue());
-                    Console.WriteLine("check!:"+Ready.Count + "," + Arrived.Count);
                 }
 
                 for (int i = 0; i < Arrived.Count; i++)
@@ -51,7 +50,13 @@ namespace Scheduling_Jh
                         currentTime += process.getBurstTime();
                         end = currentTime;
 
-                        Console.WriteLine(currentTime);
+                        for(int j=0; j<inputData.Count; j++)
+                        {
+                            if(inputData[j].getName().Equals(process.getName()))
+                            {
+                                inputData[j].setEndTime(end);
+                            }
+                        }
 
                         Stamp s = new Stamp(process.getName(), start, end);
                         addStamp(s);
@@ -60,7 +65,7 @@ namespace Scheduling_Jh
                         break;
                     }
                 }
-                Console.WriteLine(Ready.Count+","+Arrived.Count);
+                if (Ready.Count > 0 && Arrived.Count == 0) currentTime++;
             } while (Ready.Count > 0 || Arrived.Count > 0);
         }
     }

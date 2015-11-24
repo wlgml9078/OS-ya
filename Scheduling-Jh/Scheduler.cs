@@ -31,7 +31,7 @@ namespace Scheduling_Jh
     class Comparer_HRN : IComparer<Process_HRN>
     {
         public int Compare(Process_HRN x, Process_HRN y)
-        { 
+        {
             return x.getPriority().CompareTo(y.getPriority()); 
         }
     }
@@ -96,6 +96,7 @@ namespace Scheduling_Jh
             for(int i=0; i<inputData.Count; i++)
             {
                 data = inputData[i].getEndTime() - inputData[i].getArrivalTime();
+                Console.WriteLine(inputData[i].getName()+":"+inputData[i].getEndTime()+","+inputData[i].getArrivalTime());
                 sum += data; //각 반환시간 더함
             }
 
@@ -112,6 +113,7 @@ namespace Scheduling_Jh
             for (int i = 0; i < inputData.Count; i++)
             {
                 data = inputData[i].getEndTime() - inputData[i].getArrivalTime() - inputData[i].getBurstTime();
+                Console.WriteLine("data:" + data);
                 sum += data;
             }
 

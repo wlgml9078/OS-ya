@@ -260,7 +260,7 @@ namespace Scheduling_Jh
                             {
                                 timestamp[i].print();
                             }
-                            Console.WriteLine(System.Convert.ToDouble(hrn.getAWT()) + " " + System.Convert.ToDouble(hrn.getATT()));
+                            Console.WriteLine("awt:"+System.Convert.ToDouble(hrn.getAWT()) + ",att:" + System.Convert.ToDouble(hrn.getATT()));
                         break;
                 }
             }
