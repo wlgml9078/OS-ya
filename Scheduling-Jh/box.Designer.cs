@@ -34,12 +34,15 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.chart = new Scheduling_Jh.DoubleBufferedPanel();
+            this.usageText = new System.Windows.Forms.Label();
             this.artText = new System.Windows.Forms.Label();
             this.artLabel = new System.Windows.Forms.Label();
             this.attText = new System.Windows.Forms.Label();
@@ -49,24 +52,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.chart = new Scheduling_Jh.DoubleBufferedPanel();
-            this.usageText = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.overPanel = new Scheduling_Jh.DoubleBufferedPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.process_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.arrival_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.burst_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProCessLabelText = new System.Windows.Forms.Label();
             this.ghattbox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.chart.SuspendLayout();
-            this.overPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // ghattbox
@@ -146,6 +137,21 @@
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             this.panel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseUp);
             // 
+            // button5
+            // 
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Gulim", 27F);
+            this.button5.ForeColor = System.Drawing.Color.White;
+            this.button5.Location = new System.Drawing.Point(16, 25);
+            this.button5.Margin = new System.Windows.Forms.Padding(0);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(47, 33);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "≡";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -221,6 +227,24 @@
             this.panel6.Size = new System.Drawing.Size(483, 204);
             this.panel6.TabIndex = 6;
             this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
+            // 
+            // chart
+            // 
+            this.chart.Controls.Add(this.usageText);
+            this.chart.Location = new System.Drawing.Point(15, 34);
+            this.chart.Name = "chart";
+            this.chart.Size = new System.Drawing.Size(160, 160);
+            this.chart.TabIndex = 1;
+            // 
+            // usageText
+            // 
+            this.usageText.AutoSize = true;
+            this.usageText.Font = new System.Drawing.Font("Sony Sketch EF", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usageText.Location = new System.Drawing.Point(56, 68);
+            this.usageText.Name = "usageText";
+            this.usageText.Size = new System.Drawing.Size(53, 16);
+            this.usageText.TabIndex = 0;
+            this.usageText.Text = "label3";
             // 
             // artText
             // 
@@ -324,111 +348,12 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Ghantt- Chart";
             // 
-            // chart
-            // 
-            this.chart.Controls.Add(this.usageText);
-            this.chart.Location = new System.Drawing.Point(15, 34);
-            this.chart.Name = "chart";
-            this.chart.Size = new System.Drawing.Size(160, 160);
-            this.chart.TabIndex = 1;
-            // 
-            // usageText
-            // 
-            this.usageText.AutoSize = true;
-            this.usageText.Font = new System.Drawing.Font("Sony Sketch EF", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usageText.Location = new System.Drawing.Point(56, 68);
-            this.usageText.Name = "usageText";
-            this.usageText.Size = new System.Drawing.Size(53, 16);
-            this.usageText.TabIndex = 0;
-            this.usageText.Text = "label3";
-            // 
-            // button5
-            // 
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Gulim", 27F);
-            this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(16, 25);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(47, 33);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "≡";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // overPanel
-            // 
-            this.overPanel.Controls.Add(this.ProCessLabelText);
-            this.overPanel.Controls.Add(this.dataGridView1);
-            this.overPanel.Location = new System.Drawing.Point(2, 74);
-            this.overPanel.Name = "overPanel";
-            this.overPanel.Size = new System.Drawing.Size(293, 437);
-            this.overPanel.TabIndex = 8;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.process_Name,
-            this.arrival_time,
-            this.burst_time,
-            this.priority});
-            this.dataGridView1.Location = new System.Drawing.Point(4, 39);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(284, 370);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // process_Name
-            // 
-            this.process_Name.HeaderText = "프로세스 이름";
-            this.process_Name.Name = "process_Name";
-            this.process_Name.ReadOnly = true;
-            this.process_Name.Width = 75;
-            // 
-            // arrival_time
-            // 
-            this.arrival_time.HeaderText = "도착시간";
-            this.arrival_time.Name = "arrival_time";
-            this.arrival_time.ReadOnly = true;
-            this.arrival_time.Width = 55;
-            // 
-            // burst_time
-            // 
-            this.burst_time.HeaderText = "실행시간";
-            this.burst_time.Name = "burst_time";
-            this.burst_time.ReadOnly = true;
-            this.burst_time.Width = 55;
-            // 
-            // priority
-            // 
-            this.priority.HeaderText = "우선순위";
-            this.priority.Name = "priority";
-            this.priority.ReadOnly = true;
-            this.priority.Width = 55;
-            // 
-            // ProCessLabelText
-            // 
-            this.ProCessLabelText.AutoSize = true;
-            this.ProCessLabelText.Font = new System.Drawing.Font("Noto Sans CJK KR Bold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ProCessLabelText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(150)))), ((int)(((byte)(136)))));
-            this.ProCessLabelText.Location = new System.Drawing.Point(9, 11);
-            this.ProCessLabelText.Name = "ProCessLabelText";
-            this.ProCessLabelText.Size = new System.Drawing.Size(104, 24);
-            this.ProCessLabelText.TabIndex = 1;
-            this.ProCessLabelText.Text = "프로세스 목록";
-            this.ProCessLabelText.Click += new System.EventHandler(this.label3_Click);
-            // 
             // box
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.ClientSize = new System.Drawing.Size(695, 507);
-            this.Controls.Add(this.overPanel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.button3);
@@ -453,9 +378,6 @@
             this.panel6.PerformLayout();
             this.chart.ResumeLayout(false);
             this.chart.PerformLayout();
-            this.overPanel.ResumeLayout(false);
-            this.overPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -487,12 +409,5 @@
         private System.Windows.Forms.Label artLabel;
         private DoubleBufferedPanel chart;
         private System.Windows.Forms.Button button5;
-        private DoubleBufferedPanel overPanel;
-        private System.Windows.Forms.Label ProCessLabelText;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn process_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn arrival_time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn burst_time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn priority;
     }
 }

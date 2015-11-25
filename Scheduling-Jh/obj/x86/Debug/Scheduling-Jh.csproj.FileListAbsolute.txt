@@ -22,4 +22,9 @@ C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling_Jh
 C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.csproj.GenerateResource.Cache
 C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.exe
 C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.pdb
+C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\bin\Debug\Scheduling-Jh.exe.manifest
+C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\bin\Debug\Scheduling-Jh.application
+C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.TrustInfo.xml
+C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.exe.manifest
+C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.application
 C:\Users\민상\Documents\GitHub\OS-ya\Scheduling-Jh\obj\x86\Debug\Scheduling-Jh.csprojResolveAssemblyReference.cache

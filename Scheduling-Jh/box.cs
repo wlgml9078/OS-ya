@@ -39,7 +39,7 @@ namespace Scheduling_Jh
             is_down = false;
             usage = 0;
             isopen = false;
-            overPanel.Location=new Point(overPanel.Location.X-overPanel.Size.Width,overPanel.Location.Y);
+            
             this.DoubleBuffered = true;
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -321,14 +321,13 @@ namespace Scheduling_Jh
             gc.DrawArc(background, range, 0, 360);
 
             float limit = (float)(usage * 360);
-            Console.WriteLine("limit:" + limit);
+            
             float bottom=0;
             int time=Convert.ToInt32(limit/360*20);//시간
             for (bottom=0; bottom < limit+1; bottom += limit / 50) 
             {
                 usageText.Text = Math.Round(bottom /360*100, 2) + "%";
-                usageText.Refresh();
-                Console.WriteLine("bottom:" + bottom+" time:"+time);
+                usageText.Refresh();                
                 gc.DrawArc(foreground, range, 0, bottom);
                 
                 Thread.Sleep(time);
@@ -456,14 +455,12 @@ namespace Scheduling_Jh
         {
             if (!isopen)
             {
-                isopen = true;
-                overPanel.Location = new Point(overPanel.Location.X + overPanel.Size.Width, overPanel.Location.Y);
+                isopen = true;                
             }
             else
             {
                 Ghannt_base.SuspendLayout();
                 isopen = false;
-                overPanel.Location = new Point(overPanel.Location.X - overPanel.Size.Width, overPanel.Location.Y);                
                 Ghannt_base.Refresh();
                 Ghannt_base.ResumeLayout();
                 

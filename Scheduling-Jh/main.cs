@@ -200,7 +200,9 @@ namespace Scheduling_Jh
                             chlid.Show();
                             Priority p1 = new Priority(getData());
                             p1.pri_run(true);
-                            chlid.setStamp(p1.getTimestamp());
+                            timestamp = p1.getTimestamp();
+                            timestamp.Sort(stmp_compare);
+                            chlid.setStamp(timestamp);
                             chlid.setAwtATT(System.Convert.ToDouble(p1.getAWT()), System.Convert.ToDouble(p1.getATT()));
                         }
                         else
@@ -213,7 +215,7 @@ namespace Scheduling_Jh
                         chlid.SetBounds(Location.X+665,Location.Y,700,507);                
                         chlid.Show();
                         SJF sjf = new SJF(processListval);
-                        sjf.sjf_alg();
+                        sjf.sjf_run();
                         timestamp = sjf.getTimestamp();
                         chlid.setStamp(sjf.getTimestamp());
                         chlid.setAwtATT(System.Convert.ToDouble(sjf.getAWT()), System.Convert.ToDouble(sjf.getATT()));
@@ -222,15 +224,11 @@ namespace Scheduling_Jh
                         chlid = new box(processListval,this);
                         chlid.SetBounds(Location.X+665,Location.Y,700,507);                
                         chlid.Show();
-                        Console.WriteLine("SRT");
+                        
                         SRT srt = new SRT(getData());
                         timestamp = srt.getTimestamp();
-                        srt.srt_alg();
+                        srt.srt_run();
                         chlid.setStamp(srt.getTimestamp());
-                        for (int i = 0; i < timestamp.Count; i++)
-                        {
-                            timestamp[i].print();
-                        }
                         chlid.setAwtATT(System.Convert.ToDouble(srt.getAWT()), System.Convert.ToDouble(srt.getATT()));
                         
                         break;
@@ -255,7 +253,15 @@ namespace Scheduling_Jh
                             chlid.setAwtATT(System.Convert.ToDouble(rr.getAWT()), System.Convert.ToDouble(rr.getATT()));
                         }
                         break;
-                    default:
+                    case 6:
+                        chlid = new box(processListval, this);
+                        chlid.SetBounds(Location.X + 665, Location.Y, 700, 507);
+                        chlid.Show();
+
+                        HRN hrn = new HRN(getData());
+                        hrn.hrn_alg();
+                        chlid.setStamp(hrn.getTimestamp());
+                        chlid.setAwtATT(System.Convert.ToDouble(hrn.getAWT()), System.Convert.ToDouble(hrn.getATT()));
                         break;
                         
                 }
@@ -342,7 +348,15 @@ namespace Scheduling_Jh
                 priorityUnderline.Hide();
             }
         }
-
+        public int stmp_compare(Stamp a, Stamp b)    //정렬 Priority 기준으로 할라고 만듬
+        {
+            if (a.getStartTime() > b.getStartTime())
+                return 1;
+            else if (a.getStartTime() == b.getStartTime())
+                return 0;
+            else
+                return -1;
+        }
         
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -520,6 +534,8 @@ namespace Scheduling_Jh
         {
             if(chlid!=null)
                 chlid.Close();
+            processListval=null;
+            timestamp=null;
             Application.Exit();
         }
 

@@ -522,22 +522,22 @@
             // DEV2
             // 
             this.DEV2.ForeColor = System.Drawing.Color.Black;
-            this.DEV2.Location = new System.Drawing.Point(579, 450);
+            this.DEV2.Location = new System.Drawing.Point(583, 441);
             this.DEV2.Name = "DEV2";
-            this.DEV2.Size = new System.Drawing.Size(45, 23);
+            this.DEV2.Size = new System.Drawing.Size(59, 23);
             this.DEV2.TabIndex = 15;
-            this.DEV2.Text = "DEV2";
+            this.DEV2.Text = "예제2";
             this.DEV2.UseVisualStyleBackColor = true;
             this.DEV2.Click += new System.EventHandler(this.DEV2_Click);
             // 
             // DEV1
             // 
             this.DEV1.ForeColor = System.Drawing.Color.Black;
-            this.DEV1.Location = new System.Drawing.Point(530, 450);
+            this.DEV1.Location = new System.Drawing.Point(509, 441);
             this.DEV1.Name = "DEV1";
-            this.DEV1.Size = new System.Drawing.Size(43, 23);
+            this.DEV1.Size = new System.Drawing.Size(68, 23);
             this.DEV1.TabIndex = 14;
-            this.DEV1.Text = "DEV1";
+            this.DEV1.Text = "예제1";
             this.DEV1.UseVisualStyleBackColor = true;
             this.DEV1.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -565,11 +565,11 @@
             // Dev3
             // 
             this.Dev3.ForeColor = System.Drawing.Color.Black;
-            this.Dev3.Location = new System.Drawing.Point(530, 479);
+            this.Dev3.Location = new System.Drawing.Point(509, 474);
             this.Dev3.Name = "Dev3";
-            this.Dev3.Size = new System.Drawing.Size(94, 21);
+            this.Dev3.Size = new System.Drawing.Size(133, 21);
             this.Dev3.TabIndex = 0;
-            this.Dev3.Text = "DEV3";
+            this.Dev3.Text = "예제3";
             this.Dev3.UseVisualStyleBackColor = true;
             this.Dev3.Click += new System.EventHandler(this.button5_Click_1);
             // 
