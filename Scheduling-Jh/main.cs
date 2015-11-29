@@ -225,7 +225,7 @@ namespace Scheduling_Jh
                         Console.WriteLine("SRT");
                         SRT srt = new SRT(getData());
                         timestamp = srt.getTimestamp();
-                        srt.srt_alg();
+                        srt.srt_run();
                         chlid.setStamp(srt.getTimestamp());
                         for (int i = 0; i < timestamp.Count; i++)
                         {
