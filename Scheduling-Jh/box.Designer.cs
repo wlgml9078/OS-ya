@@ -41,8 +41,6 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.chart = new Scheduling_Jh.DoubleBufferedPanel();
-            this.usageText = new System.Windows.Forms.Label();
             this.artText = new System.Windows.Forms.Label();
             this.artLabel = new System.Windows.Forms.Label();
             this.attText = new System.Windows.Forms.Label();
@@ -52,6 +50,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.chart = new Scheduling_Jh.DoubleBufferedPanel();
+            this.usageText = new System.Windows.Forms.Label();
             this.ghattbox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -222,29 +222,12 @@
             this.panel6.Controls.Add(this.awtText);
             this.panel6.Controls.Add(this.awtLabel);
             this.panel6.Controls.Add(this.label5);
-            this.panel6.Location = new System.Drawing.Point(188, 25);
+            this.panel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(156)))), ((int)(((byte)(138)))));
+            this.panel6.Location = new System.Drawing.Point(188, 27);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(483, 204);
+            this.panel6.Size = new System.Drawing.Size(483, 202);
             this.panel6.TabIndex = 6;
             this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
-            // 
-            // chart
-            // 
-            this.chart.Controls.Add(this.usageText);
-            this.chart.Location = new System.Drawing.Point(15, 34);
-            this.chart.Name = "chart";
-            this.chart.Size = new System.Drawing.Size(160, 160);
-            this.chart.TabIndex = 1;
-            // 
-            // usageText
-            // 
-            this.usageText.AutoSize = true;
-            this.usageText.Font = new System.Drawing.Font("Sony Sketch EF", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usageText.Location = new System.Drawing.Point(56, 68);
-            this.usageText.Name = "usageText";
-            this.usageText.Size = new System.Drawing.Size(53, 16);
-            this.usageText.TabIndex = 0;
-            this.usageText.Text = "label3";
             // 
             // artText
             // 
@@ -347,6 +330,24 @@
             this.label2.Size = new System.Drawing.Size(115, 24);
             this.label2.TabIndex = 7;
             this.label2.Text = "Ghantt- Chart";
+            // 
+            // chart
+            // 
+            this.chart.Controls.Add(this.usageText);
+            this.chart.Location = new System.Drawing.Point(15, 34);
+            this.chart.Name = "chart";
+            this.chart.Size = new System.Drawing.Size(160, 160);
+            this.chart.TabIndex = 1;
+            // 
+            // usageText
+            // 
+            this.usageText.AutoSize = true;
+            this.usageText.Font = new System.Drawing.Font("Sony Sketch EF", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usageText.Location = new System.Drawing.Point(56, 68);
+            this.usageText.Name = "usageText";
+            this.usageText.Size = new System.Drawing.Size(53, 16);
+            this.usageText.TabIndex = 0;
+            this.usageText.Text = "label3";
             // 
             // box
             // 

@@ -75,6 +75,7 @@
             this.processBurstTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.processPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.processList)).BeginInit();
@@ -567,7 +568,7 @@
             this.Dev3.ForeColor = System.Drawing.Color.Black;
             this.Dev3.Location = new System.Drawing.Point(509, 474);
             this.Dev3.Name = "Dev3";
-            this.Dev3.Size = new System.Drawing.Size(133, 21);
+            this.Dev3.Size = new System.Drawing.Size(68, 21);
             this.Dev3.TabIndex = 0;
             this.Dev3.Text = "예제3";
             this.Dev3.UseVisualStyleBackColor = true;
@@ -632,6 +633,16 @@
             this.listBox1.Size = new System.Drawing.Size(337, 54);
             this.listBox1.TabIndex = 27;
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(583, 472);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(59, 23);
+            this.button5.TabIndex = 28;
+            this.button5.Text = "예제4";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click_2);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -639,6 +650,7 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.ClientSize = new System.Drawing.Size(651, 507);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.Dev3);
             this.Controls.Add(this.priority);
             this.Controls.Add(this.listBox1);
@@ -725,6 +737,7 @@
         private System.Windows.Forms.Panel arrivalUnderline;
         private System.Windows.Forms.Panel timesliceUnderline;
         private System.Windows.Forms.Panel priorityUnderline;
+        private System.Windows.Forms.Button button5;
 
 
     }

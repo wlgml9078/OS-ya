@@ -26,8 +26,8 @@ namespace Scheduling_Jh
         }
         public void sjf_run()
         {
-            temp = new List<Process>[10];
-            for (int i = 0; i < 10; i++)
+            temp = new List<Process>[20];
+            for (int i = 0; i < 20; i++)
             {
                 temp[i] = new List<Process>();
             }
@@ -37,12 +37,12 @@ namespace Scheduling_Jh
             {
                 temp[inputData[i].getArrivalTime()].Add(inputData[i]);//도착시간의 범위가 0-9 이므로 이렇게 했습니다
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 temp[i].Sort(bur_compare);
             }
             inputData = new List<Process>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 for (int j = 0; j < temp[i].Count; j++)
                 {

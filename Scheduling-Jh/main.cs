@@ -226,9 +226,10 @@ namespace Scheduling_Jh
                         chlid.Show();
                         
                         SRT srt = new SRT(getData());
-                        timestamp = srt.getTimestamp();
                         srt.srt_run();
-                        chlid.setStamp(srt.getTimestamp());
+                        timestamp = srt.getTimestamp();
+                        timestamp.Sort(stmp_compare);
+                        chlid.setStamp(timestamp);
                         chlid.setAwtATT(System.Convert.ToDouble(srt.getAWT()), System.Convert.ToDouble(srt.getATT()));
                         
                         break;
@@ -266,6 +267,8 @@ namespace Scheduling_Jh
                         
                 }
                 this.Focus();
+                chlid.sidebar.Location = new Point(chlid.Location.X-284,chlid.Location.Y);
+                chlid.sidebar.Visible = false;
             }
             else
             {
@@ -348,7 +351,7 @@ namespace Scheduling_Jh
                 priorityUnderline.Hide();
             }
         }
-        public int stmp_compare(Stamp a, Stamp b)    //정렬 Priority 기준으로 할라고 만듬
+        public int stmp_compare(Stamp a, Stamp b)    //스탬프의 정렬
         {
             if (a.getStartTime() > b.getStartTime())
                 return 1;
@@ -750,7 +753,26 @@ namespace Scheduling_Jh
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
             processListval.Add(newProcess);
         }
-
+        private void button5_Click_2(object sender, EventArgs e)
+        {
+            Process newProcess;
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 7, 3);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 2, 4, 2);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 5, 2, 4);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 6, 5, 1);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 10, 1, 2);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            timeSlice.Text = "2";
+        }
         
         private void button1_MouseHover(object sender, EventArgs e)
         {
@@ -833,6 +855,8 @@ namespace Scheduling_Jh
         }
 
         private void main_Paint(object sender, PaintEventArgs e){}
+
+        
 
         
         
