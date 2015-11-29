@@ -622,6 +622,7 @@ namespace Scheduling_Jh
             is_down = true;
             position.X = e.X;
             position.Y = e.Y;
+            this.Refresh();
         }
 
         private void panel5_MouseMove(object sender, MouseEventArgs e)
@@ -630,6 +631,7 @@ namespace Scheduling_Jh
             {
                 Point p = PointToScreen(e.Location);
                 Location = new Point(p.X - position.X, p.Y - position.Y);
+                this.Refresh();
             }
         }
 
