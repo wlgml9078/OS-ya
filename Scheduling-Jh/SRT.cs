@@ -7,55 +7,52 @@ namespace Scheduling_Jh
 {
     class SRT :Scheduler    //선점방식 사용
     {
-        int max_num;
-        List<Process>[] temp;
         List<Process> Ready;
         List<Process> Copy;
         public SRT(List<Process> list)
             :base(list)
         {
             currentTime = 0;
-            max_num = 0;
             Ready = new List<Process>();
             Copy = list;
         }
 
-        private int isNowInStamp(Process p, List<Stamp> list)//currentTime이 스탬프에 찍혀있는 범위 내의 값인지 확인
-        {
+        //private int isNowInStamp(Process p, List<Stamp> list)//currentTime이 스탬프에 찍혀있는 범위 내의 값인지 확인
+        //{
             
-            bool is_start_dup=false;
-            bool is_end_dup=false;
-            for (int i = 0; i < list.Count; i++)
-            {
-                Console.WriteLine("searching process:str:" + list[i].getStartTime() + " end" + list[i].getEndTime());
-                if ((list[i].getStartTime() <= p.getArrivalTime()) && (list[i].getEndTime() > p.getArrivalTime()))
-                {                    
-                    is_start_dup = true;
-                    break;
-                }
-                //if(p.getArrivalTime()>=list[i].getStartTime()&&p.getArrivalTime()<list[i].getEndTime())
-                //    is_start_dup=true;
+        //    bool is_start_dup=false;
+        //    bool is_end_dup=false;
+        //    for (int i = 0; i < list.Count; i++)
+        //    {
+        //        Console.WriteLine("searching process:str:" + list[i].getStartTime() + " end" + list[i].getEndTime());
+        //        if ((list[i].getStartTime() <= p.getArrivalTime()) && (list[i].getEndTime() > p.getArrivalTime()))
+        //        {                    
+        //            is_start_dup = true;
+        //            break;
+        //        }
+        //        //if(p.getArrivalTime()>=list[i].getStartTime()&&p.getArrivalTime()<list[i].getEndTime())
+        //        //    is_start_dup=true;
 
-                if (list[i].getStartTime() <= p.getArrivalTime() + p.getBurstTime() && list[i].getEndTime() >= p.getArrivalTime() + p.getBurstTime())
-                {
-                    is_end_dup = true;
-                }
-                //if (p.getArrivalTime() + p.getBurstTime() >= list[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() <= list[i].getEndTime())
-                //    is_end_dup=true;
-                if(p.getArrivalTime()<list[i].getStartTime()&&p.getArrivalTime()+p.getBurstTime()>list[i].getEndTime())
-                    return 0;
-                if (p.getArrivalTime() > list[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() < list[i].getEndTime())
-                    return 1;
-            }
-            if(is_start_dup){
-                return 1;
-            }
-            else if(is_end_dup){
-                return 0;
-            }
-            else{
-                return 2;
-            }
+        //        if (list[i].getStartTime() <= p.getArrivalTime() + p.getBurstTime() && list[i].getEndTime() >= p.getArrivalTime() + p.getBurstTime())
+        //        {
+        //            is_end_dup = true;
+        //        }
+        //        //if (p.getArrivalTime() + p.getBurstTime() >= list[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() <= list[i].getEndTime())
+        //        //    is_end_dup=true;
+        //        if(p.getArrivalTime()<list[i].getStartTime()&&p.getArrivalTime()+p.getBurstTime()>list[i].getEndTime())
+        //            return 0;
+        //        if (p.getArrivalTime() > list[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() < list[i].getEndTime())
+        //            return 1;
+        //    }
+        //    if(is_start_dup){
+        //        return 1;
+        //    }
+        //    else if(is_end_dup){
+        //        return 0;
+        //    }
+        //    else{
+        //        return 2;
+        //    }
             
             //for (int i = 0; i < list.Count; i++) 
             //{
@@ -77,47 +74,186 @@ namespace Scheduling_Jh
             //    }            
             //}
             //return 2;   //아무 경우도 X
-        }
-        public void srt_run() {
-            Copy.Sort(pro_compare);
-            for (int i = 0; i < Copy.Count||Ready.Count==0; i++) {
-                Console.WriteLine("Current"+ Copy[i].getName()+" arr:"+Copy[i].getArrivalTime()+" bur"+Copy[i].getBurstTime());
-                
-                Ready.Add(Copy[i]);
-                Ready.Sort(bur_compare);
-                if (i < Copy.Count - 1)
+        //}        
+        public void srt_run()
+        {
+            int remain = 0, smallest;
+            int time;
+            int[] remain_times = new int[10];
+
+            for (int i = 0; i < Copy.Count; i++)
+            {
+                remain_times[i] = Copy[i].getBurstTime();
+            }
+            remain_times[9] = 999;
+
+            for (time = 0; remain != Copy.Count; time++)
+            {
+                Console.WriteLine("time = " + time);
+                smallest = 9;
+                for (int i = 0; i < Copy.Count; i++)
                 {
-                    int index = 0;
-                    for (int j = 0; j < inputData.Count; j++) 
+                    if ((Copy[i].getArrivalTime() <= time) && (remain_times[i] < remain_times[smallest]) && (remain_times[i] > 0))
                     {
-                        if(Copy[i].getName().CompareTo(inputData[j].getName())==0)
-                        {
-                            index = j;
-                        }
+                        smallest = i;
                     }
-                    if ((currentTime+Copy[i].getBurstTime())<= Copy[i + 1].getArrivalTime())
-                    {//다음 프로세스의 시작시간과 겹치지 않은 경우
-                        Console.WriteLine("case 0");
-                        timestamp.Add(new Stamp(Ready[0].getName(), Copy[i].getArrivalTime(), Copy[i].getArrivalTime() + Copy[i].getBurstTime()));
-                        Console.WriteLine("stamp " +Copy[i].getName()+" " +Copy[i].getArrivalTime() +" "+ (Copy[i].getArrivalTime() + Copy[i].getBurstTime()));
-                        inputData[index].setEndTime(Copy[i].getArrivalTime() + Copy[i].getBurstTime());
-                        currentTime += Ready[0].getBurstTime();
-                    }
-                    else //겹친 경우에는 준비 큐에 삽입 
-                    {
-                        Console.WriteLine("case 1");
-                        timestamp.Add(new Stamp(Ready[0].getName(), Copy[i].getArrivalTime(), Copy[i+1].getArrivalTime()));
-                        Console.WriteLine("stamp " +Copy[i].getName()+" "+ Copy[i].getArrivalTime() + " " + Copy[i + 1].getArrivalTime());
-                        Copy.Insert(i+1,new Process(Ready[0].getName(), Copy[i + 1].getArrivalTime(),Copy[0].getBurstTime()-(Copy[i+1].getArrivalTime()-Copy[i].getArrivalTime())));
-                        Console.WriteLine("insert " +Copy[i].getName()+" "+ Copy[i + 1].getArrivalTime() +" "+ (Copy[0].getBurstTime() - (Copy[i + 1].getArrivalTime() - Copy[i].getArrivalTime())));
-                        currentTime += Copy[0].getBurstTime() - (Copy[i + 1].getArrivalTime() - Copy[i].getArrivalTime());
-                    }
-                    Ready.RemoveAt(0);
-                    Console.ReadLine();
+                }
+                timestamp.Add(new Stamp(inputData[smallest].getName(), time, time + 1));
+                remain_times[smallest]--;
+                Console.WriteLine("remain:" + remain_times[smallest]);
+                if (remain_times[smallest] == 0)
+                {
+                    remain++;
+                    inputData[smallest].setEndTime(time + 1);
+                    Console.WriteLine(inputData[smallest].getName() +" " + inputData[smallest].getEndTime());
                 }
             }
+            //스탬프 합치기
+            for (int i = 0; i < timestamp.Count-1;i++ ) {
+                               
+                if(timestamp[i].getName().CompareTo(timestamp[i+1].getName())==0){
+                    Stamp newStamp=new Stamp(timestamp[i].getName(),timestamp[i].getStartTime(),timestamp[i+1].getEndTime());
+                    timestamp.RemoveAt(i);
+                    timestamp.RemoveAt(i);
+                    timestamp.Insert(i, newStamp);
+                    i--;
+                }
 
+            }
+        }
+            //Copy.Sort(pro_compare);
+            //for (int i = 0; i < Copy.Count; i++) {
+            //    Console.WriteLine("Current"+ Copy[0].getName()+" arr:"+Copy[0].getArrivalTime()+" bur"+Copy[0].getBurstTime());
+                
+            //    temp = new List<Process>[20];
+            //    for (int j = 0; j < 20; j++) {
+            //        temp[j] = new List<Process>();
+            //    }
+            //    Copy.Sort(bur_compare);
+            //    for (int j = 0; j < Copy.Count; j++)
+            //    {
+            //        temp[Copy[j].getArrivalTime()].Insert(0,Copy[j]);
+            //    }
+            //    Copy= new List<Process>();
+            //    for (int j = 0; j < 20; j++)
+            //    {
+            //        for (int l = 0; l < temp[j].Count; l++)
+            //        {
+            //            Copy.Add(temp[j][l]);
+            //        }
+            //    }
+            //    //for (int j = 0; j < Copy.Count; j++)
+            //    //{
+            //    //    Console.WriteLine(Copy[j].getName() + " " + Copy[j].getArrivalTime() + " " + Copy[j].getBurstTime());
+            //    //}
 
+            //    //who are you?
+            //    int index = 0;
+            //    for (int j = 0; j < inputData.Count; j++)
+            //    {
+            //        if (Copy[0].getName().CompareTo(inputData[j].getName()) == 0)
+            //        {
+            //            index = j;
+            //        }
+            //    }
+            //    if (i<Copy.Count-1)//비교할 다음 프로세스가 존재
+            //    {    
+                    
+                   
+
+            //        if (Copy[0].getBurstTime()+Copy[0].getArrivalTime()<= Copy[1].getArrivalTime())
+            //            //다음 프로세스의 시작시간과 겹치지 않은 경우
+            //        {
+            //            Console.WriteLine("case 0");
+            //            timestamp.Add(new Stamp(Copy[0].getName(), Copy[0].getArrivalTime(), Copy[0].getArrivalTime() + Copy[0].getBurstTime()));
+            //            Console.WriteLine("stamp " + Copy[0].getName() + " " + Copy[0].getArrivalTime() + " " + (Copy[0].getArrivalTime() + Copy[0].getBurstTime()));
+            //            inputData[index].setEndTime(Copy[0].getArrivalTime() + Copy[0].getBurstTime());
+            //            currentTime += Copy[0].getBurstTime();
+            //        }
+            //        else
+            //        {
+            //            for (int j = 0; j < Copy.Count; j++) { 
+            //                if()
+            //            }
+            //            //겹쳤는데 잘린 경우
+            //            if (Copy[0].getBurstTime() - Copy[1].getArrivalTime() > Copy[1].getBurstTime())
+            //            {
+            //                Console.WriteLine("case 1-1");
+            //                //앞부분은 스탬프
+            //                timestamp.Add(new Stamp(Copy[0].getName(), Copy[0].getArrivalTime(), Copy[0].getArrivalTime()));
+            //                Console.WriteLine("stamp " + Copy[0].getName() + " " + Copy[0].getArrivalTime() + " " + Copy[1].getArrivalTime());
+            //                //뒷부분은 새 프로세스
+            //                Copy.Insert(2, new Process(Copy[0].getName(), Copy[1].getArrivalTime() + Copy[1].getBurstTime(), Copy[0].getBurstTime() - (Copy[1].getArrivalTime())));
+            //                Console.WriteLine("insert " + Copy[0].getName() + " " + (Copy[1].getArrivalTime() + Copy[1].getBurstTime()) + " " + (Copy[0].getBurstTime() - (Copy[1].getArrivalTime())));
+            //            }
+            //            //겹쳤는데 뒤에꺼가 밀린 경우(다 밀어내기)
+            //            else
+            //            {
+            //                Console.WriteLine("case 1-2");
+            //                //미룬 프로세스 삽입
+            //                for (int j = Copy.Count - 1; j > 1; j--)
+            //                {
+            //                    Copy.Insert(j, new Process(Copy[j].getName(), Copy[j].getArrivalTime() + Copy[0].getBurstTime(), Copy[j].getBurstTime()));
+            //                    Console.WriteLine("Insert " + Copy[j].getName() + " " + (Copy[j].getArrivalTime() + Copy[0].getBurstTime()) + " " + (Copy[j].getBurstTime()));
+            //                    //다음 프로세스 종료
+            //                    Copy.RemoveAt(j + 1);
+            //                }
+            //                //현재 프로세스 스탬프
+            //                timestamp.Add(new Stamp(Copy[0].getName(), Copy[0].getArrivalTime(), (Copy[0].getArrivalTime() + Copy[0].getBurstTime())));
+            //                Console.WriteLine("stamp " + Copy[0].getName() + " " + Copy[0].getArrivalTime() + " " + (Copy[0].getArrivalTime() + Copy[0].getBurstTime()));
+
+            //            }
+            //        }
+            //        Copy.RemoveAt(0);
+            //        temp = new List<Process>[20];
+            //        for (int j = 0; j < 20; j++)
+            //        {
+            //            temp[j] = new List<Process>();
+            //        }
+            //        Copy.Sort(bur_compare);
+            //        for (int j = 0; j < Copy.Count; j++)
+            //        {
+            //            temp[Copy[j].getArrivalTime()].Insert(0, Copy[j]);
+            //        }
+            //        Copy = new List<Process>();
+            //        for (int j = 0; j < 20; j++)
+            //        {
+            //            for (int l = 0; l < temp[j].Count; l++)
+            //            {
+            //                Copy.Add(temp[j][l]);
+            //            }
+            //        }                 
+                    
+            //        Console.WriteLine("Ready");
+            //        for (int j = 0; j < Copy.Count; j++)
+            //        {
+            //            Console.WriteLine(Copy[j].getName()+" "+Copy[j].getArrivalTime()+" "+Copy[j].getBurstTime());
+            //        }
+            //        Console.WriteLine("Ready");
+            //        Console.ReadLine();
+            //    }
+            //    else 
+            //    { 
+            //        Console.WriteLine("case -1*******************");
+            //        {
+            //            timestamp.Add(new Stamp(Copy[0].getName(), Copy[0].getArrivalTime(), Copy[0].getArrivalTime() + Copy[0].getBurstTime()));
+            //            Console.WriteLine("stamp " + Copy[0].getName() + " " + Copy[0].getArrivalTime() + " " + (Copy[0].getArrivalTime() + Copy[0].getBurstTime()));
+            //            inputData[index].setEndTime(Copy[0].getArrivalTime() + Copy[0].getBurstTime());                    
+            //        }
+            //    }
+            //}
+            //********************************************************************************************************************
+            //********************************************************************************************************************
+            //******        ********          *****          ***          **         *****     ****  *****        ***      *******
+            //******  ******  ******  *************  *******  **  ******  **  **********  ********    *******  ******  ***********
+            //******  *******  *****  *************  *******  **  ******  **  *********  ********  **  ******  ******  ***********
+            //******  *******  *****  *************  *******  **  ***    ***  *********  ********  **  ******  ******  ***********
+            //******  *******  *****          *****         ****     *******         **  *******       ******  ******      *******
+            //******  *******  *****  *************  ***********  ***  *****  *********  *******  ****  *****  ******  *********** 
+            //******  ******  ******  *************  ***********  *****  ***  **********  ******  ****  *****  ******  ***********
+            //******         *******          *****  ***********  *****  ***         ****     **  ****  *****  ******       ******
+            //********************************************************************************************************************
+            //********************************************************************************************************************
             //int max_run = -1;
             //for (int i = 0; i < Copy.Count; i++)
             //{
@@ -248,7 +384,8 @@ namespace Scheduling_Jh
             //    Console.ReadLine();
             //}
 
-        }
+        //}
+        
         //public void srt_alg()
         //{
             

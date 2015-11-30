@@ -13,7 +13,8 @@ namespace Scheduling_Jh
 {
     public partial class box : Form
     {
-        public sidebar sidebar=new sidebar();
+        
+        public sidebar sidebar;
         Color[] myPalette=new Color[20];
         main main;
         private Rectangle[] graphs;
@@ -64,7 +65,8 @@ namespace Scheduling_Jh
             Pen background = new Pen((new SolidBrush(Color.FromArgb((byte)0xFF, 66, 66, 66))), 20);
             Rectangle range = new Rectangle(new Point(20, 20), new Size(chart.Size.Width - 40, chart.Size.Height - 40));
             gc.DrawArc(background, range, 0, 360);
-            button1.BackColor = Color.Gray;            
+            button1.BackColor = Color.Gray;
+            sidebar = new sidebar(list);
             sidebar.Visible = true;
         }
 
@@ -105,6 +107,7 @@ namespace Scheduling_Jh
 
         private void button4_Click(object sender, EventArgs e)
         {
+            sidebar.Close();
             Close();
         }
 
@@ -113,6 +116,7 @@ namespace Scheduling_Jh
             position.X = e.X;
             position.Y = e.Y;
             is_down = true;
+            this.Refresh();
         }
 
         private void panel3_MouseDown(object sender, MouseEventArgs e)
@@ -120,6 +124,7 @@ namespace Scheduling_Jh
             position.X = e.X;
             position.Y = e.Y;
             is_down = true;
+            this.Refresh();
         }
 
         private void panel2_MouseUp(object sender, MouseEventArgs e)
@@ -464,8 +469,9 @@ namespace Scheduling_Jh
                 
             }
             drawgap = 0;
+            
             if (!is_run)
-                button2.Click += new EventHandler(button2_Click);                
+                //button2.Click += new EventHandler(button2_Click);                
             drawgap = 500;
             this.Focus();
         }
