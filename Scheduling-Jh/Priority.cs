@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
-    class Priority : Scheduler
+    class Priority :Scheduler
     {
         List<Process>[] temp;
         List<Process> Ready;
-        List<Process> Copy = new List<Process>();
+        List<Process> Copy=new List<Process>();
         public Priority(List<Process> list)
-            : base(list)
+            :base(list)
         {
             Copy = list;
             currentTime = 0;
@@ -19,7 +19,7 @@ namespace Scheduling_Jh
         }
         private int isNowInStamp(Process p, List<Stamp> list)//currentTime이 스탬프에 찍혀있는 범위 내의 값인지 확인
         {
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < list.Count; i++) 
             {
                 if (p.getArrivalTime() < list[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() > timestamp[i].getStartTime())    //스탬프의 앞쪽이 겹칠 때
                     return 0;
@@ -27,7 +27,7 @@ namespace Scheduling_Jh
                     return 1;
             }
             return 2;   //아무 경우도 X
-        }
+        } 
         public void pri_run(bool preemptive) //그럼 내가 새로 짬.. ㅎㅎ
         {
             if (preemptive)//선점
@@ -44,7 +44,7 @@ namespace Scheduling_Jh
                 {
                     temp[inputData[i].getPriority()].Add(inputData[i]);//우선순위의 범위가 0-9 이므로 이렇게 했습니다
                 }
-
+                
                 for (int i = 0; i < 20; i++)
                 {
                     temp[i].Sort(pro_compare);
@@ -62,34 +62,30 @@ namespace Scheduling_Jh
                 do
                 {
                     Process p = Ready.First();
-                    timestamp.Sort(stamp_compare);
                     StampProcess(p);
                     Ready.RemoveAt(0);
                 } while (Ready.Count > 0);
             }
             else   //비선점
             {
-                temp = new List<Process>[20];
-                for (int i = 0; i < 20; i++)
-                {
+                temp=new List<Process>[20];
+                for (int i = 0; i < 20; i++) {
                     temp[i] = new List<Process>();
                 }
                 //들어온순-우선순위으로 정렬(기수정렬을 응용)
                 Copy.Sort(pro_compare);//들어온 순으로 정렬
-
+                
                 for (int i = 0; i < inputData.Count; i++)
                 {
                     temp[Copy[i].getArrivalTime()].Add(Copy[i]);//도착시간의 범위가 0-9 이므로 이렇게 했습니다
                 }
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 20; i++) 
                 {
                     temp[i].Sort(pri_compare);
                 }
-                Copy = new List<Process>();
-                for (int i = 0; i < 20; i++)
-                {
-                    for (int j = 0; j < temp[i].Count; j++)
-                    {
+                Copy=new List<Process>();
+                for (int i = 0; i < 20; i++) {
+                    for (int j = 0; j < temp[i].Count; j++) {
                         Copy.Add(temp[i][j]);//저게 큐가 아니니까 이렇게 처리해야 순서대로 들어갑니다
                     }
                 }
@@ -110,15 +106,14 @@ namespace Scheduling_Jh
                     }
                     //this is the way how to get the tombstone point
                     int target = 0;
-                    for (int j = 0; j < inputData.Count; j++)
-                    {
+                    for (int j = 0; j < inputData.Count; j++) {
                         if (Ready[0].getName().CompareTo(inputData[j].getName()) == 0)
                         {
                             target = j;
-                        }
+                        }                        
                     }
                     inputData[target].setEndTime(currentTime);//프로세스의 묘비명을 적어줍니다
-
+                    
                     Ready.RemoveAt(0);//실행끝난 프로세스는 죽입니다
                 }
             }
@@ -126,17 +121,17 @@ namespace Scheduling_Jh
 
         private void StampProcess(Process p)
         {
-            int type = isNowInStamp(p, timestamp);
+            int type = isNowInStamp(p,timestamp);
             Stamp s;
-            int startpoint = 0, endpoint = 0;
+            int startpoint=0, endpoint=0;
             Process next;
-            switch (type)
+            switch(type)
             {
                 case 0:
                     Console.WriteLine("<type 0>");
-                    for (int i = 0; i < timestamp.Count; i++)
+                    for(int i=0; i<timestamp.Count; i++)
                     {
-                        if (p.getArrivalTime() < timestamp[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() > timestamp[i].getStartTime())
+                        if(p.getArrivalTime() < timestamp[i].getStartTime() && p.getArrivalTime()+p.getBurstTime()>timestamp[i].getStartTime())
                         {
                             startpoint = timestamp[i].getStartTime();
                             endpoint = timestamp[i].getEndTime();
@@ -145,15 +140,14 @@ namespace Scheduling_Jh
                     }
                     int n_burst = p.getBurstTime() - (startpoint - p.getArrivalTime());
 
-                    Console.WriteLine("next_burst:" + n_burst + ", startpoint:" + startpoint + ", endpoint:" + endpoint);
+                    Console.WriteLine("n_b:" + n_burst);
 
                     next = new Process(p.getName(), endpoint, n_burst);
                     s = new Stamp(p.getName(), p.getArrivalTime(), startpoint);
 
-                    Console.WriteLine(s.getName() + ":" + s.getStartTime() + "," + s.getEndTime());
-
                     addStamp(s);
                     StampProcess(next); //순환 호출
+                    Console.WriteLine("<type 0 end>");
                     break;
                 case 1:
                     Console.WriteLine("<type 1>");
@@ -167,22 +161,24 @@ namespace Scheduling_Jh
                         }
                     }
                     next = new Process(p.getName(), endpoint, p.getBurstTime());
-                    Console.WriteLine("next:" + endpoint + "," + next.getName() + ":" + next.getArrivalTime() + "," + next.getBurstTime());
                     StampProcess(next);
+                    Console.WriteLine(endpoint + "," + next.getName() + ":" + next.getArrivalTime() + "," + next.getBurstTime());
+                    Console.WriteLine("<type 1 end>");
                     break;
                 case 2:
                     Console.WriteLine("<type 2>");
                     int end = p.getArrivalTime() + p.getBurstTime();
                     s = new Stamp(p.getName(), p.getArrivalTime(), end);
                     addStamp(s);
-                    for (int i = 0; i < inputData.Count; i++)
+                    for (int i = 0; i < inputData.Count; i++ )
                     {
                         if (inputData[i].getName().Equals(s.getName()))
                         {
                             inputData[i].setEndTime(end);
-                            Console.WriteLine(inputData[i].getName() + ":" + s.getStartTime() + "," + s.getEndTime());
+                            Console.WriteLine(inputData[i].getName() +":"+ s.getStartTime() + "," + s.getEndTime());
                         }
                     }
+                    Console.WriteLine("<type 2 end>");
                     break;
             }
         }
@@ -195,11 +191,6 @@ namespace Scheduling_Jh
                 return 0;
             else
                 return -1;
-        }
-
-        private int stamp_compare(Stamp A, Stamp B)
-        {
-            return A.getStartTime().CompareTo(B.getStartTime());
         }
     }
 }

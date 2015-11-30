@@ -228,17 +228,8 @@ namespace Scheduling_Jh
                         SRT srt = new SRT(getData());
                         srt.srt_run();
                         timestamp = srt.getTimestamp();
-<<<<<<< HEAD
                         timestamp.Sort(stmp_compare);
                         chlid.setStamp(timestamp);
-=======
-                        srt.srt_run();
-                        chlid.setStamp(srt.getTimestamp());
-                        for (int i = 0; i < timestamp.Count; i++)
-                        {
-                            timestamp[i].print();
-                        }
->>>>>>> origin/master
                         chlid.setAwtATT(System.Convert.ToDouble(srt.getAWT()), System.Convert.ToDouble(srt.getATT()));
                         
                         break;
@@ -631,7 +622,6 @@ namespace Scheduling_Jh
             is_down = true;
             position.X = e.X;
             position.Y = e.Y;
-            this.Refresh();
         }
 
         private void panel5_MouseMove(object sender, MouseEventArgs e)
@@ -640,7 +630,6 @@ namespace Scheduling_Jh
             {
                 Point p = PointToScreen(e.Location);
                 Location = new Point(p.X - position.X, p.Y - position.Y);
-                this.Refresh();
             }
         }
 
