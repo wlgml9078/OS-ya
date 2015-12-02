@@ -160,7 +160,9 @@ namespace Scheduling_Jh{
             if (!is_run){
                 if (draw){
                     Application.DoEvents();
-                    artText.Text = Math.Round(art,4) + "";attText.Text = Math.Round(att, 4) + "";awtText.Text = Math.Round(awt, 4) + "";
+                    artText.Text = Math.Round(art,4) + "";
+                    attText.Text = Math.Round(att, 4) + "";
+                    awtText.Text = Math.Round(awt, 4) + "";
 
                     Graphics gc = chart.CreateGraphics();
                     gc.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
@@ -182,6 +184,7 @@ namespace Scheduling_Jh{
                     for (int i = 0; i < pro_list.Count; i++){
                         //최대 프로세스 종료 시간을 구한다.
                         max_end = (max_end > pro_list[i].getEndTime() ? max_end : pro_list[i].getEndTime());
+                        Console.WriteLine("pro_endTime: ["+i+"]" + pro_list[i].getEndTime());
                         //같은 반복문 내에서 브러시를 만든다                        
                         if (i < 8)brush[i] = new SolidBrush(myPalette[i]);
                         else {
@@ -193,6 +196,7 @@ namespace Scheduling_Jh{
                     startPoint.Y = (0);
                     fg.DrawString(0 + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
                     log.Add(0);
+                    Console.WriteLine(stmp_list.Count);
                     if (targetPosition == -1){//자동진행                     
                         for (; currentPosition < stmp_list.Count; currentPosition++){
                             listBox1.Items.Insert(0,"<Process Inserted>");
@@ -216,13 +220,11 @@ namespace Scheduling_Jh{
                             
                             g.DrawString(stmp_list[currentPosition].getName(), new Font("Microsoft Sans Serif", 12), Brushes.White, graphs[currentPosition]);
                             if (!isExist(log, stmp_list[currentPosition].getStartTime())){
-                                fg.DrawString(stmp_list[currentPosition].getStartTime() + "", 
-                                    new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
+                                fg.DrawString(stmp_list[currentPosition].getStartTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X, startPoint.Y + 58));
                                 log.Add(stmp_list[currentPosition].getStartTime());
                             }
                             if (!isExist(log, stmp_list[currentPosition].getEndTime())){
-                                fg.DrawString(stmp_list[currentPosition].getEndTime() + "", 
-                                    new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X + (int)width, startPoint.Y + 58));
+                                fg.DrawString(stmp_list[currentPosition].getEndTime() + "", new Font("Microsoft Sans Serif", 8), Brushes.Black, new Point(startPoint.X + (int)width, startPoint.Y + 58));
                                 log.Add(stmp_list[currentPosition].getEndTime());
                             }
                             timesum += stmp_list[currentPosition].getTimeGap();
@@ -230,7 +232,10 @@ namespace Scheduling_Jh{
 
                             listBox1.Items.Insert(0, "<Process Ended>");
                             listBox1.Items.Insert(0, " : Name :" + stmp_list[currentPosition].getName() + "  At >" + stmp_list[currentPosition].getStartTime());
-                            listBox1.Refresh();attText.Refresh();artText.Refresh();awtText.Refresh();
+                            listBox1.Refresh();
+                            attText.Refresh();
+                            artText.Refresh();
+                            awtText.Refresh();
                             Thread.Sleep(drawgap);
                         }
                         targetPosition = stmp_list.Count;                 

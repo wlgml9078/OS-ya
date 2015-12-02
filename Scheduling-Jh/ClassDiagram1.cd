@@ -2,10 +2,6 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Scheduling_Jh.box">
     <Position X="13.5" Y="0.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
     <NestedTypes>
       <Struct Name="Scheduling_Jh.box.MARGINS" Collapsed="true">
         <TypeIdentifier>
@@ -14,7 +10,7 @@
       </Struct>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>BqACEAGASCERABCJAK6AIAiCiMB4EgAChHksUyCiAIQ=</HashCode>
+      <HashCode>BqACEAGASCERABCJAK6AIAiCiMF4EgAChHksUyCiAIQ=</HashCode>
       <FileName>box.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -48,19 +44,6 @@
   </Class>
   <Class Name="Scheduling_Jh.HRN">
     <Position X="6.5" Y="5" Width="1.5" />
-    <NestedTypes>
-      <Class Name="Scheduling_Jh.HRN.Process_HRN" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HRN.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Class>
-      <Class Name="Scheduling_Jh.HRN.Comparer_HRN" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>HRN.cs</NewMemberFileName>
-        </TypeIdentifier>
-        <Lollipop Position="0.2" />
-      </Class>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAEAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>HRN.cs</FileName>
@@ -68,10 +51,6 @@
   </Class>
   <Class Name="Scheduling_Jh.main">
     <Position X="15.25" Y="0.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
     <NestedTypes>
       <Struct Name="Scheduling_Jh.main.MARGINS" Collapsed="true">
         <TypeIdentifier>
@@ -80,7 +59,7 @@
       </Struct>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>hmbTASFAQGQBiBDNgCm4sAgCC9V4sBAChHwsRQiksos=</HashCode>
+      <HashCode>hmbSASFAQGQBiBDNgCm4sAgCC9V4sDAChHwsRQiksos=</HashCode>
       <FileName>main.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -127,10 +106,18 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
+  <Class Name="Scheduling_Jh.Comparer_HRN" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Scheduler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
   <Class Name="Scheduling_Jh.Scheduler">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAgAAAAAAAAAAAAAAAgCEAACIAABIAAAAQAA=</HashCode>
+      <HashCode>gAAAAEAAAgBAAAAAAAAAAABAAgCEAACIAABIAAAAQAA=</HashCode>
       <FileName>Scheduler.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -144,21 +131,21 @@
   <Class Name="Scheduling_Jh.SJF">
     <Position X="8.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAACBAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAACBIAAQAAAAAAA=</HashCode>
       <FileName>SJF.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Scheduling_Jh.SRT">
     <Position X="11.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACABAAEAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAACABAAEAAAAAAAAAAgAAAAAAIAAAAAAAAAA=</HashCode>
       <FileName>SRT.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Scheduling_Jh.Stamp">
     <Position X="11.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAIAAAAIAAAAAgAIAAAAAkAAAAABAEAAAAAAA=</HashCode>
+      <HashCode>AAQAEAAAIAAAAIAAAAAgAIAAAAAkAAAAABAEAAAAAAA=</HashCode>
       <FileName>Stamp.cs</FileName>
     </TypeIdentifier>
   </Class>
