@@ -129,29 +129,17 @@ namespace Scheduling_Jh
             {
                 temp = new List<Process>[20];
                 for (int i = 0; i < 20; i++)
-                {
                     temp[i] = new List<Process>();
-                }
-
                 //들어온순-우선순위으로 정렬(기수정렬을 응용)
                 Copy.Sort(new Comparer(0));//들어온 순으로 정렬
-
                 for (int i = 0; i < inputData.Count; i++)
-                {
                     temp[Copy[i].getArrivalTime()].Add(Copy[i]);//도착시간의 범위가 0-9 이므로 이렇게 했습니다
-                }
                 for (int i = 0; i < 20; i++)
-                {
                     temp[i].Sort(pri_compare);
-                }
                 Copy = new List<Process>();
                 for (int i = 0; i < 20; i++)
-                {
                     for (int j = 0; j < temp[i].Count; j++)
-                    {
                         Copy.Add(temp[i][j]);//copy에 삽입
-                    }
-                }
                 //정렬은 끝났고 아래부분에서는 처리해줍니다                
                 for (int i = 0; i < inputData.Count; i++)//즉 시간순으로 처리됩니다
                 {
@@ -159,9 +147,7 @@ namespace Scheduling_Jh
                     Copy.RemoveAt(0);
                     Copy.Sort(pri_compare);//큐가 아닌 리스트이므로 리스트를 큐처럼 만들기 위해 정렬을 합니다.
                     if (currentTime > Ready[0].getArrivalTime())//현재 시간이 실행할 놈 도착시간보다 빠르면(겹치면)
-                    {
                         addStamp(new Stamp(Ready[0].getName(), currentTime, (currentTime += Ready[0].getBurstTime()))); //스탬프 쾅쾅
-                    }
                     else
                     {
                         currentTime = Ready[0].getArrivalTime();
@@ -170,14 +156,9 @@ namespace Scheduling_Jh
                     //this is the way how to get the tombstone point
                     int target = 0;
                     for (int j = 0; j < inputData.Count; j++)
-                    {
                         if (Ready[0].getName().CompareTo(inputData[j].getName()) == 0)
-                        {
                             target = j;
-                        }
-                    }
                     inputData[target].setEndTime(currentTime);//프로세스의 묘비명을 적어줍니다
-
                     Ready.RemoveAt(0);//실행끝난 프로세스는 죽입니다
                 }
             }
