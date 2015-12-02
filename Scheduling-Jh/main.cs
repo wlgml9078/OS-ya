@@ -523,16 +523,6 @@ namespace Scheduling_Jh
             
         }
 
-        private void processList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void processList_CellContentClick(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click_1(object sender, EventArgs e)
         {
             if(chlid!=null)
@@ -541,12 +531,7 @@ namespace Scheduling_Jh
             timestamp=null;
             Application.Exit();
         }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+               
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             is_down = true;
@@ -648,57 +633,6 @@ namespace Scheduling_Jh
                 processList.Rows.RemoveAt(index);
             }
         }
-
-        private void timeSlice_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void processInfo_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void arrivalTimeText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void processNameText_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void priority_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void burstTime_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void arrivalTime_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void processName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void titlebar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             Process newProcess;
@@ -854,15 +788,6 @@ namespace Scheduling_Jh
         private void button3_MouseDown(object sender, MouseEventArgs e)
         {
             this.button3.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));
-        }
-
-        private void main_Paint(object sender, PaintEventArgs e){}
-
-        
-
-        
-        
-
-        
+        }       
     }
 }

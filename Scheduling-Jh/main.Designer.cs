@@ -90,8 +90,7 @@
             this.titlebar.Name = "titlebar";
             this.titlebar.Size = new System.Drawing.Size(172, 31);
             this.titlebar.TabIndex = 2;
-            this.titlebar.Text = "스케줄러 프로그램";
-            this.titlebar.Click += new System.EventHandler(this.titlebar_Click);
+            this.titlebar.Text = "스케줄러 프로그램";            
             // 
             // processName
             // 
@@ -101,7 +100,6 @@
             this.processName.Name = "processName";
             this.processName.Size = new System.Drawing.Size(106, 18);
             this.processName.TabIndex = 3;
-            this.processName.TextChanged += new System.EventHandler(this.processName_TextChanged);
             // 
             // arrivalTime
             // 
@@ -111,7 +109,6 @@
             this.arrivalTime.Name = "arrivalTime";
             this.arrivalTime.Size = new System.Drawing.Size(106, 18);
             this.arrivalTime.TabIndex = 4;
-            this.arrivalTime.TextChanged += new System.EventHandler(this.arrivalTime_TextChanged);
             this.arrivalTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.arrivalTime_KeyPress);
             // 
             // burstTime
@@ -122,7 +119,6 @@
             this.burstTime.Name = "burstTime";
             this.burstTime.Size = new System.Drawing.Size(106, 18);
             this.burstTime.TabIndex = 5;
-            this.burstTime.TextChanged += new System.EventHandler(this.burstTime_TextChanged);
             this.burstTime.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.burstTime_KeyPress);
             // 
             // priority
@@ -135,7 +131,6 @@
             this.priority.Size = new System.Drawing.Size(106, 18);
             this.priority.TabIndex = 7;
             this.priority.Text = " ";
-            this.priority.TextChanged += new System.EventHandler(this.priority_TextChanged);
             this.priority.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.priority_KeyPress);
             // 
             // processNameText
@@ -148,7 +143,6 @@
             this.processNameText.Size = new System.Drawing.Size(68, 18);
             this.processNameText.TabIndex = 9;
             this.processNameText.Text = "프로세스 ID";
-            this.processNameText.Click += new System.EventHandler(this.processNameText_Click);
             // 
             // arrivalTimeText
             // 
@@ -160,7 +154,6 @@
             this.arrivalTimeText.Size = new System.Drawing.Size(52, 18);
             this.arrivalTimeText.TabIndex = 10;
             this.arrivalTimeText.Text = "도착시간";
-            this.arrivalTimeText.Click += new System.EventHandler(this.arrivalTimeText_Click);
             // 
             // burstTimeText
             // 
@@ -309,7 +302,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(667, 73);
             this.panel1.TabIndex = 23;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
             this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
@@ -454,7 +446,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(133, 331);
             this.panel2.TabIndex = 24;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // timeSlice
             // 
@@ -466,7 +457,6 @@
             this.timeSlice.Name = "timeSlice";
             this.timeSlice.Size = new System.Drawing.Size(106, 18);
             this.timeSlice.TabIndex = 6;
-            this.timeSlice.TextChanged += new System.EventHandler(this.timeSlice_TextChanged);
             this.timeSlice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.timeSlice_KeyPress);
             // 
             // timesliceUnderline
@@ -552,7 +542,6 @@
             this.processInfo.Size = new System.Drawing.Size(77, 18);
             this.processInfo.TabIndex = 25;
             this.processInfo.Text = "프로세스 정보";
-            this.processInfo.Click += new System.EventHandler(this.processInfo_Click);
             // 
             // panel4
             // 
@@ -592,7 +581,6 @@
             this.processList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.processList.Size = new System.Drawing.Size(338, 331);
             this.processList.TabIndex = 23;
-            this.processList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.processList_CellContentClick);
             // 
             // processNameColumn
             // 
@@ -679,7 +667,6 @@
             this.Name = "main";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.main_Paint);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
