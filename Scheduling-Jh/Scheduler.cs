@@ -18,9 +18,9 @@ namespace Scheduling_Jh
         {
             switch (flag)
             {
-                case 0:
+                case 0:     //도착시간으로 정렬
                     return x.getArrivalTime().CompareTo(y.getArrivalTime());
-                default:
+                default:    //실생시간으로 정렬
                     return x.getBurstTime().CompareTo(y.getBurstTime());
             }
         }
