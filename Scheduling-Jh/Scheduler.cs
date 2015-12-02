@@ -42,9 +42,6 @@ namespace Scheduling_Jh
             timestamp = new List<Stamp>();
             inputData = list;
             inputData.Sort(new Comparer(0));
-            for (int i = 0; i < inputData.Count; i++)
-                Console.WriteLine(inputData
-                    [i].getName());
             ATT = 0;
             AWT = 0;
         }
@@ -74,7 +71,6 @@ namespace Scheduling_Jh
             for (int i = 0; i < inputData.Count; i++)
             {
                 data = inputData[i].getEndTime() - inputData[i].getArrivalTime();
-                Console.WriteLine(inputData[i].getName() + ":" + inputData[i].getEndTime() + "," + inputData[i].getArrivalTime());
                 sum += data; //각 반환시간 더함
             }
 
@@ -91,7 +87,6 @@ namespace Scheduling_Jh
             for (int i = 0; i < inputData.Count; i++)
             {
                 data = inputData[i].getEndTime() - inputData[i].getArrivalTime() - inputData[i].getBurstTime();
-                Console.WriteLine("data:" + data);
                 sum += data;
             }
 

@@ -477,6 +477,11 @@ namespace Scheduling_Jh{
         private void button1_MouseDown(object sender, MouseEventArgs e){this.running_button.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));}
         private void button4_MouseDown(object sender, MouseEventArgs e){this.button4.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));}
         private void addProcess_MouseDown(object sender, MouseEventArgs e){this.addProcess.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));}
-        private void button3_MouseDown(object sender, MouseEventArgs e){this.button3.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));}       
+        private void button3_MouseDown(object sender, MouseEventArgs e){this.button3.BackgroundImage = ((System.Drawing.Image)(Properties.Resources.buttonbackground));}
+
+        private void nameUnderline_Paint(object sender, PaintEventArgs e)
+        {
+
+        }       
     }
 }

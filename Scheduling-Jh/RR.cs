@@ -45,7 +45,7 @@ namespace Scheduling_Jh
 
                         end = currentTime;  //끝 시간 계산
 
-                        //레디큐에 끝나지 않은 삽입
+                        //레디큐에 끝나지 않은 프로세스 다시 삽입
                         int i;
                         for (i = 0; i < Ready.Count; i++)
                         {
