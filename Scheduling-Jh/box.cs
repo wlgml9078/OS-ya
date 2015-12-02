@@ -44,7 +44,7 @@ namespace Scheduling_Jh
             is_down = false;
             usage = 0;
             isopen = false;
-            drawgap = 500;
+            drawgap = 50;
             this.DoubleBuffered = true;
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -406,7 +406,8 @@ namespace Scheduling_Jh
                 targetPosition--;
                 draw = true;
                 if(!is_run)
-                    Ghannt_base.Paint += new PaintEventHandler(drawAutoGhanttChart);                
+                    Ghannt_base.Paint += new PaintEventHandler(drawAutoGhanttChart);
+                Ghannt_base.Refresh();
             }
             else
             {
@@ -472,7 +473,7 @@ namespace Scheduling_Jh
             
             if (!is_run)
                 //button2.Click += new EventHandler(button2_Click);                
-            drawgap = 500;
+            drawgap = 50;
             this.Focus();
         }
     }

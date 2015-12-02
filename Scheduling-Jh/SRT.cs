@@ -79,25 +79,20 @@ namespace Scheduling_Jh
         {
             int remain = 0, smallest;
             int time;
-            int[] remain_times = new int[10];
+            int[] remain_times = new int[20];
 
             for (int i = 0; i < Copy.Count; i++)
-            {
                 remain_times[i] = Copy[i].getBurstTime();
-            }
-            remain_times[9] = 999;
+            remain_times[19] = 999;
 
             for (time = 0; remain != Copy.Count; time++)
             {
                 Console.WriteLine("time = " + time);
-                smallest = 9;
+                smallest = 19;
                 for (int i = 0; i < Copy.Count; i++)
-                {
                     if ((Copy[i].getArrivalTime() <= time) && (remain_times[i] < remain_times[smallest]) && (remain_times[i] > 0))
-                    {
                         smallest = i;
-                    }
-                }
+                 
                 timestamp.Add(new Stamp(inputData[smallest].getName(), time, time + 1));
                 remain_times[smallest]--;
                 Console.WriteLine("remain:" + remain_times[smallest]);
@@ -109,17 +104,14 @@ namespace Scheduling_Jh
                 }
             }
             //스탬프 합치기
-            for (int i = 0; i < timestamp.Count-1;i++ ) {
-                               
+            for (int i = 0; i < timestamp.Count-1;i++ )
                 if(timestamp[i].getName().CompareTo(timestamp[i+1].getName())==0){
                     Stamp newStamp=new Stamp(timestamp[i].getName(),timestamp[i].getStartTime(),timestamp[i+1].getEndTime());
                     timestamp.RemoveAt(i);
                     timestamp.RemoveAt(i);
                     timestamp.Insert(i, newStamp);
                     i--;
-                }
-
-            }
+                }            
         }
             //Copy.Sort(pro_compare);
             //for (int i = 0; i < Copy.Count; i++) {
