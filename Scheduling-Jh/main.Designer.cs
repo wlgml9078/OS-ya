@@ -52,7 +52,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.running_button = new System.Windows.Forms.Button();
             this.addProcess = new System.Windows.Forms.Button();
             this.processListText = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -90,7 +90,7 @@
             this.titlebar.Name = "titlebar";
             this.titlebar.Size = new System.Drawing.Size(172, 31);
             this.titlebar.TabIndex = 2;
-            this.titlebar.Text = "스케줄러 프로그램";            
+            this.titlebar.Text = "스케줄러 프로그램";
             // 
             // processName
             // 
@@ -295,7 +295,7 @@
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.titlebar);
             this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.running_button);
             this.panel1.Controls.Add(this.addProcess);
             this.panel1.Location = new System.Drawing.Point(-1, -1);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
@@ -373,24 +373,24 @@
             this.button4.MouseLeave += new System.EventHandler(this.button4_MouseLeave);
             this.button4.MouseHover += new System.EventHandler(this.button4_MouseHover);
             // 
-            // button1
+            // running_button
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Image = global::Scheduling_Jh.Properties.Resources.play_icon;
-            this.button1.Location = new System.Drawing.Point(604, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(36, 36);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button1_MouseDown);
-            this.button1.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
-            this.button1.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
-            this.button1.MouseHover += new System.EventHandler(this.button1_MouseHover);
+            this.running_button.BackColor = System.Drawing.Color.Transparent;
+            this.running_button.FlatAppearance.BorderSize = 0;
+            this.running_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.running_button.Font = new System.Drawing.Font("Noto Sans CJK KR Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.running_button.ForeColor = System.Drawing.Color.White;
+            this.running_button.Image = global::Scheduling_Jh.Properties.Resources.play_icon;
+            this.running_button.Location = new System.Drawing.Point(604, 28);
+            this.running_button.Name = "running_button";
+            this.running_button.Size = new System.Drawing.Size(36, 36);
+            this.running_button.TabIndex = 0;
+            this.running_button.UseVisualStyleBackColor = false;
+            this.running_button.Click += new System.EventHandler(this.button1_Click);
+            this.running_button.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button1_MouseDown);
+            this.running_button.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
+            this.running_button.MouseLeave += new System.EventHandler(this.button1_MouseLeave);
+            this.running_button.MouseHover += new System.EventHandler(this.button1_MouseHover);
             // 
             // addProcess
             // 
@@ -679,7 +679,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button running_button;
         private System.Windows.Forms.Label titlebar;
         private System.Windows.Forms.TextBox processName;
         private System.Windows.Forms.TextBox arrivalTime;

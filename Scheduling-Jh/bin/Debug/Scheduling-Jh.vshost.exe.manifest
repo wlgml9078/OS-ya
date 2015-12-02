@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Scheduling-Jh.exe" size="98720">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Scheduling-Jh.exe" size="97696">
       <assemblyIdentity name="Scheduling-Jh" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>XwEJFFjAbtTxBB8vMbN+18naNUM=</dsig:DigestValue>
+        <dsig:DigestValue>d429Ws+dfjKjAJMCFJ5ix2CUZqg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

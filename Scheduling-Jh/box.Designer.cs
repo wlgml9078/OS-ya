@@ -197,8 +197,7 @@
             this.listBox1.Location = new System.Drawing.Point(5, 27);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(176, 202);
-            this.listBox1.TabIndex = 5;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBox1.TabIndex = 5;            
             // 
             // panel4
             // 
@@ -226,8 +225,7 @@
             this.panel6.Location = new System.Drawing.Point(188, 27);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(483, 202);
-            this.panel6.TabIndex = 6;
-            this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
+            this.panel6.TabIndex = 6;            
             // 
             // chart
             // 
@@ -255,8 +253,7 @@
             this.artText.Name = "artText";
             this.artText.Size = new System.Drawing.Size(80, 27);
             this.artText.TabIndex = 7;
-            this.artText.Text = "label6";
-            this.artText.Click += new System.EventHandler(this.artText_Click);
+            this.artText.Text = "label6";            
             // 
             // artLabel
             // 
@@ -267,8 +264,7 @@
             this.artLabel.Name = "artLabel";
             this.artLabel.Size = new System.Drawing.Size(225, 18);
             this.artLabel.TabIndex = 6;
-            this.artLabel.Text = "평균 실행 시간(Average Running Time)";
-            this.artLabel.Click += new System.EventHandler(this.artLabel_Click);
+            this.artLabel.Text = "평균 실행 시간(Average Running Time)";            
             // 
             // attText
             // 
@@ -322,7 +318,6 @@
             this.label5.Size = new System.Drawing.Size(93, 24);
             this.label5.TabIndex = 0;
             this.label5.Text = "CPU 사용률";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label1
             // 
@@ -335,7 +330,6 @@
             this.label1.Size = new System.Drawing.Size(33, 18);
             this.label1.TabIndex = 6;
             this.label1.Text = "LOG";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -368,7 +362,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "box";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.box_FormClosing);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.box_Paint);
             this.ghattbox.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -381,7 +374,6 @@
             this.chart.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

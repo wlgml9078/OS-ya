@@ -28,9 +28,65 @@ namespace Scheduling_Jh
             }
             return 2;   //아무 경우도 X
         }
-        public void pri_run(bool preemptive) //그럼 내가 새로 짬.. ㅎㅎ
+
+        private void StampProcess(Process p)    //선점 priority에서 프로세스 스탬프 찍어주는 함수
         {
-            if (preemptive)//선점
+            int type = isNowInStamp(p, timestamp);  //스탬프 어떻게 찍힐지 정함
+            Stamp s;
+            int startpoint = 0, endpoint = 0;
+            Process next;
+            switch (type)
+            {
+                case 0: //프로세스가 중간에 끊기는 경우
+                    for (int i = 0; i < timestamp.Count; i++)
+                    {
+                        if (p.getArrivalTime() < timestamp[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() > timestamp[i].getStartTime())
+                        {
+                            startpoint = timestamp[i].getStartTime();
+                            endpoint = timestamp[i].getEndTime();
+                            break;
+                        }
+                    }
+                    int n_burst = p.getBurstTime() - (startpoint - p.getArrivalTime()); //업데이트될 Burst Time
+
+                    next = new Process(p.getName(), endpoint, n_burst); //다음에 스탬프로 찍어줄 업데이트된 프로세스
+                    s = new Stamp(p.getName(), p.getArrivalTime(), startpoint); //스탬프 쾅쾅
+
+                    addStamp(s);
+                    StampProcess(next); //순환 호출
+                    break;
+                case 1:     //프로세스가 이미 스탬프가 찍혀있는 범위에 있는 경우
+                    for (int i = 0; i < timestamp.Count; i++)
+                    {
+                        //가장 먼저 만나는 스탬프의 endpoint를 시작시간으로 설정
+                        if (p.getArrivalTime() >= timestamp[i].getStartTime() && p.getArrivalTime() < timestamp[i].getEndTime())
+                        {
+                            startpoint = timestamp[i].getStartTime();
+                            endpoint = timestamp[i].getEndTime();
+                            break;
+                        }
+                    }
+                    next = new Process(p.getName(), endpoint, p.getBurstTime()); //다음에 스탬프로 찍어줄 업데이트된 프로세스
+                    StampProcess(next); //순환 호출
+                    break;
+                case 2:     //그냥 찍으면 됨
+                    int end = p.getArrivalTime() + p.getBurstTime();
+                    s = new Stamp(p.getName(), p.getArrivalTime(), end);
+                    addStamp(s);    //스탬프 찍고 순환호출 안하고 끝내면 됩니다
+                    for (int i = 0; i < inputData.Count; i++)
+                    {
+                        if (inputData[i].getName().Equals(s.getName()))
+                        {
+                            inputData[i].setEndTime(end);   //끝나는 시간을 설정해줌
+                        }
+                    }
+                    break;
+            }
+        }
+
+        public void pri_run(bool preemptive)
+        {
+            if (preemptive)//선점 - 지희
             {
                 //우선순위- 들어온순으로 정렬
                 temp = new List<Process>[20];
@@ -47,7 +103,7 @@ namespace Scheduling_Jh
 
                 for (int i = 0; i < 20; i++)
                 {
-                    temp[i].Sort(pro_compare);
+                    temp[i].Sort(new Comparer(0));  //들어온순 정렬
                 }
                 inputData = new List<Process>();
                 for (int i = 0; i < 20; i++)
@@ -55,27 +111,30 @@ namespace Scheduling_Jh
                     for (int j = 0; j < temp[i].Count; j++)
                     {
                         inputData.Insert(0, temp[i][j]);//저게 큐가 아니니까 이렇게 처리해야 순서대로 들어갑니다
-                        Ready.Add(temp[i][j]);
+                        Ready.Insert(0, temp[i][j]);    //레디 리스트에도 삽입
                     }
                 }
 
                 do
                 {
                     Process p = Ready.First();
-                    timestamp.Sort(stamp_compare);
-                    StampProcess(p);
+                    timestamp.Sort(stamp_compare);  //스탬프 리스트를 정렬
+                    StampProcess(p);    //스탬프를 계속 만들어줍니당
                     Ready.RemoveAt(0);
-                } while (Ready.Count > 0);
+                } while (Ready.Count > 0);  //레디 리스트가 빌 때까지 반복
             }
-            else   //비선점
+
+
+            else   //비선점 - 민상
             {
                 temp = new List<Process>[20];
                 for (int i = 0; i < 20; i++)
                 {
                     temp[i] = new List<Process>();
                 }
+
                 //들어온순-우선순위으로 정렬(기수정렬을 응용)
-                Copy.Sort(pro_compare);//들어온 순으로 정렬
+                Copy.Sort(new Comparer(0));//들어온 순으로 정렬
 
                 for (int i = 0; i < inputData.Count; i++)
                 {
@@ -90,7 +149,7 @@ namespace Scheduling_Jh
                 {
                     for (int j = 0; j < temp[i].Count; j++)
                     {
-                        Copy.Add(temp[i][j]);//저게 큐가 아니니까 이렇게 처리해야 순서대로 들어갑니다
+                        Copy.Add(temp[i][j]);//copy에 삽입
                     }
                 }
                 //정렬은 끝났고 아래부분에서는 처리해줍니다                
@@ -124,69 +183,6 @@ namespace Scheduling_Jh
             }
         }
 
-        private void StampProcess(Process p)
-        {
-            int type = isNowInStamp(p, timestamp);
-            Stamp s;
-            int startpoint = 0, endpoint = 0;
-            Process next;
-            switch (type)
-            {
-                case 0:
-                    Console.WriteLine("<type 0>");
-                    for (int i = 0; i < timestamp.Count; i++)
-                    {
-                        if (p.getArrivalTime() < timestamp[i].getStartTime() && p.getArrivalTime() + p.getBurstTime() > timestamp[i].getStartTime())
-                        {
-                            startpoint = timestamp[i].getStartTime();
-                            endpoint = timestamp[i].getEndTime();
-                            break;
-                        }
-                    }
-                    int n_burst = p.getBurstTime() - (startpoint - p.getArrivalTime());
-
-                    Console.WriteLine("next_burst:" + n_burst + ", startpoint:" + startpoint + ", endpoint:" + endpoint);
-
-                    next = new Process(p.getName(), endpoint, n_burst);
-                    s = new Stamp(p.getName(), p.getArrivalTime(), startpoint);
-
-                    Console.WriteLine(s.getName() + ":" + s.getStartTime() + "," + s.getEndTime());
-
-                    addStamp(s);
-                    StampProcess(next); //순환 호출
-                    break;
-                case 1:
-                    Console.WriteLine("<type 1>");
-                    for (int i = 0; i < timestamp.Count; i++)
-                    {
-                        if (p.getArrivalTime() >= timestamp[i].getStartTime() && p.getArrivalTime() < timestamp[i].getEndTime())
-                        {
-                            startpoint = timestamp[i].getStartTime();
-                            endpoint = timestamp[i].getEndTime();
-                            break;
-                        }
-                    }
-                    next = new Process(p.getName(), endpoint, p.getBurstTime());
-                    Console.WriteLine("next:" + endpoint + "," + next.getName() + ":" + next.getArrivalTime() + "," + next.getBurstTime());
-                    StampProcess(next);
-                    break;
-                case 2:
-                    Console.WriteLine("<type 2>");
-                    int end = p.getArrivalTime() + p.getBurstTime();
-                    s = new Stamp(p.getName(), p.getArrivalTime(), end);
-                    addStamp(s);
-                    for (int i = 0; i < inputData.Count; i++)
-                    {
-                        if (inputData[i].getName().Equals(s.getName()))
-                        {
-                            inputData[i].setEndTime(end);
-                            Console.WriteLine(inputData[i].getName() + ":" + s.getStartTime() + "," + s.getEndTime());
-                        }
-                    }
-                    break;
-            }
-        }
-
         public int pri_compare(Process a, Process b)    //정렬 Priority 기준으로 할라고 만듬
         {
             if (a.getPriority() > b.getPriority())
@@ -197,9 +193,9 @@ namespace Scheduling_Jh
                 return -1;
         }
 
-        private int stamp_compare(Stamp A, Stamp B)
+        private int stamp_compare(Stamp A, Stamp B) //스탬프 정렬하려고 만듬
         {
-            return A.getStartTime().CompareTo(B.getStartTime());
+            return A.getStartTime().CompareTo(B.getStartTime());    //starttime 순으로 정렬
         }
     }
 }

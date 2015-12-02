@@ -26,20 +26,19 @@ namespace Scheduling_Jh
             this.endtime = endpoint;
             this.remained = remained;
         }
-        public int getTimeGap()
+
+        public int getTimeGap() //스탬프 이용시간 getter
         {
             return endtime - starttime;
         }
-        public int getRemained()
+
+        public int getRemained()    //남은 시간.. getter
         {
             return remained;
         }
+        //getter
         public int getStartTime() { return starttime; }
         public int getEndTime() { return endtime; }
-        public void print()
-        {
-            Console.WriteLine("s"+this.name+":"+starttime+","+endtime);
-        }
         public String getName() { return name; }
     }
 }
