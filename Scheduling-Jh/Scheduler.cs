@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Scheduling_Jh
 {
-    class Comparer : IComparer<Process>
+    class Comparer : IComparer<Process> //Sorting할 때 필요
     {
         int flag;
 
@@ -20,10 +20,8 @@ namespace Scheduling_Jh
             {
                 case 0:
                     return x.getArrivalTime().CompareTo(y.getArrivalTime());
-                case 1:
-                    return x.getBurstTime().CompareTo(y.getBurstTime());
                 default:
-                    return -x.getArrivalTime().CompareTo(y.getArrivalTime());
+                    return x.getBurstTime().CompareTo(y.getBurstTime());
             }
         }
     }

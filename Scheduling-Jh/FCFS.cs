@@ -26,7 +26,7 @@ namespace Scheduling_Jh
         }
         public void fcfs_run()
         {
-            inputData.Sort(pro_compare);
+            inputData.Sort(new Comparer(0));
             //airgap
             for (int i = 0; i < inputData.Count; i++)
             {
