@@ -116,7 +116,7 @@ namespace Scheduling_Jh
             position.X = e.X;
             position.Y = e.Y;
             is_down = true;
-            this.Refresh();
+            
         }
 
         private void panel3_MouseDown(object sender, MouseEventArgs e)
@@ -124,7 +124,7 @@ namespace Scheduling_Jh
             position.X = e.X;
             position.Y = e.Y;
             is_down = true;
-            this.Refresh();
+            
         }
 
         private void panel2_MouseUp(object sender, MouseEventArgs e)
