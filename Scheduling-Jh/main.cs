@@ -200,7 +200,9 @@ namespace Scheduling_Jh
                             chlid.Show();
                             Priority p1 = new Priority(getData());
                             p1.pri_run(true);
-                            chlid.setStamp(p1.getTimestamp());
+                            timestamp = p1.getTimestamp();
+                            timestamp.Sort(stmp_compare);
+                            chlid.setStamp(timestamp);
                             chlid.setAwtATT(System.Convert.ToDouble(p1.getAWT()), System.Convert.ToDouble(p1.getATT()));
                         }
                         else
@@ -213,7 +215,7 @@ namespace Scheduling_Jh
                         chlid.SetBounds(Location.X+665,Location.Y,700,507);                
                         chlid.Show();
                         SJF sjf = new SJF(processListval);
-                        sjf.sjf_alg();
+                        sjf.sjf_run();
                         timestamp = sjf.getTimestamp();
                         chlid.setStamp(sjf.getTimestamp());
                         chlid.setAwtATT(System.Convert.ToDouble(sjf.getAWT()), System.Convert.ToDouble(sjf.getATT()));
@@ -222,15 +224,12 @@ namespace Scheduling_Jh
                         chlid = new box(processListval,this);
                         chlid.SetBounds(Location.X+665,Location.Y,700,507);                
                         chlid.Show();
-                        Console.WriteLine("SRT");
+                        
                         SRT srt = new SRT(getData());
-                        timestamp = srt.getTimestamp();
                         srt.srt_run();
-                        chlid.setStamp(srt.getTimestamp());
-                        for (int i = 0; i < timestamp.Count; i++)
-                        {
-                            timestamp[i].print();
-                        }
+                        timestamp = srt.getTimestamp();
+                        timestamp.Sort(stmp_compare);
+                        chlid.setStamp(timestamp);
                         chlid.setAwtATT(System.Convert.ToDouble(srt.getAWT()), System.Convert.ToDouble(srt.getATT()));
                         
                         break;
@@ -255,11 +254,21 @@ namespace Scheduling_Jh
                             chlid.setAwtATT(System.Convert.ToDouble(rr.getAWT()), System.Convert.ToDouble(rr.getATT()));
                         }
                         break;
-                    default:
+                    case 6:
+                        chlid = new box(processListval, this);
+                        chlid.SetBounds(Location.X + 665, Location.Y, 700, 507);
+                        chlid.Show();
+
+                        HRN hrn = new HRN(getData());
+                        hrn.hrn_alg();
+                        chlid.setStamp(hrn.getTimestamp());
+                        chlid.setAwtATT(System.Convert.ToDouble(hrn.getAWT()), System.Convert.ToDouble(hrn.getATT()));
                         break;
                         
                 }
                 this.Focus();
+                chlid.sidebar.Location = new Point(chlid.Location.X-284,chlid.Location.Y);
+                chlid.sidebar.Visible = false;
             }
             else
             {
@@ -342,7 +351,15 @@ namespace Scheduling_Jh
                 priorityUnderline.Hide();
             }
         }
-
+        public int stmp_compare(Stamp a, Stamp b)    //스탬프의 정렬
+        {
+            if (a.getStartTime() > b.getStartTime())
+                return 1;
+            else if (a.getStartTime() == b.getStartTime())
+                return 0;
+            else
+                return -1;
+        }
         
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -520,6 +537,8 @@ namespace Scheduling_Jh
         {
             if(chlid!=null)
                 chlid.Close();
+            processListval=null;
+            timestamp=null;
             Application.Exit();
         }
 
@@ -603,6 +622,7 @@ namespace Scheduling_Jh
             is_down = true;
             position.X = e.X;
             position.Y = e.Y;
+            
         }
 
         private void panel5_MouseMove(object sender, MouseEventArgs e)
@@ -611,6 +631,7 @@ namespace Scheduling_Jh
             {
                 Point p = PointToScreen(e.Location);
                 Location = new Point(p.X - position.X, p.Y - position.Y);
+                
             }
         }
 
@@ -734,7 +755,26 @@ namespace Scheduling_Jh
             processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
             processListval.Add(newProcess);
         }
-
+        private void button5_Click_2(object sender, EventArgs e)
+        {
+            Process newProcess;
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 0, 7, 3);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 2, 4, 2);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 5, 2, 4);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 6, 5, 1);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            newProcess = new Process("p" + (processListval.Count + 1) + "", 10, 1, 2);
+            processList.Rows.Add(newProcess.getName(), newProcess.getArrivalTime(), newProcess.getBurstTime(), newProcess.getPriority());
+            processListval.Add(newProcess);
+            timeSlice.Text = "2";
+        }
         
         private void button1_MouseHover(object sender, EventArgs e)
         {
@@ -817,6 +857,8 @@ namespace Scheduling_Jh
         }
 
         private void main_Paint(object sender, PaintEventArgs e){}
+
+        
 
         
         

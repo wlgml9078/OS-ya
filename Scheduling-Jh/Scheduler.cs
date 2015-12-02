@@ -30,7 +30,7 @@ namespace Scheduling_Jh
     {
         public int Compare(Process_HRN x, Process_HRN y)
         {
-            return x.getPriority().CompareTo(y.getPriority()); 
+            return -x.getPriority().CompareTo(y.getPriority()); 
         }
     }
 

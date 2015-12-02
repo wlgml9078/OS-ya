@@ -13,6 +13,8 @@ namespace Scheduling_Jh
 {
     public partial class box : Form
     {
+        
+        public sidebar sidebar;
         Color[] myPalette=new Color[20];
         main main;
         private Rectangle[] graphs;
@@ -28,8 +30,11 @@ namespace Scheduling_Jh
         double awt, att,art;
         float limit;//그리기 제한
         bool isopen;
+        int drawgap=500;
+        
         public box(List<Process> list,main main)
         {
+            
             this.main = main;
             this.pro_list = list;
             InitializeComponent();
@@ -39,7 +44,7 @@ namespace Scheduling_Jh
             is_down = false;
             usage = 0;
             isopen = false;
-            overPanel.Location=new Point(overPanel.Location.X-overPanel.Size.Width,overPanel.Location.Y);
+            drawgap = 50;
             this.DoubleBuffered = true;
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -60,7 +65,11 @@ namespace Scheduling_Jh
             Pen background = new Pen((new SolidBrush(Color.FromArgb((byte)0xFF, 66, 66, 66))), 20);
             Rectangle range = new Rectangle(new Point(20, 20), new Size(chart.Size.Width - 40, chart.Size.Height - 40));
             gc.DrawArc(background, range, 0, 360);
+            button1.BackColor = Color.Gray;
+            sidebar = new sidebar(list);
+            sidebar.Visible = true;
         }
+
         public void setStamp(List<Stamp> list){
             
             stmp_list = list;
@@ -98,6 +107,7 @@ namespace Scheduling_Jh
 
         private void button4_Click(object sender, EventArgs e)
         {
+            sidebar.Close();
             Close();
         }
 
@@ -106,6 +116,7 @@ namespace Scheduling_Jh
             position.X = e.X;
             position.Y = e.Y;
             is_down = true;
+            
         }
 
         private void panel3_MouseDown(object sender, MouseEventArgs e)
@@ -113,6 +124,7 @@ namespace Scheduling_Jh
             position.X = e.X;
             position.Y = e.Y;
             is_down = true;
+            
         }
 
         private void panel2_MouseUp(object sender, MouseEventArgs e)
@@ -131,6 +143,7 @@ namespace Scheduling_Jh
             {
                 Point p = PointToScreen(e.Location);
                 Location = new Point(p.X - position.X, p.Y - position.Y);
+                sidebar.Location = new Point(p.X - position.X - 284, p.Y - position.Y);
             }
         }
 
@@ -140,6 +153,7 @@ namespace Scheduling_Jh
             {
                 Point p = PointToScreen(e.Location);
                 Location = new Point(p.X - position.X, p.Y - position.Y);
+                sidebar.Location = new Point(p.X - position.X - 284, p.Y - position.Y);
             }
         }
         private bool isExist(List<int>list,int target) {
@@ -158,6 +172,7 @@ namespace Scheduling_Jh
             {
                 if (draw)
                 {
+                    
                     Application.DoEvents();
                     artText.Text = Math.Round(art,4) + "";
                     attText.Text = Math.Round(att, 4) + "";
@@ -186,11 +201,13 @@ namespace Scheduling_Jh
                         max_end = (max_end > pro_list[i].getEndTime() ? max_end : pro_list[i].getEndTime());
                         Console.WriteLine("pro_endTime: ["+i+"]" + pro_list[i].getEndTime());
                         //같은 반복문 내에서 브러시를 만든다
-                        byte red = (byte)r.Next(100, 200), green = (byte)r.Next(100, 200), blue = (byte)r.Next(100, 200);
+                        
                         if (i < 8)
                             brush[i] = new SolidBrush(myPalette[i]);
-                        else
+                        else {
+                            byte red = (byte)r.Next(100, 200), green = (byte)r.Next(100, 200), blue = (byte)r.Next(100, 200);
                             brush[i] = new SolidBrush(Color.FromArgb((byte)0xFF,red, green, blue));
+                        }
                     }
                         //Console.WriteLine("MAX: " + max_end);
 
@@ -247,7 +264,7 @@ namespace Scheduling_Jh
                             attText.Refresh();
                             artText.Refresh();
                             awtText.Refresh();
-                            Thread.Sleep(500);
+                            Thread.Sleep(drawgap);
                         }
                         targetPosition = stmp_list.Count;                 
                     }
@@ -311,7 +328,7 @@ namespace Scheduling_Jh
                 is_run = false;
             }
         }
-        
+        //그래프를 그리는 스레드
         public void weeded() {
             Pen background = new Pen((new SolidBrush(Color.FromArgb((byte)0xFF, 66, 66, 66))), 20);
             Graphics gc = chart.CreateGraphics();            
@@ -321,46 +338,20 @@ namespace Scheduling_Jh
             gc.DrawArc(background, range, 0, 360);
 
             float limit = (float)(usage * 360);
-            Console.WriteLine("limit:" + limit);
+            
             float bottom=0;
             int time=Convert.ToInt32(limit/360*20);//시간
             for (bottom=0; bottom < limit+1; bottom += limit / 50) 
             {
                 usageText.Text = Math.Round(bottom /360*100, 2) + "%";
-                usageText.Refresh();
-                Console.WriteLine("bottom:" + bottom+" time:"+time);
+                usageText.Refresh();                
                 gc.DrawArc(foreground, range, 0, bottom);
                 
                 Thread.Sleep(time);
-            }
+            }           
             return;
             
-        }
-        //스레드를 위한 생각을 정리
-        private void weedCircle(float startAngle,float endAngle)
-        {
-            Graphics gc = chart.CreateGraphics();
-            gc.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            Pen foreground = new Pen((new SolidBrush(Color.FromArgb((byte)0xFF, 255, 193, 7))), 10);
-            Rectangle range = new Rectangle(new Point(20, 20), new Size(chart.Size.Width - 40, chart.Size.Height - 40));
-            
-            //쉬어야하는 단위시간
-            int timetoq = Convert.ToInt32(Math.Round(endAngle - startAngle, 0) * 2);
-            float startToq;
-            float angelToq=1;
-            
-            if (startAngle != 0)
-            {
-                gc.DrawArc(foreground,range,0,startAngle);
-                startToq=startAngle;
-            }
-            
-            for (int i = 0; i < Math.Round(endAngle - startAngle, 0); i++) 
-            { 
-                gc.DrawArc(foreground,range,startAngle,startAngle+=angelToq);
-                Thread.Sleep(timetoq);
-            }            
-        }
+        }       
 
         private void box_Paint(object sender, PaintEventArgs e)
         {
@@ -373,16 +364,21 @@ namespace Scheduling_Jh
 
         private void button2_Click(object sender, EventArgs e)
         {
+             
             targetPosition = -1;
             currentPosition = 0;
             draw = true;
             Ghannt_base.Paint += new PaintEventHandler(drawAutoGhanttChart);
             Ghannt_base.Refresh();
+            
+            button1.BackColor = Color.FromArgb(255, 255, 193, 7);
+            button3.BackColor = Color.Gray;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            button1.ForeColor = Color.FromArgb(255, 255, 193, 7);
+            button1.BackColor = Color.FromArgb(255, 255, 193, 7);
+            button3.BackColor = Color.FromArgb(255, 255, 193, 7);
             if (targetPosition < stmp_list.Count) {
                 currentPosition = 0;
                 targetPosition++;
@@ -395,13 +391,15 @@ namespace Scheduling_Jh
                 this.main.listBox1.Items.Insert(0, "프로세스의 끝입니다");
             }
             if (targetPosition == stmp_list.Count)
-                button3.ForeColor = Color.Gray;
+                button3.BackColor= Color.Gray;
             else
-                button3.ForeColor = Color.FromArgb(255, 255, 193, 7);
+                button3.BackColor = Color.FromArgb(255, 255, 193, 7);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button3.BackColor = Color.FromArgb(255, 255, 193, 7);
+            button1.BackColor = Color.FromArgb(255, 255, 193, 7);
             if (targetPosition > 0)
             {
                 currentPosition = 0;
@@ -415,6 +413,10 @@ namespace Scheduling_Jh
             {
                 this.main.listBox1.Items.Insert(0, "프로세스의 처음입니다");
             }
+            if (targetPosition == 0)
+                button1.BackColor = Color.Gray;
+            else
+                button1.BackColor = Color.FromArgb(255, 255, 193, 7);
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -457,17 +459,22 @@ namespace Scheduling_Jh
             if (!isopen)
             {
                 isopen = true;
-                overPanel.Location = new Point(overPanel.Location.X + overPanel.Size.Width, overPanel.Location.Y);
+                sidebar.Visible = true;
             }
             else
             {
+                sidebar.Visible = false;
                 Ghannt_base.SuspendLayout();
-                isopen = false;
-                overPanel.Location = new Point(overPanel.Location.X - overPanel.Size.Width, overPanel.Location.Y);                
-                Ghannt_base.Refresh();
+                isopen = false;                
                 Ghannt_base.ResumeLayout();
                 
             }
+            drawgap = 0;
+            
+            if (!is_run)
+                //button2.Click += new EventHandler(button2_Click);                
+            drawgap = 50;
+            this.Focus();
         }
     }
 }
